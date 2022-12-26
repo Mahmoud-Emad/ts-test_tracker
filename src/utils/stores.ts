@@ -1,6 +1,6 @@
 import { writable, get } from "svelte/store";
 import isAuthenticated from "../apis/authentication/IsAuthenticated";
-import type { AlertType, IAuthStore, NotifacationType, UserType } from "./types";
+import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType } from "./types";
 import User from "../apis/users"
 
 function createAuthStore() {
@@ -70,3 +70,5 @@ export const authStore = createAuthStore();
 export const userStore = writable<UserType>({});
 export const notifacationStore = writable<NotifacationType>({});
 export const alertStore = writable<AlertType>({});
+export const projectsStore = writable<Array<projectsType>>([]);
+export const recentProjectsStore = writable<Array<projectsType>>([]);

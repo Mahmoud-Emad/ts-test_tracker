@@ -1,10 +1,10 @@
 <script lang="ts">
-    export let withFooter: boolean;
-    export let withHeader: boolean;
-    export let cardClassName: string;
-    export let cardClassHeader: string;
-    export let cardClassBody: string;
-    export let cardClassFooter: string;
+    export let withFooter: boolean = false;
+    export let withHeader: boolean = false;
+    export let cardClassName: string = "";
+    export let cardClassHeader: string = "";
+    export let cardClassBody: string = "";
+    export let cardClassFooter: string = "";
 </script>
 
 <div class="card {cardClassName}">
@@ -22,3 +22,12 @@
         </div>
     {/if}
 </div>
+
+<style>
+    .card{
+        border-radius: 0px;
+        background-color: var(--boxes-bg);
+        box-shadow: var(--boxes-shadow);
+        border: 0 !important;
+    }
+</style>

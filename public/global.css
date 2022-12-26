@@ -235,6 +235,13 @@ html .btn {
 	border: 0 !important;
 	border-bottom: 2px solid var(--text-primary) !important;
 }
+
+/* ####################################################### --- Home Page --- ################################################################ */
+
+.text-primary{
+	color:var(--text-primary) !important;
+}
+
 /* Root attrs to dark mode */
 .dark{
 	transition: 0.3s;
