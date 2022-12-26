@@ -1,0 +1,39 @@
+{
+  "name": "test-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "rollup": "rollup",
+    "build": "rollup -c",
+    "dev": "rollup -c -w ",
+    "env:dev": "env-cmd npm run dev",
+    "start": "sirv public --single -p 8080",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "@types/uuid": "^9.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "snarkdown": "^2.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-navigator": "^3.1.5",
+    "svelte-preprocess": "^4.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "sirv-cli": "^2.0.0",
+    "svelte-github-login": "^1.3.1",
+    "sveltestrap": "^5.10.0",
+    "uuid": "^9.0.0"
+  }
+}

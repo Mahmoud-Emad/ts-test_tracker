@@ -1,0 +1,250 @@
+/* Root attrs to light mode */
+:root{
+	--bg-color: #f1f1f1;
+	--text-color: #000;
+	--boxes-bg: #fff;
+	--boxes-shadow: 0px 2px 6px #00000030;
+	--text-muted: #757575;
+	--text-primary: #5a79b1;
+	--text-primary-10: #5a79b1ab;
+	--text-primary-5: #5a79b178;
+	--text-danger: #bf4e62;
+	--text-light: #fff;
+	--text-dark: #222;
+	--calender-today: rgb(255 169 0 / 36%);
+}
+
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+body {
+	color: #333;
+	margin: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+a{
+	text-decoration: none !important;
+	color: #5a79b1 !important;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0,80,160);
+}
+
+label {
+	display: block;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+
+.notifacation{
+	position: fixed;
+	bottom: 20px;
+	z-index: 10!important;
+}
+
+.notifacation-header{
+    font-size: 16px;
+    border: 1px solid #0000;
+}
+.notifacation-body{
+    font-size: 15px;
+    font-weight: 600;
+	border-radius: 0px 0px 5px 5px;
+}
+.notifacation-header-danger{
+    background-color: rgb(255 255 255);
+    color: rgb(0 0 0) !important;
+    border-color: rgb(255 18 18 / 29%);
+}
+.notifacation-body-danger{
+	background: rgb(220 53 69)!important;
+    color: rgb(255 255 255);
+}
+.notifacation-header-primary{
+	background: rgb(0 123 255 / 74%)!important;
+	color: rgb(0 0 0) !important;
+	border-color: rgb(0 123 255 / 74%)!important;
+}
+.notifacation-body-primary{
+	background: rgb(0 123 255)!important;
+    color: rgb(255 255 255);
+}
+.notifacation-header-success{
+	background: rgb(205 255 216)!important;
+	color: rgb(0 0 0) !important;
+	border-color: rgba(40, 167, 70, 0.315)!important;
+}
+.notifacation-body-success{
+	background: rgb(37 52 41)!important;
+    color: rgb(255 255 255);
+}
+
+/* ########################################################## --- REGISTER STYLE --- ##################################################################*/
+.register-counter p{
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+}
+.register-counter .counter{
+	font-size: 70px;
+	text-align: center;
+	width: 250px;
+	border: 1px solid;
+	margin: 0 auto;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	margin-top: 15px;
+}
+.counter-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+/* ########################################################### --- GITHUB STYLE --- #################################################################### */
+.uomiauth:before {
+	content: "";
+	border-bottom: 1px solid rgb(55, 56, 58);
+	flex: 1 0 auto;
+	height: 0.5em;
+	margin: 0;
+}
+.uomiauth:after {
+	content: "";
+	border-bottom: 1px solid rgb(57, 58, 59);
+	flex: 1 0 auto;
+	height: 0.5em;
+	margin: 0;
+}
+.uomiauth {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	text-transform: uppercase;
+	border: none;
+	font-size: 12px;
+	font-weight: 500;
+	margin: 0;
+	padding: 24px 0 0;
+	padding: var(--spacing-3) 0 0 0;
+}
+.uomiauth span {
+	text-align: center;
+	flex: 0.2 0 auto;
+	margin: 0;
+}
+.github-icon-style{
+	font-size: 18px;
+}
+html .btn {
+	transition: .3s ease-in;
+}
+.btn.github-btn-style,
+.btn.github-btn-style:active{
+	background-color: rgb(34 34 34);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 14px;
+	color: rgb(255 255 255);
+}
+.btn.github-btn-style:hover{
+	color: rgb(255 255 255);
+	opacity: .9
+}
+
+/* ################################################################ --- NAVBAR --- ############################################################## */
+
+.navbar{
+	background-color: var(--boxes-bg) !important;
+	box-shadow: var(--boxes-shadow);
+	border: 0 !important;
+}
+.user_photo_nav{
+	display: inline-block;
+	background: var(--text-primary);
+	margin-right: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	font-weight: 700;
+}
+.nav-tabs{
+	background-color: var(--boxes-bg)!important;
+	box-shadow: var(--boxes-shadow)!important;
+	border: 0 !important;
+}
+.nav-link{
+	color: var(--text-primary) !important;
+}
+.nav-link-tab:hover{
+	background-color: var(--bg-color)!important;
+	box-shadow: var(--boxes-shadow)!important;
+}
+.nav-link.active {
+	background-color: var(--bg-color)!important;
+	box-shadow: none!important;
+	border: 0 !important;
+	border-bottom: 2px solid var(--text-primary) !important;
+}
+/* Root attrs to dark mode */
+.dark{
+	transition: 0.3s;
+	--bg-color: #1a1a1a;
+	--text-color: #fff;
+	--boxes-bg: #262626;
+	--boxes-shadow: 0px 0px 2px 2px #4a4a4a;
+	--text-muted: #ebe7e7;
+	--text-primary: #1da1f2;
+	--text-primary-10: #1da1f296;
+	--text-primary-5: #1da1f242;
+	--calender-today: rgb(255 169 0 / 10%);
+}
