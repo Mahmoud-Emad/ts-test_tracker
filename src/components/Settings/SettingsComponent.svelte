@@ -11,6 +11,7 @@
     import Alert from "../UI/Alert.svelte";
     import Button from "../UI/Forms/Button.svelte";
     import { validateName, validatePhone } from "../../utils/validators";
+    import ChangeMode from "./ChangeMode.svelte";
 
     const tabs: TabType[] = [
         {
@@ -38,10 +39,14 @@
 
 </script>
 
-<Navbar darkModeOption={true}/>
 {#if isLoading}
-    <LoadingComponent className={"page"}/>
+<LoadingComponent className={"page"}/>
 {:else}
+    <Navbar>
+        <div slot="actionBTN">
+            <ChangeMode/>
+        </div>
+    </Navbar>
     <div class="container">
         <div class="mt-3">
             <div class="header">

@@ -1,7 +1,7 @@
 import { writable, get } from "svelte/store";
 import isAuthenticated from "../apis/authentication/IsAuthenticated";
 import Dashboard from "../apis/dashboard"
-import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType } from "./types";
+import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType, MemberType } from "./types";
 import User from "../apis/users"
 
 function createRecentProjectsStore(){
@@ -25,6 +25,27 @@ function createRecentProjectsStore(){
 	};
 };
 
+function createMembersStore(){
+	const store = writable<Array<MemberType>>([]);
+	const { subscribe, update, set } = store;
+
+	function loadMembers(){
+		User.loadMembers().then((res: MemberType[]) => {
+			if(res){
+				return update((s) => {            
+					s = res;
+					return s;
+				});
+			};
+		});
+	};
+	return {
+		subscribe,
+		set,
+		loadMembers
+	};
+};
+
 function createAuthStore() {
 	const store = writable<IAuthStore>({});
 	const { subscribe, update } = store;
@@ -38,7 +59,7 @@ function createAuthStore() {
 				s.refresh_token = undefined;
 				return s;
 			});
-		}
+		};
 	});
 
 	function removeSession(){
@@ -75,7 +96,7 @@ function createAuthStore() {
 			s.refresh_token = refreshToken;
 			return s;
 		});
-	}
+	};
 
 	return {
 		subscribe,
@@ -90,6 +111,7 @@ function createAuthStore() {
 
 export const authStore = createAuthStore();
 export const userStore = writable<UserType>({});
+export const membersStore = createMembersStore();
 export const notifacationStore = writable<NotifacationType>({});
 export const alertStore = writable<AlertType>({});
 export const projectsStore = writable<Array<projectsType>>([]);

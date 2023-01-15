@@ -11,6 +11,15 @@ class User{
             onErrorResponse(error)
         };
     };
+
+    public async loadMembers(){
+        try{
+            const response: onSuccessResponseType = await axios.get("/members/all/");
+            return response.data;
+        } catch (error) {
+            onErrorResponse(error)
+        };
+    };
 };
 
 const user = new User();

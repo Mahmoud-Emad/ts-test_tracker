@@ -1,11 +1,9 @@
 <script lang="ts">
-    import { Alert } from 'sveltestrap';
-
     export let className: string;
     export let title: string | null = null;
     export let message: string;
     export let isOpen: boolean;
-    export let error: {};
+    export let error: Object = {};
 
     let timeOut: number = 0;
 
@@ -23,7 +21,7 @@
 </script>
 
 {#if isOpen}
-    <Alert class="alert-{className}">
+    <div class="alert alert-{className}">
         {#if title}
             <h6 class="alert-heading text-capitalize">{title}</h6>
         {/if}
@@ -37,5 +35,5 @@
                 {/each}
             </ul>
         {/if}
-    </Alert>
+    </div>
 {/if}

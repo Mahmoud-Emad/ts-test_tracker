@@ -14,6 +14,8 @@
 	--calender-today: rgb(255 169 0 / 36%);
 	--github-button-backfround: rgb(34,34,34);
 	--btn-primary: #5a79b1;
+	--loading-page-spiner-bg: #222;
+	--modal-background: rgb(0 0 0 / 70%)
 }
 
 html, body {
@@ -74,6 +76,9 @@ button:disabled {
 
 button:not(:disabled):active {
 	background-color: #ddd;
+}
+.spinner-grow {
+	color: var(--loading-page-spiner-bg);
 }
 
 button:focus {
@@ -209,16 +214,16 @@ html .btn {
 	border: 0 !important;
 }
 .user_photo_nav{
-	display: inline-block;
 	background: var(--text-primary);
-	margin-right: 20px;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	line-height: 40px;
-	text-align: center;
-	color: #fff;
-	font-weight: 700;
+    height: 40px;
+    width: 40px;
+    color: #FFF;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-right: 10px;
 }
 .nav-tabs{
 	background-color: var(--boxes-bg)!important;
@@ -259,6 +264,8 @@ html .btn {
 	--calender-today: rgb(255 169 0 / 10%);
 	--github-button-backfround: rgb(18, 102, 241);
 	--btn-primary: #1da1f2;
+	--loading-page-spiner-bg: rgb(255 255 255);
+	--modal-background: rgb(0 0 0 / 50%)
 }
 
 /* ####################################################### ---Dark Mood ####################################################################*/
@@ -301,6 +308,9 @@ html .btn {
 input:disabled {
 	background-color: var(--boxes-bg) !important;
 	color: var(--text-dark-color);
+}
+input:focus {
+	background-color: var(--boxes-bg) !important;
 }
 .btn-primary{
 	background-color: var(--btn-primary);

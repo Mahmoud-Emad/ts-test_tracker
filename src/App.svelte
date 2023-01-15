@@ -40,6 +40,7 @@
 </script>
 
 {#if $notifacationStore.push}
+	<!-- If there are internal errors e.g. server error -->
 	<Toast 
 		className={$notifacationStore.className}
 		message={$notifacationStore.message}

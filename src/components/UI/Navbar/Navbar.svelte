@@ -1,15 +1,10 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
     import { Router, Link } from "svelte-navigator";
     import { userStore } from '../../../utils/stores';
     import { useParams } from 'svelte-navigator';
     import NavBarDropdown from './NavBarDropdown.svelte'
-    import ChangeMode from '../../Settings/ChangeMode.svelte';
-    // import AddNewObject from './AddNewObject.svelte'
 
     export let projectView: boolean = false;
-    export let darkModeOption: boolean = false;
-    const dispatch = createEventDispatcher();
     const params = useParams();
     let projectID: number = Number($params.id);
 </script>
@@ -93,9 +88,6 @@
                 </li>
             </span>
         </NavBarDropdown>
-
-        {#if darkModeOption}
-            <ChangeMode />
-        {/if}
+        <slot name="actionBTN" />
     </div>
 </nav>

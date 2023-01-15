@@ -32,7 +32,20 @@ export type UserType = {
     phone?: string
     password1?: string
     password2?: string
+};
 
+export type MemberType = {
+    email?: string
+    first_name?: string
+    last_name?: string
+    full_name?: string
+    id?: number
+    permission?: string
+    phone?: string
+    created: string
+    modified?: string
+    invited: boolean
+    accepted: boolean
 };
 
 export type TokensType = {
