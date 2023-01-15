@@ -4,13 +4,14 @@
     import { userStore } from '../../../utils/stores';
     import { useParams } from 'svelte-navigator';
     import NavBarDropdown from './NavBarDropdown.svelte'
+    import ChangeMode from '../../Settings/ChangeMode.svelte';
     // import AddNewObject from './AddNewObject.svelte'
 
-    export let projectView = false;
+    export let projectView: boolean = false;
+    export let darkModeOption: boolean = false;
     const dispatch = createEventDispatcher();
     const params = useParams();
     let projectID: number = Number($params.id);
-    console.log(projectID);
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -92,5 +93,9 @@
                 </li>
             </span>
         </NavBarDropdown>
+
+        {#if darkModeOption}
+            <ChangeMode />
+        {/if}
     </div>
 </nav>

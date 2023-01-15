@@ -20,10 +20,11 @@ html, body {
 	height: 100%;
 }
 body {
-	color: #333;
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
+	color: var(--text-color);
+	background-color: var(--bg-color);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
@@ -254,4 +255,28 @@ html .btn {
 	--text-primary-10: #1da1f296;
 	--text-primary-5: #1da1f242;
 	--calender-today: rgb(255 169 0 / 10%);
+}
+
+/* ####################################################### ---Dark Mood ####################################################################*/
+
+.light{
+	background: var(--bg-color);
+	color: var(--text-color);
+	transition: 0.3s
+}
+.sun-btn{
+	background: var(--bg-color)!important;
+	box-shadow: var(--boxes-shadow);
+}
+.moon-btn {
+	box-shadow: var(--boxes-shadow);
+	background: var(--bg-color)!important;
+}
+.sun-btn:focus{
+	background: var(--bg-color)!important;
+	box-shadow: none;
+}
+.moon-btn:focus{
+	background: var(--bg-color)!important;
+	box-shadow: none;
 }

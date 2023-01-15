@@ -189,3 +189,10 @@ export type projectsType = {
     total_test_plan: TestPlanChart[]
     total_test_runs: TestRunChart[]
 };
+
+export type TabType = {
+    tabID: string
+    tabName: string
+    isActive: boolean
+    component: any
+};

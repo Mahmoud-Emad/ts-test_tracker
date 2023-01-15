@@ -7,11 +7,14 @@
     import { onMount } from "svelte";
     import { navigate } from "svelte-navigator";
     import parseJwt from "./apis/authentication/JWTPars";
+    import { setTheme } from "./utils/helpers";
 
 
 	let isLoading: boolean = false;
+	const mode = localStorage.getItem("mode")
 
 	onMount(async () => {
+		setTheme(mode)
 		isLoading = true;
 		const accessToken = localStorage.getItem("accessToken");
 		console.log();

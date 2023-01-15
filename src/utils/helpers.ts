@@ -117,3 +117,15 @@ export const updateThem = () => {
         localStorage.setItem("mode", "light");
     };
 };
+
+export function setTheme(mode: string){
+    if(mode === "light"){
+        window.document.body.classList.add('light');
+        window.document.body.classList.remove('dark');
+    } else if(mode === "dark"){
+        window.document.body.classList.add('dark');
+        window.document.body.classList.remove('light');
+    } else {
+        updateThem();
+    };
+};
