@@ -10,8 +10,7 @@ class Dashboard{
         try {
 			const response: onSuccessResponseType = await httpAxios.get(`project/recent/?count=${count}`);
             const projects: projectsType[] = response.data;
-            recentProjectsStore.set(projects);
-			return recentProjectsStore;
+			return projects;
 		} catch (error) {
             return onErrorResponse(error);
 		};

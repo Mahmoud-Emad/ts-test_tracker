@@ -1,3 +1,5 @@
+import type { Writable } from "svelte/store";
+
 export type InputValidationsType = {
     isValid?: boolean
     errorMessage?: string

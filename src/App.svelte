@@ -24,7 +24,7 @@
 						(data) => {$userStore = data}
 					);
 				}
-			} catch (error) {
+			} catch (error) {				
 				return navigate('/auth/login');
 			};
         } else {

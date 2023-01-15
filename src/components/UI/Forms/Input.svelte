@@ -8,7 +8,7 @@
     export let type     : string = "text";
     export let disabled : boolean = false;
     export let className: string = '';
-    export let validation: InputValidationsType;
+    export let validation: InputValidationsType = {};
 
     let elmID: string = "";
     let validateClass: string;

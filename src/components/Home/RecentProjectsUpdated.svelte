@@ -10,7 +10,7 @@
 {#if isLoading}
     <LoadingComponent className="d-flex h-100 justify-content-center align-items-center"/>
 {:else}
-    <div class="pt-5">
+    <div>
         <p class="last-projects">
             Last <strong class="text-primary">{$recentProjectsStore.length}</strong> of
             {$recentProjectsStore.length === 1 ? "Project" : "Projects"} Updated
