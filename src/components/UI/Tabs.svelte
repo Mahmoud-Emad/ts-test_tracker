@@ -30,9 +30,7 @@
             id="{tab.tabID}-tabs"
             role="tabpanel"
             aria-labelledby="{tab.tabID}">
-            <div class="container">
-                {tab.component}
-            </div>
+            <svelte:component this={tab.component}/>
         </div>
     {/each}
 </div>

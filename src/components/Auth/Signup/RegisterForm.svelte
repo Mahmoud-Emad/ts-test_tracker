@@ -84,6 +84,6 @@
 </div>
 <div class="mt-2">
     <p>
-        have an account? <Link to="/auth/login">login now</Link> 
+        have an account? <Link to="/auth/login" class="text-primary">login now</Link> 
     </p>
 </div>

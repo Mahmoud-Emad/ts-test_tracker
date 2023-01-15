@@ -1,6 +1,13 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import SettingsComponent from "../components/Settings/SettingsComponent.svelte";
+    import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
     export let isLoading: boolean = false;
+
+    onMount(() => {
+        clearAlertMessage();
+		clearNotifacationStore();
+    });
 </script>
 
 <section class="container-fluid">

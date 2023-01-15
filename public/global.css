@@ -12,6 +12,8 @@
 	--text-light: #fff;
 	--text-dark: #222;
 	--calender-today: rgb(255 169 0 / 36%);
+	--github-button-backfround: rgb(34,34,34);
+	--btn-primary: #5a79b1;
 }
 
 html, body {
@@ -187,7 +189,7 @@ html .btn {
 }
 .btn.github-btn-style,
 .btn.github-btn-style:active{
-	background-color: rgb(34 34 34);
+	background-color: var(--github-button-backfround);
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -255,6 +257,8 @@ html .btn {
 	--text-primary-10: #1da1f296;
 	--text-primary-5: #1da1f242;
 	--calender-today: rgb(255 169 0 / 10%);
+	--github-button-backfround: rgb(18, 102, 241);
+	--btn-primary: #1da1f2;
 }
 
 /* ####################################################### ---Dark Mood ####################################################################*/
@@ -279,4 +283,25 @@ html .btn {
 .moon-btn:focus{
 	background: var(--bg-color)!important;
 	box-shadow: none;
+}
+.card{
+	border-radius: 0px;
+	background-color: var(--boxes-bg);
+	box-shadow: var(--boxes-shadow);
+	border: 0 !important;
+}
+.input{
+	outline: none !important;
+	margin-right: 3px !important;
+	background-color: var(--bg-color);
+	border: 1px solid var(--text-primary) !important;
+	border-radius: 3px !important;
+	color: var(--text-color);
+}
+input:disabled {
+	background-color: var(--boxes-bg) !important;
+	color: var(--text-dark-color);
+}
+.btn-primary{
+	background-color: var(--btn-primary);
 }

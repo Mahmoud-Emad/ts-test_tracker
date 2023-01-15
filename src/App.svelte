@@ -31,7 +31,9 @@
 				return navigate('/auth/login');
 			};
         } else {
-			return navigate('/auth/login');
+			if(!blockedRoutes.includes(window.location.pathname)){
+				return navigate('/auth/login');
+			}
 		}
 		isLoading = false;
     });

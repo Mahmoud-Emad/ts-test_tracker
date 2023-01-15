@@ -1,4 +1,4 @@
-import type { Writable } from "svelte/store";
+import type { ComponentType } from 'svelte';
 
 export type InputValidationsType = {
     isValid?: boolean
@@ -29,6 +29,10 @@ export type UserType = {
     full_name?: string
     id?: number
     permission?: string
+    phone?: string
+    password1?: string
+    password2?: string
+
 };
 
 export type TokensType = {
@@ -194,5 +198,5 @@ export type TabType = {
     tabID: string
     tabName: string
     isActive: boolean
-    component: any
+    component: ComponentType
 };

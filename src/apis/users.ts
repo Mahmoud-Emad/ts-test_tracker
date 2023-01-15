@@ -6,7 +6,6 @@ class User{
     public async profile(){
         try{
             const response: onSuccessResponseType = await axios.get("/dashboard/user/");
-            onSuccessResponse(response)
             return response.data;
         } catch (error) {
             onErrorResponse(error)

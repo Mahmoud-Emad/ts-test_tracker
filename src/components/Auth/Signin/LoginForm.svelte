@@ -114,7 +114,7 @@
         </div>
         <div class="mt-2">
             <p>
-                Don't have an account? <Link to="/auth/register">Sign up</Link> 
+                Don't have an account? <Link to="/auth/register" class="text-primary">Sign up</Link> 
             </p>
         </div>
         <div class="uomiauth">
