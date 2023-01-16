@@ -4,11 +4,12 @@
     export let message: string;
     export let isOpen: boolean;
     export let error: Object = {};
+    export let close: boolean = true;
 
     let timeOut: number = 0;
 
     function handleAlert(){
-        if (isOpen && className != "danger"){
+        if (close && (isOpen && className != "danger")){
             timeOut = 3000;
             setTimeout(()=>{
                 isOpen = false;

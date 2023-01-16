@@ -8,6 +8,10 @@ function createRecentProjectsStore(){
 	const store = writable<Array<projectsType>>([]);
 	const { subscribe, update, set } = store;
 	
+	function search(count: number){
+		return this.reload(count)
+	};
+	
 	function reload(count: number){
 		Dashboard.recentProjectsUpdated(count).then((res: projectsType[]) => {
 			if(res){
@@ -21,6 +25,7 @@ function createRecentProjectsStore(){
 	return {
 		subscribe,
 		set,
+		search,
 		reload
 	};
 };
@@ -28,6 +33,10 @@ function createRecentProjectsStore(){
 function createMembersStore(){
 	const store = writable<Array<MemberType>>([]);
 	const { subscribe, update, set } = store;
+
+	function search(){
+		return this.loadMembers()
+	};
 
 	function loadMembers(){
 		User.loadMembers().then((res: MemberType[]) => {
@@ -42,6 +51,7 @@ function createMembersStore(){
 	return {
 		subscribe,
 		set,
+		search,
 		loadMembers
 	};
 };

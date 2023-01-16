@@ -6,7 +6,8 @@
     import Alert from "../UI/Alert.svelte";
     import MemberCard from "./MemberCard.svelte";
     import NavAction from "../UI/Navbar/NavAction.svelte";
-    import Modal from "../UI/Modals/Modal.svelte";
+    import AddNewMember from "./AddNewMember.svelte";
+    import Search from "../UI/Search.svelte";
 
     export let isLoading: boolean = false;
     let openModal: boolean = false;
@@ -31,18 +32,24 @@
                 <p class="h4 mb-2">
                     <strong class="h4 text-primary">All Members</strong>
                 </p>
-                {#if $membersStore && $membersStore.length > 0}
-                    <p class="text-muted">
-                        -- There are <strong class="text-primary">{$membersStore.length}</strong>
-                        {$membersStore.length === 1 ? "member" : "members"} registered
-                    </p>
-                {/if}
+                <p class="text-muted">
+                    -- There are <strong class="text-primary">{$membersStore.length}</strong>
+                    {$membersStore.length === 1 ? "member" : "members"} registered
+                </p>
             </div>
         </div>
+        <Search 
+            label={"Search Members"}
+            searchStore={membersStore}
+            searchMethod={membersStore.loadMembers}
+            searchField={"first_name"}
+            on:Search={
+                (event) => {
+                    membersStore.set(event.detail.objects)
+                }
+            }
+        />
         {#if $membersStore && $membersStore.length > 0}
-            <div class="pt-4">
-                <p>Search Members</p>
-            </div>
             <div class="pt-5">
                 <div class="row">
                     {#each $membersStore as member}
@@ -52,17 +59,12 @@
             </div>
         {:else}
             <Alert 
-                isOpen = {true} 
-                message = {"There are no members, try to invite someone"} 
-                className = {"info"}
+                close = {$membersStore.length > 0}
+                isOpen = {true}
+                message = {"There are no members, try to invite someone from the navbar."}
+                className = {"warning"}
             />
         {/if}
     </div>
-
-    <Modal bind:openModal>
-        <div slot="modal-body">
-            Hello
-        </div>
-    </Modal>
-
+    <AddNewMember bind:openModal/>
 {/if}

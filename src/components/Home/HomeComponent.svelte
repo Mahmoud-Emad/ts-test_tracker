@@ -20,8 +20,11 @@
 <div class="container pt-4">
     <Greeting />
     <Search 
-        name={"on Recent Projects Updated"}
-        store={recentProjectsStore}
+        label={"Search Members"}
+        searchStore={recentProjectsStore}
+        searchMethod={recentProjectsStore.reload}
+        searchArgs={4}
+        searchField={"title"}
         on:Search={
             (event) => {
                 recentProjectsStore.set(event.detail.objects)

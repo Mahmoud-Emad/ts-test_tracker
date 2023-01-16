@@ -2,34 +2,38 @@
     import { validateEmptyInput } from "../../utils/validators";
     import { createEventDispatcher } from 'svelte';
     import Input from "./Forms/Input.svelte";
-
-    let objects: []; // Add more objects to search on it.
-    export let name: string;
-    export let store;
+    export let searchMethod: CallableFunction;
+    export let searchField: string; // title, name, etc..
+    export let searchArgs: any = null;
+    export let searchStore: any;
+    export let label: string
 
     const dispatch = createEventDispatcher();
     let value: string;
+    let objects: []; // Add more objects to search on it.
     
     const search = () => {
-        const storeObjects = $store
+        const storeObjects = $searchStore
         if (validateEmptyInput(value).isValid) {            
             // store.reload(4)
             const filtered = storeObjects.filter(
-                ( obj: { title: string; }) => obj.title.toLocaleLowerCase().includes(
+                ( obj: { [x: string]: string; } ) => obj[searchField].toLocaleLowerCase().includes(
                     value.toLocaleLowerCase()
                 )
-            )
-            console.log(filtered);
-            
+            )            
             dispatch('Search', {
                 objects: filtered
             });
         } else {
-            store.reload(4);
+            if(searchArgs){
+                searchMethod(searchArgs)
+            } else {
+                searchMethod()
+            }
         };
     };
 
     $: value, search()
 </script>
 
-<Input bind:value label={`Search ${name}`}/>
+<Input bind:value label={label}/>
