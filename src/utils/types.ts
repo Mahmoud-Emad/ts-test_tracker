@@ -42,10 +42,10 @@ export type MemberType = {
     id?: number
     permission?: string
     phone?: string
-    created: string
+    created?: string
     modified?: string
-    invited: boolean
-    accepted: boolean
+    invited?: boolean
+    accepted?: boolean
 };
 
 export type TokensType = {
@@ -62,6 +62,11 @@ export enum ToastEnum{
     info = "info",
     light = "light",
     dark = "dark"
+};
+
+export enum MemberPermissions{
+    full_access = "full_access",
+    admin_access = "admin_access",
 };
 
 export type NotifacationType = {

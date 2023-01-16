@@ -1,4 +1,4 @@
-import type { onSuccessResponseType } from './../utils/types';
+import type { MemberType, onSuccessResponseType } from './../utils/types';
 import axios from '../utils/axios';
 import { onErrorResponse, onSuccessResponse } from '../utils/helpers';
 
@@ -20,6 +20,16 @@ class User{
             onErrorResponse(error)
         };
     };
+
+    public async inviteNewMember(memberData: MemberType) {
+        try{
+            const response: onSuccessResponseType = await axios.post("/dashboard/members/", memberData);
+            onSuccessResponse(response);
+            return response.data;
+        } catch (error) {
+            onErrorResponse(error)
+        };
+    }
 };
 
 const user = new User();

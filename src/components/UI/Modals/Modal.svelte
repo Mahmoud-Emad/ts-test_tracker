@@ -1,6 +1,4 @@
 <script lang="ts">
-    export let withFooter: boolean = false;
-    export let withHeader: boolean = false;
     export let modalClassName: string = "";
     export let modalClassHeader: string = "";
     export let cardClassBody: string = "";
@@ -11,25 +9,21 @@
 <div class="modal {modalClassName}" tabindex="-1" style="display:{openModal ? "block" : "none"}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="close">
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- <div class="close">
                 <i class="fa fa-close" on:click={() => {
                     openModal = false;
                 }}></i>
+            </div> -->
+            <div class="modal-header {modalClassHeader}">
+                <slot name="modal-header" />
             </div>
-            {#if withHeader}
-                <div class="modal-header {modalClassHeader}">
-                    <slot name="card-header" />
-                </div>
-            {/if}
             <div class="modal-body {cardClassBody}">
                 <slot name="modal-body" />
             </div>
-            {#if withFooter}
-                <div class="modal-footer {modalClassFooter}">
-                    <slot name="card-footer" />
-                </div>
-            {/if}
+            <div class="modal-footer {modalClassFooter}">
+                <slot name="modal-footer" />
+            </div>
         </div>
     </div>
 </div>

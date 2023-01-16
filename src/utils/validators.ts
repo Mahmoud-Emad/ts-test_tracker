@@ -1,9 +1,8 @@
 import type { InputValidationsType } from "./types";
 
-const ALPHA_ONLY_REGEX = /^[A-Za-z]*$/; // Alphabets only
 const NUMS_ONLY_REGEX = /^[0-9]+$/i; // Nums only
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+const VALID_NAME = /^([a-zA-Z]{2,10})$/
 
 export function validateEmail (email: string): InputValidationsType{
     let validated: InputValidationsType = {};    
@@ -30,36 +29,14 @@ export function validateEmptyInput (value: string): InputValidationsType{
 
 export function validateName(name: string): InputValidationsType {
     let validated: InputValidationsType = {};
-    if(name){        
-        if (name.length < 2) {
-            validated.isValid = false;
-            validated.errorMessage = "Name must be at least 2 characters";
-            return validated;
-        };
-        if (!isNaN(+name[0]) || specialChars.test(name)){
-            validated.isValid = false;
-            validated.errorMessage = "Name can only include alphanumeric characters.";
-            return validated;
-        };
-        if (!ALPHA_ONLY_REGEX.test(String(name))){
-            validated.isValid = false;
-            validated.errorMessage = "Name can only include alphanumeric characters.";
-            return validated;
-        };
-        if (name.length > 20){
-            validated.isValid = false;
-            validated.errorMessage = "Name must be at most 20 characters.";
-            return validated;
-        };
-        
-        validated.isValid = true;
-        delete validated.errorMessage;
-        return validated;
-    } else {
+    if (!VALID_NAME.test(name)) {
         validated.isValid = false;
         validated.errorMessage = "You must provide a valid name.";
         return validated;
     };
+    validated.isValid = true;
+    delete validated.errorMessage;
+    return validated;
 };
 
 export function validatePhone(phone: string){

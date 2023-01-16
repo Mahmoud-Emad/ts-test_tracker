@@ -10,7 +10,7 @@
     });
 </script>
 
-<section class="container-fluid">
+<section>
     <SettingsComponent bind:isLoading/>
 </section>
 

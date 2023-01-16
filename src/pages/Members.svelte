@@ -10,7 +10,7 @@
     });
 </script>
 
-<section class="container-fluid">
+<section>
     <MembersComponent bind:isLoading/>
 </section>
 

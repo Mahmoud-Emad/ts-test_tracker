@@ -9,7 +9,7 @@
     let timeOut: number = 0;
 
     function handleAlert(){
-        if (close && (isOpen && className != "danger")){
+        if (close || (isOpen && className != "danger")){
             timeOut = 3000;
             setTimeout(()=>{
                 isOpen = false;

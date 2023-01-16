@@ -66,5 +66,9 @@
             />
         {/if}
     </div>
-    <AddNewMember bind:openModal/>
+    <AddNewMember bind:openModal 
+        on:create={() => {
+            membersStore.loadMembers();
+        }}
+    />
 {/if}

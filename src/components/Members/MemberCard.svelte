@@ -8,7 +8,7 @@
 
 
 <Link to="/members/{member.id}/">
-    <Card cardClassName={member.invited ? "invited" : ""}>
+    <Card cardClassName={member.invited ? "invited mb-3" : "mb-3"}>
         <div slot="card-body" class="d-flex align-items-center">
             <span class="user_photo_nav user_photo">
                 {member.first_name[0]}{member
