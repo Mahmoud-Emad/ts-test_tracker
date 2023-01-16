@@ -13,6 +13,8 @@
     import { validateName, validatePhone } from "../../utils/validators";
     import ChangeMode from "./ChangeMode.svelte";
 
+    let disabledForm: boolean = true;
+
     const tabs: TabType[] = [
         {
             tabID: "tab1",
@@ -32,10 +34,12 @@
         return await SettingsService.update($userStore)
     };
 
-    $: disabledForm = 
+    $: if($userStore){
+        disabledForm = 
         !validateName($userStore.first_name).isValid ||
-        !validateName($userStore.last_name).isValid ||
-        !validatePhone($userStore.phone).isValid;
+        !validateName($userStore.last_name).isValid||
+        !validatePhone($userStore.phone).isValid
+    }
 
 </script>
 
@@ -48,17 +52,18 @@
         </div>
     </Navbar>
     <div class="container">
-        <div class="mt-3">
-            <div class="header">
-                <strong class="h4">Settings | 
-                    <strong class="text-primary">{$userStore.first_name} {$userStore.last_name}</strong>
-                </strong>
-            </div>
+        {#if $userStore}
             <div class="mt-3">
-                <Tabs {tabs}/>
+                <div class="header">
+                    <strong class="h4">Settings | 
+                        <strong class="text-primary">{$userStore.first_name} {$userStore.last_name}</strong>
+                    </strong>
+                </div>
+                <div class="mt-3">
+                    <Tabs {tabs}/>
+                </div>
             </div>
-        </div>
-
+        {/if}
         <div class="mt-3">
             {#if $alertStore.isOpen}
                 <Alert 

@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 import { notifacationStore, alertStore } from './stores';
-import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType } from './types';
+import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType, RouteType } from './types';
 
 export const generateUUID = () => {
     // Generate a random uuid
@@ -131,4 +131,24 @@ export function setTheme(mode: string){
     } else {
         updateThem();
     };
+};
+
+export const getRoute = (routes: RouteType[], currentRoute: string): boolean => {
+    const keys: Array<string> = [];
+    const paramID = currentRoute.split("/")[2];
+    for (const route of routes) {
+        if(route.path.includes(":id")){
+            keys.push(route.path.replace(":id", `${paramID}/`).slice(0, route.path.length - 1))
+        } else{
+            keys.push(route.path.slice(0, route.path.length - 1))
+        }
+    };
+    if(currentRoute.startsWith("/")){
+        currentRoute = currentRoute.substring(1);
+    };
+    if(currentRoute.endsWith("/")){
+        currentRoute = currentRoute.substring(0, currentRoute.length - 1);
+    };
+
+    return !keys.includes(currentRoute);
 };

@@ -29,7 +29,7 @@
                     <li class="nav-item">
                         <Link to="/" class="nav-link">Dashboard</Link>
                     </li>
-                    {#if $userStore.permission == "admin"}
+                    {#if $userStore && $userStore.permission == "admin"}
                         <li class="nav-item">
                             <Link to="/members/" class="nav-link">Members</Link>
                         </li>
@@ -70,13 +70,15 @@
         /> -->
         <NavBarDropdown>
             <span slot="dropdown-toggle" 
-                class="user_photo_nav">
-                {#if $userStore.first_name && $userStore.last_name != ""}
-                    {$userStore.first_name[0]}{$userStore.last_name[0]}
-                {:else if $userStore.first_name && $userStore.last_name == ""}
-                    {$userStore.first_name[0]}{$userStore.first_name[1]}
-                {:else if $userStore.email}
-                    {$userStore.email[0]}
+            class="user_photo_nav">
+                {#if $userStore}
+                    {#if $userStore.first_name && $userStore.last_name != ""}
+                        {$userStore.first_name[0]}{$userStore.last_name[0]}
+                    {:else if $userStore.first_name && $userStore.last_name == ""}
+                        {$userStore.first_name[0]}{$userStore.first_name[1]}
+                    {:else if $userStore.email}
+                        {$userStore.email[0]}
+                    {/if}
                 {/if}
             </span>
             <span slot="dropdown-li">

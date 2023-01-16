@@ -4,17 +4,39 @@
     import Settings from "../pages/Settings.svelte";
     import Members from "../pages/Members.svelte";
     import MemberDetails from "../pages/MemberDetails.svelte";
-    import Auth from "./Auth.svelte";
+    import Login from "../pages/Login.svelte";
+    import Logout from "../pages/Logout.svelte";
+    import Register from "../pages/Register.svelte";
+    import type { RouteType } from "../utils/types";
+    import { getRoute } from "../utils/helpers";
+    import NotFound from "../components/Errors/NotFound.svelte";
 
     export let isLoading: boolean;
     export let isError404: boolean;
+    
+    const routes: RouteType[] = [
+        {path: "/", component: Home},
+        {path: "settings/", component: Settings},
+        {path: "members/", component: Members},
+        {path: "members/:id", component: MemberDetails},
+        
+        {path: "auth/login/", component: Login},
+        {path: "auth/register/", component: Register},
+        {path: "auth/logout/", component: Logout},
+    ];
+    const currentRoute: string = window.location.pathname;
+    isError404 = getRoute(routes, currentRoute);
 
 </script>
 
-<Router>
-    <Route path="/" primary={false}><Home bind:isLoading/></Route>
-    <Route path="settings/" primary={false}><Settings bind:isLoading/></Route>
-    <Route path="members/" primary={false}><Members bind:isLoading/></Route>
-    <Route path="members/:id" primary={false}><MemberDetails bind:isLoading bind:isError404/></Route>
-    <Auth />
-</Router>
+{#if isError404}
+    <NotFound />
+{:else}
+    <Router>
+        {#each routes as route }
+            <Route path={route.path} primary={false}>
+                <svelte:component this={route.component} bind:isLoading bind:isError404 />
+            </Route>
+        {/each}
+    </Router>
+{/if}

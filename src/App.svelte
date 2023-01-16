@@ -10,6 +10,7 @@
     import { setTheme } from "./utils/helpers";
 	import ServerError from "./components/Errors/ServerError.svelte";
 	import NotFound from "./components/Errors/NotFound.svelte";
+    import NetworkError from "./components/Errors/NetworkError.svelte";
 
 
 	let isLoading: boolean = false;
@@ -20,12 +21,10 @@
 		setTheme(mode)
 		isLoading = true;
 		const accessToken = localStorage.getItem("accessToken");
-		console.log();
 		const blockedRoutes = ["/auth/login", "/auth/register"]
         if(parseJwt(accessToken)){
 			try {
 				if(!blockedRoutes.includes(window.location.pathname)){
-					console.log(window.location.pathname);
 					await User.profile().then(
 						(data) => {$userStore = data}
 					);
@@ -42,22 +41,21 @@
     });
 </script>
 
-{#if $notifacationStore.push}
-	<!-- If there are internal errors e.g. server error -->
-	{#if $notifacationStore.statusCode === 500}
-		<ServerError />
-	{:else if isError404 || $notifacationStore.statusCode === 404}
-		<NotFound />
-	{:else}
-		<Toast 
-			className={$notifacationStore.className}
-			message={$notifacationStore.message}
-			title={$notifacationStore.title}
-			hint={$notifacationStore.hint}
-			timeOut={$notifacationStore.timeOut}
-			isOpen={$notifacationStore.push}
-		/>
-	{/if}
+<!-- If there are internal errors e.g. server error -->
+{#if $notifacationStore.statusCode === 500}
+	<ServerError />
+{:else if isError404 || $notifacationStore.statusCode === 404}
+	<NotFound />
+{:else if $notifacationStore.push }
+	<NetworkError />
+	<Toast 
+		className={$notifacationStore.className}
+		message={$notifacationStore.message}
+		title={$notifacationStore.title}
+		hint={$notifacationStore.hint}
+		timeOut={$notifacationStore.timeOut}
+		isOpen={$notifacationStore.push}
+	/>
+{:else}
+	<Router bind:isLoading bind:isError404/>
 {/if}
-
-<Router bind:isLoading bind:isError404/>

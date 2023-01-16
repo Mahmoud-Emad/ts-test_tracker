@@ -219,3 +219,8 @@ export type TabType = {
     isActive: boolean
     component: ComponentType
 };
+
+export type RouteType = {
+    path: string
+    component: ComponentType
+};
