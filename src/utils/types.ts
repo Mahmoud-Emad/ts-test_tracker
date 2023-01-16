@@ -76,6 +76,7 @@ export type NotifacationType = {
     className?: string
     title?: string
     timeOut?: number
+    statusCode?: number
 };
 
 export type AlertType = {

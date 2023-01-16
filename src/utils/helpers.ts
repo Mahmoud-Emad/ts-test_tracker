@@ -8,7 +8,7 @@ export const generateUUID = () => {
 }
 
 export function createNewNotifacation(
-    className: string, hint: string, message: string, title: string, timeOut: number): NotifacationType{
+    className: string, hint: string, message: string, title: string, timeOut: number, statusCode: number): NotifacationType{
         // Create new notifacation obj
         const createdNotifacation: NotifacationType = {
             className: className,
@@ -16,7 +16,8 @@ export function createNewNotifacation(
             message: message,
             push: true,
             timeOut: timeOut,
-            title: title
+            title: title,
+            statusCode: statusCode
         }
         notifacationStore.set(createdNotifacation)
         return createdNotifacation
@@ -80,7 +81,8 @@ export function onErrorResponse(error: onErrorResponseType){
             "",
             "Internal server error!.",
             "Oh snap!",
-            0
+            0,
+            error.response.status
         );
     } else if (error.response.status === 403){
         createAlertMessage("danger", "Unauthorized", "You don't have permission to perform this action.", {});
@@ -90,7 +92,8 @@ export function onErrorResponse(error: onErrorResponseType){
             "",
             error.message,
             error.name,
-            0
+            0,
+            error.response.status
         );
     };  
 };

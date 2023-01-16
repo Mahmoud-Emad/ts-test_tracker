@@ -30,6 +30,14 @@ class User{
             onErrorResponse(error)
         };
     }
+    public async getMember(id: number) {
+        try{
+            const response: onSuccessResponseType = await axios.get(`members/${id}/`);
+            return response.data;
+        } catch (error) {
+            onErrorResponse(error)
+        };
+    }
 };
 
 const user = new User();

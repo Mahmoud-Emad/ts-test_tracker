@@ -8,9 +8,12 @@
     import { navigate } from "svelte-navigator";
     import parseJwt from "./apis/authentication/JWTPars";
     import { setTheme } from "./utils/helpers";
+	import ServerError from "./components/Errors/ServerError.svelte";
+	import NotFound from "./components/Errors/NotFound.svelte";
 
 
 	let isLoading: boolean = false;
+	let isError404: boolean = false;
 	const mode = localStorage.getItem("mode")
 
 	onMount(async () => {
@@ -41,14 +44,20 @@
 
 {#if $notifacationStore.push}
 	<!-- If there are internal errors e.g. server error -->
-	<Toast 
-		className={$notifacationStore.className}
-		message={$notifacationStore.message}
-		title={$notifacationStore.title}
-		hint={$notifacationStore.hint}
-		timeOut={$notifacationStore.timeOut}
-		isOpen={$notifacationStore.push}
-	/>
+	{#if $notifacationStore.statusCode === 500}
+		<ServerError />
+	{:else if isError404 || $notifacationStore.statusCode === 404}
+		<NotFound />
+	{:else}
+		<Toast 
+			className={$notifacationStore.className}
+			message={$notifacationStore.message}
+			title={$notifacationStore.title}
+			hint={$notifacationStore.hint}
+			timeOut={$notifacationStore.timeOut}
+			isOpen={$notifacationStore.push}
+		/>
+	{/if}
 {/if}
 
-<Router bind:isLoading/>
+<Router bind:isLoading bind:isError404/>
