@@ -1,10 +1,5 @@
 <script>
     import { navigate } from "svelte-navigator";
-
-    function homePage() {
-        navigate("/")
-    }
-
 </script>
 
 <svelte:head>
@@ -14,16 +9,19 @@
 <div class="container mt-4 mb-4">
     <div class="row pt-4 mt-4">
         <div class="col-6 col-offset-1">
-          <h1 class="text-primary">Oops!</h1>
-          <h2>We can't seem to find the page you're looking for.</h2>
-          <h6>Error code: 404</h6>
-          <button type="button" class="btn btn-primary mt-4" 
-            on:click={homePage}>
-            Back to Home
-        </button>
+            <h1 class="text-primary">Oops!</h1>
+            <h2>We can't seem to find the page you're looking for.</h2>
+            <h6>Error code: 404</h6>
+            <div class="links">
+                <p class="mb-0">Here are some helpful links instead:</p>
+                <a href="/">Home</a>
+                <a href="/projects">Projects</a>
+                <a href="/members">Members</a>
+                <a href="/settings">Settings</a>
+            </div>
         </div>
         <div class="col-6 col-offset-1 text-center">
-          <img src="../../500.gif" width="313" height="428" alt="Girl has dropped her ice cream.">
+          <img src="../../error.gif" width="313" height="428" alt="Girl has dropped her ice cream.">
         </div>
     </div>
 </div>
@@ -34,5 +32,13 @@
         margin-top: 50px;
         font-size: 100px;
         color: rgb(48 48 48);
+    }
+    .links{
+        display: grid;
+    }
+    .links a:hover{
+        text-decoration: underline !important;
+        padding-left: 3px;
+        transition: .3s;
     }
 </style>
