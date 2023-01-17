@@ -32,19 +32,19 @@
             bind:value={memberType.first_name}
             label={"First Name"}
             type={"text"}
-            validation={validateName(memberType.first_name)}
+            validation={validateName}
         />
         <Input
             bind:value={memberType.last_name}
             label={"Last Name"}
             type={"text"}
-            validation={validateName(memberType.last_name)}
+            validation={validateName}
         />
         <Input
             bind:value={memberType.email}
             label={"Email"}
             type={"email"}
-            validation={validateEmail(memberType.email)}
+            validation={validateEmail}
         />
         <div class="form-group p-2 mb-3">
             <strong>

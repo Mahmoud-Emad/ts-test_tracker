@@ -201,17 +201,19 @@ export type TestRunChart = {
 };
 
 export type projectsType = {
-    id: number
-    title: string
-    created: string
-    short_description: string
-    teams: UserType[]
-    activity: ProjectActivity[]
-    modified: string
-    user: string
-    total_suites: TestSuiteChart[]
-    total_test_plan: TestPlanChart[]
-    total_test_runs: TestRunChart[]
+    id?: number
+    title?: string
+    created?: string
+    short_description?: string
+    teams?: UserType[]
+    activity?: ProjectActivity[]
+    modified?: string
+    user?: string
+    github_repo?: boolean
+    repo_link?: string
+    total_suites?: TestSuiteChart[]
+    total_test_plan?: TestPlanChart[]
+    total_test_runs?: TestRunChart[]
 };
 
 export type TabType = {

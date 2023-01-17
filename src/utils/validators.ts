@@ -1,8 +1,10 @@
 import type { InputValidationsType } from "./types";
 
 const NUMS_ONLY_REGEX = /^[0-9]+$/i; // Nums only
+const LINK_REGEX = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i; // validate link
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-const VALID_NAME = /^([a-zA-Z]{2,10})$/
+const VALID_NAME = /^([a-zA-Z]{2,10})$/;
+const VALID_PROJECT_NAME = /^(\w[a-z-A-Z]+\s?)*\s*$/;
 
 export function validateEmail (email: string): InputValidationsType{
     let validated: InputValidationsType = {};    
@@ -32,6 +34,40 @@ export function validateName(name: string): InputValidationsType {
     if (!VALID_NAME.test(name)) {
         validated.isValid = false;
         validated.errorMessage = "You must provide a valid name.";
+        return validated;
+    };
+    validated.isValid = true;
+    delete validated.errorMessage;
+    return validated;
+};
+
+export function validateProjectName(name: string): InputValidationsType {
+    let validated: InputValidationsType = {};
+    if(!name){
+        validated.isValid = false;
+        validated.errorMessage = "This field is required.";
+        return validated;
+    };
+    if(name.length < 4 || name.length > 20){
+        validated.isValid = false;
+        validated.errorMessage = "Must be in range (4, 20)";
+        return validated;
+    };
+    if (!VALID_PROJECT_NAME.test(name)) {
+        validated.isValid = false;
+        validated.errorMessage = "You must provide a valid name.";
+        return validated;
+    };
+    validated.isValid = true;
+    delete validated.errorMessage;
+    return validated;
+};
+
+export function validateLink(link: string): InputValidationsType {
+    let validated: InputValidationsType = {};
+    if (!LINK_REGEX.test(link)) {
+        validated.isValid = false;
+        validated.errorMessage = "You must provide a valid link.";
         return validated;
     };
     validated.isValid = true;

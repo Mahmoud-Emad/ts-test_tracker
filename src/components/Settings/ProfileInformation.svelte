@@ -1,6 +1,6 @@
 |<script lang="ts">
     import { userStore } from "../../utils/stores";
-    import { validateName, validatePhone } from "../../utils/validators";
+    import { validateEmail, validateName, validatePhone } from "../../utils/validators";
     import Input from "../UI/Forms/Input.svelte";
 </script>
 
@@ -16,23 +16,24 @@
         label={"Email."} 
         type={"email"} 
         bind:value={$userStore.email}
+        validation={validateEmail}
     />
     <Input
         label={"First Name."}
         type={"text"}
         bind:value={$userStore.first_name}
-        validation={validateName($userStore.first_name)}
+        validation={validateName}
         />
     <Input
         label={"Last Name."} 
         type={"text"} 
         bind:value={$userStore.last_name}
-        validation={validateName($userStore.last_name)}
+        validation={validateName}
     />
     <Input
         label={"Phone Number."} 
         type={"text"} 
         bind:value={$userStore.phone}
-        validation={validatePhone($userStore.phone)}
+        validation={validatePhone}
     />
 </div>

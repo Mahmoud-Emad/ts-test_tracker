@@ -16,16 +16,19 @@
             label={"Permission"} 
             type={"text"}
             bind:value={$userStore.permission}
+            validation={() => {}}
         />
     {/if}
     <Input
         label={"New Password"} 
         type={"password"} 
         bind:value={$userStore.password1}
+        validation={() => {}}
     />
     <Input
         label={"Re Type New Password"} 
         type={"password"}
         bind:value={$userStore.password2}
+        validation={() => {}}
     />
 </div>

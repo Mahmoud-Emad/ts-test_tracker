@@ -40,26 +40,26 @@
 <Input 
     bind:value={registerCredentials.first_name} 
     label={"First Name"}
-    validation = {validateName(registerCredentials.first_name)}
+    validation = {validateName}
 />
 
 <Input 
     bind:value={registerCredentials.last_name} 
     label={"Last Name"}
-    validation = {validateName(registerCredentials.last_name)}
+    validation = {validateName}
 />
 
 <Input 
     bind:value={registerCredentials.email} 
     label={"Email"}
-    validation = {validateEmail(registerCredentials.email)}
+    validation = {validateEmail}
 />
 
 <Input 
     bind:value={registerCredentials.password} 
     label={"Password"}
     type={"password"}
-    validation = {validateEmptyInput(registerCredentials.password)}
+    validation = {validateEmptyInput}
 />
 
 {#if $alertStore.isOpen}

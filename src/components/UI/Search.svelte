@@ -36,4 +36,4 @@
     $: value, search()
 </script>
 
-<Input bind:value label={label}/>
+<Input bind:value label={label} validation={() => {}}/>

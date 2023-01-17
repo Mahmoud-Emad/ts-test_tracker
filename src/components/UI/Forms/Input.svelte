@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { generateUUID } from "../../../utils/helpers";
     import type { InputValidationsType } from "../../../utils/types";
 
 
@@ -8,10 +7,11 @@
     export let type     : string = "text";
     export let disabled : boolean = false;
     export let className: string = '';
-    export let validation: InputValidationsType = {};
+    export let validation: CallableFunction;
 
     let validateClass: string;    
     let elmID: string;
+    let validated: InputValidationsType;
 
     function typeAction(node: HTMLInputElement) {
 		node.type = type;
@@ -19,11 +19,12 @@
 	};
 
     const validate = () => {
-        if(validation.isValid){
+        validated = validation(value)
+        if(validated && validated.isValid){
             validateClass = "is-valid text-success";
         }else if(value === undefined){
             validateClass = ""
-        } else if (validation.isValid === false){
+        } else if (validated.isValid === false){
             validateClass = "is-invalid error-border text-danger";
         };
     };
@@ -53,9 +54,9 @@
         }}></i>
     {/if}
     
-    {#if validation.errorMessage}
+    {#if validated && validated.errorMessage}
         <div id={elmID} class="invalid-feedback">
-            <span class="alert-link">{validation.errorMessage}</span>
+            <span class="alert-link">{validated.errorMessage}</span>
         </div>
     {/if}
 </div>

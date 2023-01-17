@@ -82,13 +82,13 @@
         <Input 
             bind:value={loginCredentials.email} 
             label={"Email"}
-            validation = {validateEmail(loginCredentials.email)}
+            validation = {validateEmail}
         />
         <Input 
             bind:value={loginCredentials.password} 
             label={"Password"} 
             type={"password"}
-            validation = {validateEmptyInput(loginCredentials.password)}
+            validation = {validateEmptyInput}
         />
         {#if $alertStore.isOpen}
             <Alert 
