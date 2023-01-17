@@ -29,14 +29,10 @@
 
 </script>
 
-{#if isError404}
-    <NotFound />
-{:else}
-    <Router>
-        {#each routes as route }
-            <Route path={route.path} primary={false}>
-                <svelte:component this={route.component} bind:isLoading bind:isError404 />
-            </Route>
-        {/each}
-    </Router>
-{/if}
+<Router>
+    {#each routes as route }
+        <Route path={route.path} primary={false}>
+            <svelte:component this={route.component} bind:isLoading bind:isError404 />
+        </Route>
+    {/each}
+</Router>
