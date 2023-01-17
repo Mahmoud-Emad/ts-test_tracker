@@ -7,7 +7,7 @@
     export let type     : string = "text";
     export let disabled : boolean = false;
     export let className: string = '';
-    export let validation: CallableFunction;
+    export let validation: CallableFunction | undefined = undefined;
 
     let validateClass: string;    
     let elmID: string;
@@ -19,14 +19,17 @@
 	};
 
     const validate = () => {
-        validated = validation(value)
-        if(validated && validated.isValid){
-            validateClass = "is-valid text-success";
-        }else if(value === undefined){
-            validateClass = ""
-        } else if (validated.isValid === false){
-            validateClass = "is-invalid error-border text-danger";
-        };
+        if(validation != undefined){
+            validated = validation(value);
+            if(validated && validated.isValid){
+                validateClass = "is-valid text-success";
+            }else if(value === undefined){
+                validateClass = ""
+            } else if (validated.isValid === false){
+                validateClass = "is-invalid error-border text-danger";
+            };
+
+        }
     };
 
     $: value, validate();
@@ -54,32 +57,42 @@
         }}></i>
     {/if}
     
-    {#if validated && validated.errorMessage}
+    {#if validation != undefined && (validated && validated.errorMessage)}
         <div id={elmID} class="invalid-feedback">
             <span class="alert-link">{validated.errorMessage}</span>
         </div>
     {/if}
 </div>
 
-<style>
-    .input:focus{
-        transition: all .1s linear;
-        border-color: rgb(255 0 30 / 0%);
-        box-shadow: inset 0 0 0 1px #cbb5b5;
-    }
-    .error-validation{
-        transition: all .1s linear;
-        border-color: rgb(255 0 30);
-        box-shadow: inset 0 0 0 1px #ffffff;
-    }
-    .success-validation{
-        transition: all .1s linear;
-        border-color: rgb(255 0 30);
-        box-shadow: inset 0 0 0 1px #ffffff;
-    }
-    .fa-eye{
-        margin-left: -30px;
-        cursor: pointer;
-        color: var(--text-primary)
-    }
-</style>
+<svelte:head>
+    <style>
+        .input:focus{
+            transition: all .1s linear;
+            border: .5px solid rgb(255 0 30 )
+        }
+        .error-validation{
+            transition: all .1s linear;
+            box-shadow: none;
+            border: 1px solid rgb(255 0 30 )
+        }
+        .success-validation{
+            transition: all .1s linear;
+            box-shadow: none;
+            border: 1px solid rgb(255 0 30 )
+        }
+        .form-control.is-invalid:focus, .was-validated .form-control:invalid:focus {
+            box-shadow: none;
+            border-color: rgb(249 49 84) !important
+
+        }
+        .form-control.is-valid:focus, .was-validated .form-control:valid:focus {
+            box-shadow: none;
+            border-color: rgb(0 183 74) !important
+        }
+        .fa-eye{
+            margin-left: -30px;
+            cursor: pointer;
+            color: var(--text-primary)
+        }
+    </style>
+</svelte:head>

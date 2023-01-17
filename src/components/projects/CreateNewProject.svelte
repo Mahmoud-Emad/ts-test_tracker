@@ -9,6 +9,7 @@
     import { alertStore } from "../../utils/stores";
     import { createEventDispatcher } from 'svelte';
     import CheckBox from "../UI/Forms/CheckBox.svelte";
+    import Dashboard from "../../apis/dashboard";
 
     export let openModal: boolean;
 
@@ -68,18 +69,19 @@
             className={"btn-primary"}
             onClick={
                 async () => {
-                    // await Members.inviteNewMember(memberType)
-                    // dispatch('create', {
-                    //     text: 'created!'
-                    // });
-                    // memberType.first_name = "";
-                    // memberType.last_name = "";
-                    // memberType.email = "";
-                    // openModal = false;
+                    await Dashboard.newProject(projectType)
+                    dispatch('create', {
+                        text: 'created!'
+                    });
+                    projectType.title = "";
+                    projectType.short_description = "";
+                    projectType.github_repo = false;
+                    projectType.repo_link = "";
+                    openModal = false;
                 }
             }
             disabled={disabledForm}
-            text={"Invite"}
+            text={"New Project"}
         />
         <Button 
             className={"btn-danger"}

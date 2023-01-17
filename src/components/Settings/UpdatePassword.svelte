@@ -1,5 +1,6 @@
 |<script lang="ts">
     import { userStore } from "../../utils/stores";
+    import { validateEmptyInput } from "../../utils/validators";
     import Input from "../UI/Forms/Input.svelte";
 </script>
 
@@ -16,19 +17,19 @@
             label={"Permission"} 
             type={"text"}
             bind:value={$userStore.permission}
-            validation={() => {}}
+            validation={validateEmptyInput}
         />
     {/if}
     <Input
         label={"New Password"} 
         type={"password"} 
         bind:value={$userStore.password1}
-        validation={() => {}}
+        validation={validateEmptyInput}
     />
     <Input
         label={"Re Type New Password"} 
         type={"password"}
         bind:value={$userStore.password2}
-        validation={() => {}}
+        validation={validateEmptyInput}
     />
 </div>

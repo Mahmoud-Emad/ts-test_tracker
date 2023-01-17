@@ -53,7 +53,7 @@
     </div>
     <CreateNewProject bind:openModal 
         on:create={() => {
-            // membersStore.loadMembers();
+            recentProjectsStore.reload(4);
         }}
     />
 {/if}

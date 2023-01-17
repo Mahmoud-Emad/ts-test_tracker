@@ -65,6 +65,11 @@ export function validateProjectName(name: string): InputValidationsType {
 
 export function validateLink(link: string): InputValidationsType {
     let validated: InputValidationsType = {};
+    if(!link){
+        validated.isValid = false;
+        validated.errorMessage = "This field is required.";
+        return validated;
+    };
     if (!LINK_REGEX.test(link)) {
         validated.isValid = false;
         validated.errorMessage = "You must provide a valid link.";

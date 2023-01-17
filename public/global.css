@@ -15,7 +15,8 @@
 	--github-button-backfround: rgb(34,34,34);
 	--btn-primary: #5a79b1;
 	--loading-page-spiner-bg: #222;
-	--modal-background: rgb(0 0 0 / 70%)
+	--input-border: rgb(34, 33, 33);
+	--modal-background: rgb(0 0 0 / 70%);
 }
 
 html, body {
@@ -49,7 +50,7 @@ label {
 	display: block;
 }
 
-input, button, select, textarea {
+button, select, textarea {
 	font-family: inherit;
 	font-size: inherit;
 	-webkit-padding: 0.4em 0;
@@ -58,6 +59,20 @@ input, button, select, textarea {
 	box-sizing: border-box;
 	border: 1px solid #ccc;
 	border-radius: 2px;
+	color: var(--text-color)
+}
+
+.input:focus {
+    transition: all .1s linear;
+    border: 0.5px solid var(--input-border)!important;
+    color: var(--text-color)!important;
+	box-shadow: none
+}
+
+.form-control:focus {
+    box-shadow: none;
+    background: rgb(0 0 0 / 0%)!important;
+    border: 0.5px solid var(--input-border)!important;
 }
 
 input:disabled {
@@ -268,7 +283,8 @@ html .btn {
 	--github-button-backfround: rgb(18, 102, 241);
 	--btn-primary: #1da1f2;
 	--loading-page-spiner-bg: rgb(255 255 255);
-	--modal-background: rgb(0 0 0 / 50%)
+	--modal-background: rgb(0 0 0 / 50%);
+	--input-border: rgb(118 114 114);
 }
 
 /* ####################################################### ---Dark Mood ####################################################################*/
@@ -304,16 +320,13 @@ html .btn {
 	outline: none !important;
 	margin-right: 3px !important;
 	background-color: var(--bg-color);
-	border: 1px solid var(--text-primary) !important;
+	border: 1px solid var(--text-primary);
 	border-radius: 3px !important;
 	color: var(--text-color);
 }
 input:disabled {
 	background-color: var(--boxes-bg) !important;
 	color: var(--text-dark-color);
-}
-input:focus {
-	background-color: var(--boxes-bg) !important;
 }
 .btn-primary{
 	background-color: var(--btn-primary);

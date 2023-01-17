@@ -2,7 +2,6 @@ import type { projectsType } from './../utils/types';
 import httpAxios from "../utils/axios";
 import { onErrorResponse, onSuccessResponse } from "../utils/helpers";
 import type { onSuccessResponseType } from "../utils/types";
-import { recentProjectsStore } from '../utils/stores';
 
 class Dashboard{
     public async recentProjectsUpdated(count: number){
@@ -14,7 +13,19 @@ class Dashboard{
 		} catch (error) {
             return onErrorResponse(error);
 		};
-    }
+    };
+    public async newProject(data: projectsType){
+        // Load last projects updated based on its count.
+        try {
+			const response: onSuccessResponseType = await httpAxios.post(`/dashboard/projects/`, data);
+            const project: projectsType = response.data;
+            onSuccessResponse(response)
+			return project;
+		} catch (error) {
+            return onErrorResponse(error);
+		};
+    };
+
 }
 
 
