@@ -21,11 +21,11 @@
 
     $: if(projectType.github_repo){
         disabledForm = !validateProjectName(projectType.title).isValid ||
-            // !validateEmptyInput(projectType.short_description).isValid ||
+            !validateEmptyInput(projectType.short_description).isValid ||
             !validateLink(projectType.repo_link).isValid;
     } else {
-        disabledForm = !validateProjectName(projectType.title).isValid 
-            // !validateEmptyInput(projectType.short_description).isValid;
+        disabledForm = !validateProjectName(projectType.title).isValid ||
+            !validateEmptyInput(projectType.short_description).isValid;
     };
 
 </script>
@@ -44,8 +44,8 @@
         <TextArea 
             bind:value={projectType.short_description}
             label={"Short Description"}
+            validation={validateEmptyInput}
         />
-            <!-- validation={validateEmptyInput} -->
         <CheckBox label={"Github repository"} bind:value={projectType.github_repo} onClick={() => {
             githubRepoLinkInput = githubRepoLinkInput ? false : true;
         }}/>
@@ -81,7 +81,7 @@
                         projectType.short_description = "";
                         projectType.github_repo = false;
                         projectType.repo_link = "";
-                        // openModal = false;
+                        openModal = false;
                     }
                 }
             }

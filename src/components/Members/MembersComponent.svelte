@@ -70,7 +70,7 @@
                             close = {$membersStore.length > 0}
                             isOpen = {true}
                             message = {"There are no members, try to invite someone from the navbar."}
-                            className = {"warning"}
+                            className={"light not-available"}
                         />
                     {/each}
                 </div>

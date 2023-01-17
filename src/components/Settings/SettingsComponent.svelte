@@ -17,14 +17,14 @@
 
     const tabs: TabType[] = [
         {
-            tabID: "tab1",
+            tabID: "information",
             tabName: "Information",
             component: ProfileInformation,
             isActive: true,
         },
         {
-            tabID: "tab2",
-            tabName: "Main",
+            tabID: "advanced",
+            tabName: "Advanced",
             component: UpdatePassword,
             isActive: false,
         },

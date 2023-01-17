@@ -5,7 +5,7 @@
 
     export let loadActivities: boolean;
 </script>
-<section class="activity mb-4">
+<section class="activity mb-4 pb-4">
     <div class="mt-2">
         <p>Recent Activity</p>
     </div>
