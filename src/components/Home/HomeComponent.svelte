@@ -4,32 +4,56 @@
     import RecentProjectsUpdated from "./RecentProjectsUpdated.svelte";
     import Search from "../UI/Search.svelte";
     import { recentProjectsStore } from "../../utils/stores";
+    import LoadingComponent from "../UI/LoadingComponent.svelte";
+    import NavBar from "../UI/Navbar/Navbar.svelte";
+    import NavAction from "../UI/Navbar/NavAction.svelte";
+    import Dashboard from "../../apis/dashboard";
+    import CreateNewProject from "../projects/CreateNewProject.svelte";
 
-    let isLoading: boolean = false;
+    export let isLoading: boolean = false;
+    let openModal: boolean = false;
+    let loadProjects: boolean = false;
 
-    onMount(() => {
+    onMount(async () => {
         // Load and update recent projects updated store.
-        isLoading = true;
-        recentProjectsStore.reload(4)
-        isLoading = false;
+        loadProjects = true;
+        await Dashboard.recentProjectsUpdated(4).then((data) => {
+            if(data){
+                recentProjectsStore.set(data)
+            };
+        }).finally(() => {
+            loadProjects = false;
+        })
     });
 </script>
 
-
-
-<div class="container pt-4">
-    <Greeting />
-    <Search 
-        label={"Search Members"}
-        searchStore={recentProjectsStore}
-        searchMethod={recentProjectsStore.reload}
-        searchArgs={4}
-        searchField={"title"}
-        on:Search={
-            (event) => {
-                recentProjectsStore.set(event.detail.objects)
+{#if isLoading}
+    <LoadingComponent className={"page"} />
+{:else}
+    <NavBar>
+        <NavAction slot="actionBTN" tooltip={"Create new project"} onClick={() => {
+            openModal = true
+        }}/>
+    </NavBar>
+    <div class="container pt-4">
+        <Greeting />
+        <Search 
+            label={"Search Members"}
+            searchStore={recentProjectsStore}
+            searchMethod={recentProjectsStore.reload}
+            searchArgs={4}
+            searchField={"title"}
+            on:Search={
+                (event) => {
+                    recentProjectsStore.set(event.detail.objects)
+                }
             }
-        }
+        />
+        <RecentProjectsUpdated bind:loadProjects/>
+    </div>
+    <CreateNewProject bind:openModal 
+        on:create={() => {
+            // membersStore.loadMembers();
+        }}
     />
-    <RecentProjectsUpdated bind:isLoading/>
-</div>
+{/if}

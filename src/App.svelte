@@ -29,12 +29,12 @@
 						(data) => {$userStore = data}
 					);
 				}
-			} catch (error) {				
-				return navigate('/auth/login');
+			} catch (error) {
+				window.location.href = '/auth/login';		
 			};
         } else {
 			if(!blockedRoutes.includes(window.location.pathname)){
-				return navigate('/auth/login');
+				window.location.href = '/auth/login';
 			}
 		}
 		isLoading = false;

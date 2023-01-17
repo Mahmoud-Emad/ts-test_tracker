@@ -47,7 +47,7 @@ export type MemberType = {
     invited?: boolean
     accepted?: boolean
     last_project_working_on?: projectsType | null
-    last_tests_assigned?: {} | null
+    last_tests_assigned?: TestRunChart | null
     total_project_worked_on?: number
     incomplete_test_runs_assigned_to_you: TestRunChart[]
 };

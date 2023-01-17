@@ -1,22 +1,20 @@
 <script lang="ts">
-    import Navbar from "../components/UI/Navbar/Navbar.svelte";
-    import LoadingComponent from "../components/UI/LoadingComponent.svelte";
     import HomeComponent from "../components/Home/HomeComponent.svelte";
-    import Footer from "../components/UI/Footer/Footer.svelte";
+    import { onMount } from "svelte";
+    import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
     
     export let isLoading: boolean;
+
+    onMount(() => {
+        clearAlertMessage();
+		clearNotifacationStore();
+    });
 	
 </script>
 
-<div class="h-100">
-    {#if isLoading}
-        <LoadingComponent className="d-flex h-100 justify-content-center align-items-center"/>
-    {:else}
-        <Navbar />
-        <HomeComponent />
-        <Footer />
-    {/if}
-</div>
+<section>
+    <HomeComponent bind:isLoading/>
+</section>
 
 <svelte:head>
     <title>Test-Tracker | Home</title>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { membersStore } from "../../../utils/stores";
+    import { membersStore, userStore } from "../../../utils/stores";
 </script>
 
 <div class="card mt-2 p-4">
@@ -41,5 +41,8 @@
                 </tr>
             </tbody>
         </table>
+        {#if $userStore.id === $membersStore[0].id}
+            <small><a href="/settings">Update.</a></small>
+        {/if}
     </div>
 </div>

@@ -12,7 +12,9 @@
 
     const params = useParams();
     let memberID: number = Number($params.id);
-    let member: MemberType = {}    
+    let member: MemberType = {
+        incomplete_test_runs_assigned_to_you: []
+    };
 
     onMount(async () => {
         clearAlertMessage();

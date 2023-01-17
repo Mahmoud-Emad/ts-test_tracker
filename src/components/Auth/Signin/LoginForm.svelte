@@ -97,6 +97,7 @@
                 title={$alertStore.title}
                 className={$alertStore.className}
                 error={$alertStore.error}
+                close={false}
             />
         {/if}
     </div>

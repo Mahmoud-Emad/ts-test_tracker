@@ -12,15 +12,15 @@ function createRecentProjectsStore(){
 		return this.reload(count)
 	};
 	
-	function reload(count: number){
-		Dashboard.recentProjectsUpdated(count).then((res: projectsType[]) => {
-			if(res){
-				return update((s) => {            
-					s = res;
-					return s;
-				});
-			};
-		});
+	async function reload(count: number){
+		const res = await Dashboard.recentProjectsUpdated(count);
+		if (res) {
+			return update((s) => {
+				s = res;
+				return s;
+			});
+		}
+		;
 	}
 	return {
 		subscribe,
