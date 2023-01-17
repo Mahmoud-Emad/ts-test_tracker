@@ -46,6 +46,10 @@ export type MemberType = {
     modified?: string
     invited?: boolean
     accepted?: boolean
+    last_project_working_on?: projectsType | null
+    last_tests_assigned?: {} | null
+    total_project_worked_on?: number
+    incomplete_test_runs_assigned_to_you: TestRunChart[]
 };
 
 export type TokensType = {
@@ -132,10 +136,6 @@ export type ProjectActivity = {
     date: string
 };
 
-export type ProjectTeam = {
-
-};
-
 export type ProjectTestCase = {
     created: string
     modified: string
@@ -183,7 +183,7 @@ export type TestPlanChart = {
 };
 
 export type TestRunChart = {
-    assigned_user: string
+    assigned_user: string | UserType
     completed: string
     created: string
     modified: string
@@ -204,7 +204,7 @@ export type projectsType = {
     title: string
     created: string
     short_description: string
-    teams: ProjectTeam[]
+    teams: UserType[]
     activity: ProjectActivity[]
     modified: string
     user: string
