@@ -1,7 +1,7 @@
 import { writable, get } from "svelte/store";
 import isAuthenticated from "../apis/authentication/IsAuthenticated";
 import Dashboard from "../apis/dashboard"
-import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType, MemberType } from "./types";
+import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType, MemberType, ProjectActivity } from "./types";
 import User from "../apis/users"
 
 function createRecentProjectsStore(){
@@ -26,6 +26,27 @@ function createRecentProjectsStore(){
 		subscribe,
 		set,
 		search,
+		reload
+	};
+};
+
+function createActivitiesStore(){
+	const store = writable<Array<ProjectActivity>>([]);
+	const { subscribe, update, set } = store;
+
+	async function reload(){
+		const res = await Dashboard.loadLast5ProjectsActivity();
+		if (res) {
+			return update((s) => {
+				s = res;
+				return s;
+			});
+		}
+		;
+	}
+	return {
+		subscribe,
+		set,
 		reload
 	};
 };
@@ -126,3 +147,4 @@ export const notifacationStore = writable<NotifacationType>({});
 export const alertStore = writable<AlertType>({});
 export const projectsStore = writable<Array<projectsType>>([]);
 export const recentProjectsStore = createRecentProjectsStore();
+export const recentProjectsActivities = createActivitiesStore();

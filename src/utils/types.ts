@@ -216,6 +216,7 @@ export type projectsType = {
     total_test_runs?: TestRunChart[]
 };
 
+
 export type TabType = {
     tabID: string
     tabName: string

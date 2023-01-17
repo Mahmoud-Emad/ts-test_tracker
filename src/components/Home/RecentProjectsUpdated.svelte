@@ -8,11 +8,13 @@
 </script>
 
 
-<div>
-    <p class="last-projects">
-        Last <strong class="text-primary">{$recentProjectsStore.length}</strong> of
-        {$recentProjectsStore.length === 1 ? "Project" : "Projects"} Updated
-    </p>
+<section class="projects mb-4">
+    <div class="mt-2">
+        <p class="last-projects">
+            Last <strong class="text-primary">{$recentProjectsStore.length}</strong> of
+            {$recentProjectsStore.length === 1 ? "Project" : "Projects"} Updated
+        </p>
+    </div>
     {#if loadProjects}
         <div class="mt-4 pt-4">
             <LoadingComponent className={"component"}/>
@@ -32,7 +34,7 @@
                 </div>
             {:else}
                 <Alert 
-                    className={"warning"}
+                    className={"light not-available"}
                     isOpen={true}
                     close={$recentProjectsStore.length > 0}
                     message={"There are no projects, try to create new one from the navbar."}
@@ -40,4 +42,10 @@
             {/each}
         </div>
     {/if}
-</div>
+</section>
+
+<style>
+    .projects{
+        overflow: hidden;
+    }
+</style>

@@ -3,7 +3,7 @@
     import Input from "../UI/Forms/Input.svelte";
     import TextArea from "../UI/Forms/TextArea.svelte";
     import type { projectsType } from "../../utils/types";
-    import { validateLink, validateProjectName } from "../../utils/validators";
+    import { validateEmptyInput, validateLink, validateProjectName } from "../../utils/validators";
     import Button from "../UI/Forms/Button.svelte";
     import Alert from "../UI/Alert.svelte";
     import { alertStore } from "../../utils/stores";
@@ -20,10 +20,12 @@
     let disabledForm: boolean = true;
 
     $: if(projectType.github_repo){
-        disabledForm = !validateProjectName(projectType.title).isValid || 
-        !validateLink(projectType.repo_link).isValid;
+        disabledForm = !validateProjectName(projectType.title).isValid ||
+            // !validateEmptyInput(projectType.short_description).isValid ||
+            !validateLink(projectType.repo_link).isValid;
     } else {
-        disabledForm = !validateProjectName(projectType.title).isValid;
+        disabledForm = !validateProjectName(projectType.title).isValid 
+            // !validateEmptyInput(projectType.short_description).isValid;
     };
 
 </script>
@@ -43,6 +45,7 @@
             bind:value={projectType.short_description}
             label={"Short Description"}
         />
+            <!-- validation={validateEmptyInput} -->
         <CheckBox label={"Github repository"} bind:value={projectType.github_repo} onClick={() => {
             githubRepoLinkInput = githubRepoLinkInput ? false : true;
         }}/>
@@ -69,15 +72,17 @@
             className={"btn-primary"}
             onClick={
                 async () => {
-                    await Dashboard.newProject(projectType)
-                    dispatch('create', {
-                        text: 'created!'
-                    });
-                    projectType.title = "";
-                    projectType.short_description = "";
-                    projectType.github_repo = false;
-                    projectType.repo_link = "";
-                    openModal = false;
+                    if(!disabledForm){
+                        await Dashboard.newProject(projectType)
+                        dispatch('create', {
+                            text: 'created!'
+                        });
+                        projectType.title = "";
+                        projectType.short_description = "";
+                        projectType.github_repo = false;
+                        projectType.repo_link = "";
+                        // openModal = false;
+                    }
                 }
             }
             disabled={disabledForm}
