@@ -39,6 +39,7 @@ export type MemberType = {
     first_name?: string
     last_name?: string
     full_name?: string
+    background_color?: string
     id?: number
     permission?: string
     phone?: string

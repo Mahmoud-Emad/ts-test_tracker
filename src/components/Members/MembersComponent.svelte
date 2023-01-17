@@ -8,12 +8,21 @@
     import NavAction from "../UI/Navbar/NavAction.svelte";
     import AddNewMember from "./AddNewMember.svelte";
     import Search from "../UI/Search.svelte";
+    import User from "../../apis/users";
 
     export let isLoading: boolean = false;
     let openModal: boolean = false;
+    let loadMembers: boolean = false;
 
     onMount(async () => {
-        membersStore.loadMembers()
+        loadMembers = true;
+        await User.loadMembers().then((members) => {
+            if(members){
+                membersStore.set(members)
+            };
+        }).finally(() => {
+            loadMembers = false;
+        });
     });
 
 </script>
@@ -49,21 +58,23 @@
                 }
             }
         />
-        {#if $membersStore && $membersStore.length > 0}
+        {#if loadMembers}
+            <LoadingComponent className="component" />
+        {:else}
             <div class="pt-5">
                 <div class="row">
                     {#each $membersStore as member}
                         <MemberCard {member}/>
+                    {:else}
+                        <Alert 
+                            close = {$membersStore.length > 0}
+                            isOpen = {true}
+                            message = {"There are no members, try to invite someone from the navbar."}
+                            className = {"warning"}
+                        />
                     {/each}
                 </div>
             </div>
-        {:else}
-            <Alert 
-                close = {$membersStore.length > 0}
-                isOpen = {true}
-                message = {"There are no members, try to invite someone from the navbar."}
-                className = {"warning"}
-            />
         {/if}
     </div>
     <AddNewMember bind:openModal 

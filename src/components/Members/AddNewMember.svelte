@@ -13,7 +13,9 @@
 
     const dispatch = createEventDispatcher();
     
-    let memberType: MemberType = {};
+    let memberType: MemberType = {
+        incomplete_test_runs_assigned_to_you: []
+    };
 
     $: disabledForm = !validateName(memberType.first_name).isValid ||
         !validateName(memberType.last_name).isValid ||
@@ -73,7 +75,7 @@
     </div>
     <div slot="modal-footer">
         <Button 
-            className={"btn-success"}
+            className={"btn-primary"}
             onClick={
                 async () => {
                     await Members.inviteNewMember(memberType)
@@ -90,7 +92,7 @@
             text={"Invite"}
         />
         <Button 
-            className={"btn-info"}
+            className={"btn-danger"}
             onClick={() => {
                 openModal = false;
                 memberType.first_name = "";

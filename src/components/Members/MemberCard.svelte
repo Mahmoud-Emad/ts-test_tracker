@@ -6,31 +6,46 @@
     export let member: MemberType
 </script>
 
-
-<Link to="/members/{member.id}/">
-    <Card cardClassName={member.invited ? "invited mb-3" : "mb-3"}>
-        <div slot="card-body" class="d-flex align-items-center">
-            <span class="user_photo_nav user_photo">
-                {member.first_name[0]}{member
-                    .last_name[0]}
-            </span>
-            <div class="info_user" >
-                <strong class="text-primary">
-                    {member.full_name}
-                </strong>
-                {#if member.invited}
-                    <p class="text-muted mb-0">
-                        invited...
-                    </p>
-                {:else}
-                    <p class="text-muted mb-0">
-                        Member since: {member.created}
-                    </p>                       
-                {/if}
+<div class="col-3">
+    <Link to="/members/{member.id}/"> 
+        <Card cardClassName={member.invited ? "invited mb-3" : "mb-3"}
+            cardClassBody={"pt-0"}
+            withHeader={true}
+            cardClassHeader={"border-bottom-0"}
+        >
+            <div slot="card-header">
+                <div class="d-flex justify-content-center">
+                    <span class="user_photo_nav user_photo" style="background: {member.background_color}">
+                        {member.first_name[0]}{member
+                            .last_name[0]}
+                    </span>
+                </div>
             </div>
-        </div>
-    </Card>
-</Link>
+            <div slot="card-body" class="d-flex align-items-center pt-0">
+                <div class="info_user" >
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <strong class="text-color">
+                                {member.full_name}
+                            </strong>
+                        </div>
+                        <div class="col-12">
+                            {#if member.invited}
+                                <p class="text-muted text-center mb-0">
+                                    invited...
+                                </p>
+                            {:else}
+                                <p class="text-muted text-center mb-0">
+                                    Member since: {member.created}
+                                </p>                       
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Card>
+    </Link>
+</div>
 
 <style>
     .info_user {

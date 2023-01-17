@@ -250,6 +250,9 @@ html .btn {
 	color:var(--text-primary) !important;
 }
 
+.text-color{
+	color: var(--text-color);
+}
 /* Root attrs to dark mode */
 .dark{
 	transition: 0.3s;
