@@ -177,3 +177,4 @@ export const alertStore = writable<AlertType>({});
 export const projectsStore = createProjectsStore();
 export const recentProjectsStore = createRecentProjectsStore();
 export const recentProjectsActivities = createActivitiesStore();
+export const isError404 = writable(false);

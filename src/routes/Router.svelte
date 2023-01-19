@@ -10,9 +10,8 @@
     import Register from "../pages/Register.svelte";
     import type { RouteType } from "../utils/types";
     import { getRoute } from "../utils/helpers";
-
+    import { isError404 } from "../utils/stores";
     export let isLoading: boolean;
-    export let isError404: boolean;
     
     const routes: RouteType[] = [
         {path: "/", component: Home},
@@ -27,14 +26,13 @@
         {path: "auth/logout/", component: Logout},
     ];
     const currentRoute: string = window.location.pathname;
-    isError404 = getRoute(routes, currentRoute);
-
+    $isError404 = getRoute(routes, currentRoute)
 </script>
 
 <Router>
     {#each routes as route }
         <Route path={route.path} primary={false}>
-            <svelte:component this={route.component} bind:isLoading bind:isError404 />
+            <svelte:component this={route.component} bind:isLoading/>
         </Route>
     {/each}
 </Router>
