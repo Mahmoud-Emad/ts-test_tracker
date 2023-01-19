@@ -18,7 +18,7 @@
             </Link>
         </Router>
         <ul
-            class="dropdown-menu dropdown-menu-end"
+            class="dropdown-menu dropdown-menu-end mt-3"
             aria-labelledby="navbarDropdownMenuAvatar"
         >
             <slot name="dropdown-li"></slot>

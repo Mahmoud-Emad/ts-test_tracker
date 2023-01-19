@@ -3,6 +3,7 @@
     import Home from "../pages/Home.svelte";
     import Settings from "../pages/Settings.svelte";
     import Projects from "../pages/Projects.svelte";
+    import ProjectDetail from "../pages/ProjectDetail.svelte";
     import Members from "../pages/Members.svelte";
     import MemberDetails from "../pages/MemberDetails.svelte";
     import Login from "../pages/Login.svelte";
@@ -20,13 +21,14 @@
         {path: "members/:id", component: MemberDetails},
         
         {path: "projects/", component: Projects},
+        {path: "projects/:id", component: ProjectDetail},
         
         {path: "auth/login/", component: Login},
         {path: "auth/register/", component: Register},
         {path: "auth/logout/", component: Logout},
     ];
     const currentRoute: string = window.location.pathname;
-    $isError404 = getRoute(routes, currentRoute)
+    $isError404 = getRoute(routes, currentRoute);
 </script>
 
 <Router>

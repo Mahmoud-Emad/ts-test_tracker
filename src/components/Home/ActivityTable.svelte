@@ -1,28 +1,35 @@
 <script lang="ts">
     import LoadingComponent from "../UI/LoadingComponent.svelte";
-    import { recentProjectsActivities } from "../../utils/stores";
+    import { projectsActivitiesStore } from "../../utils/stores";
     import Alert from "../UI/Alert.svelte";
 
     export let loadActivities: boolean;
 </script>
+
 <section class="activity mb-4 pb-4">
     <div class="mt-2">
         <p>Recent Activity</p>
     </div>
     {#if loadActivities}
         <div class="mt-4">
-            <LoadingComponent className={"component"}/>
+            <LoadingComponent className={"component"} />
         </div>
     {:else}
         <div class="table">
-            {#each $recentProjectsActivities as action}
+            {#each $projectsActivitiesStore as action}
                 {#if action.date && action.action}
                     <table class="table align-middle mb-3">
                         <thead class="table-bg">
                             <tr>
                                 <th>
-                                    <span class="badge badge-success rounded-pill d-inline">{action.date}</span>
-                                    <span class="badge rounded-pill d-inline text-muted">Action Date</span>
+                                    <span
+                                        class="badge badge-success rounded-pill d-inline"
+                                        >{action.date}</span
+                                    >
+                                    <span
+                                        class="badge rounded-pill d-inline text-muted"
+                                        >Action Date</span
+                                    >
                                 </th>
                             </tr>
                         </thead>
@@ -31,7 +38,9 @@
                                 <td>
                                     <div class="d-inline b-0">
                                         <div class="ms-3">
-                                            <p class="text-muted mb-0">{action.action}</p>
+                                            <p class="text-muted mb-0">
+                                                {action.action}
+                                            </p>
                                         </div>
                                     </div>
                                 </td>
@@ -40,7 +49,7 @@
                     </table>
                 {/if}
             {:else}
-                <Alert 
+                <Alert
                     close={false}
                     message={"Seems to be no activities available"}
                     className={"light not-available"}

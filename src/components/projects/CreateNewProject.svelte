@@ -9,8 +9,7 @@
     import { alertStore } from "../../utils/stores";
     import { createEventDispatcher } from 'svelte';
     import CheckBox from "../UI/Forms/CheckBox.svelte";
-    import Dashboard from "../../apis/dashboard";
-    import { clearAlertMessage } from "../../utils/helpers";
+    import Projects from "../../apis/projects";
 
     export let openModal: boolean;
     const dispatch = createEventDispatcher();
@@ -73,16 +72,18 @@
             onClick={
                 async () => {
                     if(!disabledForm){
-                        await Dashboard.newProject(projectType)
-                        dispatch('create', {
-                            text: 'created!'
-                        });
-                        projectType.title = "";
-                        projectType.short_description = "";
-                        projectType.github_repo = false;
-                        projectType.repo_link = "";
-                        openModal = false;
-                    }
+                        const response = await Projects.new(projectType);
+                        if(response != undefined){
+                            dispatch('create', {
+                                text: 'created!'
+                            });
+                            openModal = false;
+                            projectType.title = "";
+                            projectType.short_description = "";
+                            projectType.github_repo = false;
+                            projectType.repo_link = "";
+                        };
+                    };
                 }
             }
             disabled={disabledForm}

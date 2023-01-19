@@ -36,6 +36,16 @@ html, body {
 	color: var(--text-color);
 }
 
+.alert-center-no-bg{
+	border: 0;
+	border-radius: 0.5rem;
+	border-radius: 0px;
+	text-align: center;
+	margin-bottom: 0px;
+	padding-bottom: 1px;
+	color: var(--text-color);
+}
+
 body {
 	margin: 0;
 	padding: 8px;
@@ -269,6 +279,10 @@ html .btn {
     justify-content: center;
     align-items: center;
 	margin-right: 10px;
+}
+.c-pinter{
+	cursor: pointer;
+	font-size: 21px;
 }
 .nav-tabs{
 	background-color: var(--boxes-bg)!important;

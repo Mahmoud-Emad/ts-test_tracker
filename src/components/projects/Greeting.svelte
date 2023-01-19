@@ -1,14 +1,21 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { userStore, projectsStore } from "../../utils/stores";
+    export let projectTitle: string = "";
 </script>
 
 <div class="pt-0">
     {#if $userStore.permission === "admin"}
         <p class="h5">
-            <span class="text-primary">
-                Projects
-            </span> 
+            {#if projectTitle != ""}
+                <span>Projects</span> | 
+                <span class="text-primary">
+                    {projectTitle}
+                </span> 
+            {:else}
+                <span class="text-primary">
+                    Projects
+                </span> 
+            {/if}
         </p>
         <p class="text-muted">
             There are <strong class="text-primary">{$projectsStore.length}</strong>

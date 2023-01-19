@@ -1,18 +1,19 @@
 import { writable, get } from "svelte/store";
 import isAuthenticated from "../apis/authentication/IsAuthenticated";
-import Dashboard from "../apis/dashboard"
+import Dashboard from "../apis/dashboard";
+import Projects from "../apis/projects";
 import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType, MemberType, ProjectActivity } from "./types";
 import User from "../apis/users"
 
-function createRecentProjectsStore(){
+function createRecentProjectsStore() {
 	const store = writable<Array<projectsType>>([]);
 	const { subscribe, update, set } = store;
-	
-	function search(count: number){
+
+	function search(count: number) {
 		return this.reload(count)
 	};
-	
-	async function reload(count: number){
+
+	async function reload(count: number) {
 		const res = await Dashboard.recentProjectsUpdated(count);
 		if (res) {
 			return update((s) => {
@@ -29,12 +30,12 @@ function createRecentProjectsStore(){
 	};
 };
 
-function createProjectsStore(){
+function createProjectsStore() {
 	const store = writable<Array<projectsType>>([]);
 	const { subscribe, update, set } = store;
-	
-	async function reload(){
-		const res = await Dashboard.loadProjects();
+
+	async function reload() {
+		const res = await Projects.all();
 		if (res) {
 			return update((s) => {
 				s = res;
@@ -43,8 +44,8 @@ function createProjectsStore(){
 		}
 		;
 	}
-	
-	async function recentProjectsUpdated(count: number){
+
+	async function recentProjectsUpdated(count: number) {
 		const res = await Dashboard.recentProjectsUpdated(count);
 		if (res) {
 			return update((s) => {
@@ -61,11 +62,11 @@ function createProjectsStore(){
 	};
 };
 
-function createActivitiesStore(){
+function createActivitiesStore() {
 	const store = writable<Array<ProjectActivity>>([]);
 	const { subscribe, update, set } = store;
 
-	async function reload(){
+	async function reload() {
 		const res = await Dashboard.loadLast5ProjectsActivity();
 		if (res) {
 			return update((s) => {
@@ -82,14 +83,14 @@ function createActivitiesStore(){
 	};
 };
 
-function createMembersStore(){
+function createMembersStore() {
 	const store = writable<Array<MemberType>>([]);
 	const { subscribe, update, set } = store;
 
-	function search(){
+	function search() {
 		return this.loadMembers()
 	};
-	async function loadMembers(){
+	async function loadMembers() {
 		const res: MemberType[] = await User.loadMembers();
 		if (res) {
 			return update((s) => {
@@ -122,7 +123,7 @@ function createAuthStore() {
 		};
 	});
 
-	function removeSession(){
+	function removeSession() {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
 
@@ -137,21 +138,21 @@ function createAuthStore() {
 		localStorage.setItem("accessToken", accessToken);
 		localStorage.setItem("refreshToken", refreshToken);
 
-        if (accessToken) {
+		if (accessToken) {
 			if (get(userStore) === undefined) {
 				User.profile().then((data) => {
-                    userStore.set({
-                        id: data.id,
+					userStore.set({
+						id: data.id,
 						first_name: data.first_name,
 						last_name: data.last_name,
 						email: data.email,
 						full_name: data.full_name,
-                    })
-                });
-            };
-        };
+					})
+				});
+			};
+		};
 
-		return update((s) => {            
+		return update((s) => {
 			s.access_token = accessToken;
 			s.refresh_token = refreshToken;
 			return s;
@@ -163,7 +164,7 @@ function createAuthStore() {
 		removeSession,
 		updateTokens,
 		isAuth(): boolean {
-            const { access_token, refresh_token } = get(store);
+			const { access_token, refresh_token } = get(store);
 			return !!access_token && !!refresh_token;
 		}
 	};
@@ -176,5 +177,5 @@ export const notifacationStore = writable<NotifacationType>({});
 export const alertStore = writable<AlertType>({});
 export const projectsStore = createProjectsStore();
 export const recentProjectsStore = createRecentProjectsStore();
-export const recentProjectsActivities = createActivitiesStore();
+export const projectsActivitiesStore = createActivitiesStore();
 export const isError404 = writable(false);

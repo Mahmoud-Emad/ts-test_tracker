@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Routers
 	import Router from "./routes/Router.svelte";
-	import { isError404, notifacationStore, projectsStore, userStore } from "./utils/stores";
+	import { isError404, notifacationStore, userStore } from "./utils/stores";
 	import Toast from "./components/UI/Toast.svelte";
 	import User from "./apis/users";
     import { onMount } from "svelte";
@@ -25,16 +25,15 @@
 					await User.profile().then(
 						(data) => {$userStore = data}
 					);
-					await projectsStore.reload();
-				}
+				};
 			} catch (error) {
 				window.location.href = '/auth/login';		
 			};
         } else {
 			if(!blockedRoutes.includes(window.location.pathname)){
 				window.location.href = '/auth/login';
-			}
-		}
+			};
+		};
 		isLoading = false;
     });
 </script>

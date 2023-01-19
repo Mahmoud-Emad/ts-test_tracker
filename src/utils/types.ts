@@ -186,7 +186,7 @@ export type TestPlanChart = {
 };
 
 export type TestRunChart = {
-    assigned_user: string | UserType
+    assigned_user: UserType
     completed: string
     created: string
     modified: string
@@ -216,8 +216,10 @@ export type projectsType = {
     total_suites?: TestSuiteChart[]
     total_test_plan?: TestPlanChart[]
     total_test_runs?: TestRunChart[]
+    total_requirements_docs?: []
+    people_with_the_most_incomplete_test_runs?: TestRunChart[]
+    incomplete_test_runs_assigned_to_you?: TestRunChart
 };
-
 
 export type TabType = {
     tabID: string

@@ -13,10 +13,6 @@
 </div>
 
 <style>
-    .c-pinter{
-        cursor: pointer;
-        font-size: 21px;
-    }
     [data-tooltip] {
         position: relative;
         z-index: 2;

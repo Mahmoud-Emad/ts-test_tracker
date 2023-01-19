@@ -1,6 +1,6 @@
 import type { ProjectActivity, projectsType } from './../utils/types';
 import httpAxios from "../utils/axios";
-import { onErrorResponse, onSuccessResponse } from "../utils/helpers";
+import { onErrorResponse } from "../utils/helpers";
 import type { onSuccessResponseType } from "../utils/types";
 
 class Dashboard{
@@ -14,16 +14,7 @@ class Dashboard{
             return onErrorResponse(error);
 		};
     };
-    public async loadProjects(){
-        // Request to all projects from the server.
-        try {
-			const response: onSuccessResponseType = await httpAxios.get('/dashboard/projects/');
-            const projects: projectsType[] = response.data;
-			return projects;
-		} catch (error) {
-            return onErrorResponse(error);
-		};
-    };
+
     public async loadLast5ProjectsActivity(){
         // Load last projects updated based on its count.
         try {
@@ -34,19 +25,7 @@ class Dashboard{
             return onErrorResponse(error);
 		};
     };
-    public async newProject(data: projectsType){
-        // Load last projects updated based on its count.
-        try {
-			const response: onSuccessResponseType = await httpAxios.post(`/dashboard/projects/`, data);
-            const project: projectsType = response.data;
-            onSuccessResponse(response)
-			return project;
-		} catch (error) {
-            return onErrorResponse(error);
-		};
-    };
-
-}
+};
 
 
 const dashboard = new Dashboard();
