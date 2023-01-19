@@ -33,3 +33,9 @@
         validation={validateEmptyInput}
     />
 </div>
+
+<style>
+    .card{
+        font-size: 16px;
+    }
+</style>

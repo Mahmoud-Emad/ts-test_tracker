@@ -32,13 +32,14 @@ export function clearNotifacationStore(): NotifacationType{
     return createdNotifacation
 };
 
-export function createAlertMessage(className: string, title: string, message: string, error: {}): AlertType{
+export function createAlertMessage(className: string, title: string, message: string, error: {}, close: boolean): AlertType{
     const alert :AlertType = {
         isOpen: true,
         className: className,
         message: message,
         title: title,
-        error: error
+        error: error,
+        close: close
     };
     alertStore.set(alert)
     return alert
@@ -66,14 +67,16 @@ export function onErrorResponse(error: onErrorResponseType){
             "danger",
             error.response.statusText,
             errorMessage || "Please check your email/password.",
-            error.response.data.error || {}
+            error.response.data.error || {},
+            false
         );
     } else if(error.response.status === 400){
         createAlertMessage(
             "danger",
             error.response.statusText,
             errorMessage || "Please make sure that you entred a valid data.",
-            error.response.data.error || {}
+            error.response.data.error || {},
+            false
         );
     } else if (error.response.status === 500){
         createNewNotifacation(
@@ -85,7 +88,13 @@ export function onErrorResponse(error: onErrorResponseType){
             error.response.status
         );
     } else if (error.response.status === 403){
-        createAlertMessage("danger", "Unauthorized", "You don't have permission to perform this action.", {});
+        createAlertMessage(
+            "danger", 
+            "Unauthorized", 
+            "You don't have permission to perform this action.", 
+            {}, 
+            false
+        );
     } else {
         createNewNotifacation(
             ToastEnum.danger.toString(),
@@ -109,9 +118,21 @@ export function onSuccessResponse(response: onSuccessResponseType){
     };
 
     if (response.status === 200){
-        createAlertMessage("success", "Success response", response.message, {});
+        createAlertMessage(
+            "success",
+            "Success response",
+            response.message,
+            {},
+            true
+        );
     } else if (response.status === 201){
-        createAlertMessage("success", "Created successfully", response.message, {});
+        createAlertMessage(
+            "success",
+            "Created successfully",
+            response.message,
+            {},
+            true
+        );
     };
 };
 

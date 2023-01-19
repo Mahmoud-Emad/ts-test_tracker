@@ -2,6 +2,7 @@
     import { validateEmptyInput } from "../../utils/validators";
     import { createEventDispatcher } from 'svelte';
     import Input from "./Forms/Input.svelte";
+    import LoadingComponent from "./LoadingComponent.svelte";
     export let searchMethod: CallableFunction;
     export let searchField: string; // title, name, etc..
     export let searchArgs: any = null;
@@ -10,9 +11,9 @@
 
     const dispatch = createEventDispatcher();
     let value: string;
-    let objects: []; // Add more objects to search on it.
+    let isLoading: boolean;
     
-    const search = () => {
+    const search = async () => {
         const storeObjects = $searchStore
         if (validateEmptyInput(value).isValid) {            
             // store.reload(4)
@@ -26,10 +27,10 @@
             });
         } else {
             if(searchArgs){
-                searchMethod(searchArgs)
+                await searchMethod(searchArgs)
             } else {
-                searchMethod()
-            }
+                await searchMethod()
+            };
         };
     };
 
@@ -37,3 +38,7 @@
 </script>
 
 <Input bind:value label={label} />
+
+{#if isLoading}
+    <LoadingComponent className={"component"}/>
+{/if}

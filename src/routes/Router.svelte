@@ -2,6 +2,7 @@
     import { Route, Router } from "svelte-navigator";
     import Home from "../pages/Home.svelte";
     import Settings from "../pages/Settings.svelte";
+    import Projects from "../pages/Projects.svelte";
     import Members from "../pages/Members.svelte";
     import MemberDetails from "../pages/MemberDetails.svelte";
     import Login from "../pages/Login.svelte";
@@ -9,7 +10,6 @@
     import Register from "../pages/Register.svelte";
     import type { RouteType } from "../utils/types";
     import { getRoute } from "../utils/helpers";
-    import NotFound from "../components/Errors/NotFound.svelte";
 
     export let isLoading: boolean;
     export let isError404: boolean;
@@ -19,6 +19,8 @@
         {path: "settings/", component: Settings},
         {path: "members/", component: Members},
         {path: "members/:id", component: MemberDetails},
+        
+        {path: "projects/", component: Projects},
         
         {path: "auth/login/", component: Login},
         {path: "auth/register/", component: Register},

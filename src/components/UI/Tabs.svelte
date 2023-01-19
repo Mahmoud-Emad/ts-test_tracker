@@ -40,4 +40,7 @@
         width: 50%;
         text-align: center;
     }
+    .tab-content{
+        font-size: 0;
+    }
 </style>

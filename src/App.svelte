@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Routers
 	import Router from "./routes/Router.svelte";
-	import { notifacationStore, userStore } from "./utils/stores";
+	import { notifacationStore, projectsStore, userStore } from "./utils/stores";
 	import Toast from "./components/UI/Toast.svelte";
 	import User from "./apis/users";
     import { onMount } from "svelte";
@@ -28,6 +28,7 @@
 					await User.profile().then(
 						(data) => {$userStore = data}
 					);
+					await projectsStore.reload();
 				}
 			} catch (error) {
 				window.location.href = '/auth/login';		

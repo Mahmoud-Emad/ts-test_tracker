@@ -2,7 +2,7 @@
     import { Router, Link } from "svelte-navigator";
     import { userStore } from '../../../utils/stores';
     import { useParams } from 'svelte-navigator';
-    import NavBarDropdown from './NavBarDropdown.svelte'
+    import Dropdown from '../Dropdown.svelte'
 
     export let projectView: boolean = false;
     const params = useParams();
@@ -61,23 +61,16 @@
                 </Router>
             </ul>
         </div>
-        <!-- <AddNewObject 
-            on:message={(event) => {
-                dispatch('message', {
-                    obj: event.detail.obj,
-                });
-            }}
-        /> -->
-        <NavBarDropdown>
+        <Dropdown>
             <span slot="dropdown-toggle" 
             class="user_photo_nav">
                 {#if $userStore}
                     {#if $userStore.first_name && $userStore.last_name != ""}
-                        {$userStore.first_name[0]}{$userStore.last_name[0]}
+                        {$userStore.first_name[0].toLocaleUpperCase()}{$userStore.last_name[0].toLocaleUpperCase()}
                     {:else if $userStore.first_name && $userStore.last_name == ""}
-                        {$userStore.first_name[0]}{$userStore.first_name[1]}
+                        {$userStore.first_name[0].toLocaleUpperCase()}{$userStore.first_name[1].toLocaleUpperCase()}
                     {:else if $userStore.email}
-                        {$userStore.email[0]}
+                        {$userStore.email[0].toLocaleUpperCase()}
                     {/if}
                 {/if}
             </span>
@@ -89,7 +82,7 @@
                     <Link to="/auth/logout/" class="dropdown-item setting-drop">Logout</Link>
                 </li>
             </span>
-        </NavBarDropdown>
+        </Dropdown>
         <slot name="actionBTN" />
     </div>
 </nav>

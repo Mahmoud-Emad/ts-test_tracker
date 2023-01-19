@@ -1,22 +1,14 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { userStore, projectsStore } from "../../utils/stores";
-    export let isLoading: boolean = false;
-
-    onMount(async() => {
-        // isLoading = true;
-        await projectsStore.reload();
-        // isLoading = false;
-    })
 </script>
 
 <div class="pt-0">
     {#if $userStore.permission === "admin"}
         <p class="h5">
             <span class="text-primary">
-                Admin
+                Projects
             </span> 
-            Dashboard
         </p>
         <p class="text-muted">
             There are <strong class="text-primary">{$projectsStore.length}</strong>

@@ -49,7 +49,7 @@
         }}/>
     </NavBar>
     <div class="container pt-4">
-        <Greeting />
+        <Greeting bind:isLoading/>
         <Search 
             label={"Search Members"}
             searchStore={recentProjectsStore}
@@ -68,7 +68,7 @@
     <CreateNewProject bind:openModal 
         on:create={() => {
             recentProjectsStore.reload(4);
-            recentProjectsActivities.reload();
+            recentProjectsActivities.reload()
         }}
     />
 {/if}

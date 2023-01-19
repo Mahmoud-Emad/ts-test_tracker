@@ -10,9 +10,9 @@
     import { createEventDispatcher } from 'svelte';
     import CheckBox from "../UI/Forms/CheckBox.svelte";
     import Dashboard from "../../apis/dashboard";
+    import { clearAlertMessage } from "../../utils/helpers";
 
     export let openModal: boolean;
-
     const dispatch = createEventDispatcher();
     
     let projectType: projectsType = {};

@@ -14,6 +14,16 @@ class Dashboard{
             return onErrorResponse(error);
 		};
     };
+    public async loadProjects(){
+        // Request to all projects from the server.
+        try {
+			const response: onSuccessResponseType = await httpAxios.get('/dashboard/projects/');
+            const projects: projectsType[] = response.data;
+			return projects;
+		} catch (error) {
+            return onErrorResponse(error);
+		};
+    };
     public async loadLast5ProjectsActivity(){
         // Load last projects updated based on its count.
         try {

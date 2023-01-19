@@ -19,14 +19,45 @@ function createRecentProjectsStore(){
 				s = res;
 				return s;
 			});
-		}
-		;
+		};
 	}
 	return {
 		subscribe,
 		set,
 		search,
 		reload
+	};
+};
+
+function createProjectsStore(){
+	const store = writable<Array<projectsType>>([]);
+	const { subscribe, update, set } = store;
+	
+	async function reload(){
+		const res = await Dashboard.loadProjects();
+		if (res) {
+			return update((s) => {
+				s = res;
+				return s;
+			});
+		}
+		;
+	}
+	
+	async function recentProjectsUpdated(count: number){
+		const res = await Dashboard.recentProjectsUpdated(count);
+		if (res) {
+			return update((s) => {
+				s = res;
+				return s;
+			});
+		};
+	}
+	return {
+		subscribe,
+		set,
+		reload,
+		recentProjectsUpdated
 	};
 };
 
@@ -58,16 +89,14 @@ function createMembersStore(){
 	function search(){
 		return this.loadMembers()
 	};
-
-	function loadMembers(){
-		User.loadMembers().then((res: MemberType[]) => {
-			if(res){
-				return update((s) => {            
-					s = res;
-					return s;
-				});
-			};
-		});
+	async function loadMembers(){
+		const res: MemberType[] = await User.loadMembers();
+		if (res) {
+			return update((s) => {
+				s = res;
+				return s;
+			});
+		};
 	};
 	return {
 		subscribe,
@@ -145,6 +174,6 @@ export const userStore = writable<UserType>({});
 export const membersStore = createMembersStore();
 export const notifacationStore = writable<NotifacationType>({});
 export const alertStore = writable<AlertType>({});
-export const projectsStore = writable<Array<projectsType>>([]);
+export const projectsStore = createProjectsStore();
 export const recentProjectsStore = createRecentProjectsStore();
 export const recentProjectsActivities = createActivitiesStore();

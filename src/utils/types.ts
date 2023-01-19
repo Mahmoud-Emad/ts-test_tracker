@@ -32,6 +32,7 @@ export type UserType = {
     phone?: string
     password1?: string
     password2?: string
+    background_color?: string
 };
 
 export type MemberType = {
@@ -89,6 +90,7 @@ export type AlertType = {
     title?: string
     message?: string
     isOpen?: boolean
+    close?: boolean
     error?: Object
 };
 

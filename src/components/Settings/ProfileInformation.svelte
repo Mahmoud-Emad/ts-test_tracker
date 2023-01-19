@@ -37,3 +37,9 @@
         validation={validatePhone}
     />
 </div>
+
+<style>
+    .card{
+        font-size: 16px;
+    }
+</style>
