@@ -32,3 +32,20 @@
         {/if}
     {/if}
 </button>
+
+<style>
+    .delete-btn {
+        color: var(--text-color);
+        background: rgb(0 0 0 / 0%);
+        border-color: rgb(249 49 84);
+        border: 1px solid rgb(249 49 84);
+        width: 100%;
+    }
+    .delete-btn:focus {
+        color: #fff;
+        background: rgb(249 49 84);
+        border-color: rgb(249 49 84);
+        border: 1px solid var(--text-color);
+        width: 100%;
+    }
+</style>

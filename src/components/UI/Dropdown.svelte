@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
     import { Router, Link } from "svelte-navigator";
+    let ulDrop: HTMLUListElement;
 </script>
 
 
@@ -17,9 +18,16 @@
                 <slot name="dropdown-toggle"></slot>
             </Link>
         </Router>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <ul
-            class="dropdown-menu dropdown-menu-end mt-3"
+            class="dropdown-menu custom-dropdown-menu dropdown-menu-end mt-3"
             aria-labelledby="navbarDropdownMenuAvatar"
+            bind:this={ulDrop}
+            on:click={() => {
+                ulDrop.classList.contains("show")
+                ? ulDrop.classList.remove("show")
+                : ulDrop.classList.add("show");
+            }}
         >
             <slot name="dropdown-li"></slot>
         </ul>

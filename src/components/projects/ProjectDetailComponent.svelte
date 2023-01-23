@@ -1,16 +1,19 @@
 <script lang="ts">
     import LoadingComponent from "../UI/LoadingComponent.svelte";
     import NavBar from "../UI/Navbar/Navbar.svelte";
-    import { projectsStore } from "../../utils/stores";
-    import CreateNewProject from "./CreateNewProject.svelte";
+    import { alertStore, notifacationStore, projectsStore, userStore } from "../../utils/stores";
     import Dropdown from "../UI/Dropdown.svelte";
-    import { Link, Router } from "svelte-navigator";
+    import { Link, navigate, Router } from "svelte-navigator";
     import Alert from "../UI/Alert.svelte";
     import ActivityTable from "../Home/ActivityTable.svelte";
+    import DeleteModal from "../UI/Modals/DeleteModal.svelte";
+    import { DeleteType } from "../../utils/types";
+    import Projects from "../../apis/projects";
+    import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
 
     export let isLoading: boolean;
     export let loadActivities: boolean;
-    let openModal: boolean;
+    let openDeleteModal: boolean;
 </script>
 
 {#if isLoading}
@@ -30,7 +33,7 @@
                     <Router>
                         <li>
                             <Link
-                                class="dropdown-item drop-size"
+                                class="dropdown-item drop-size text-primary"
                                 to={`/projects/${$projectsStore[0].id}/update/`}
                             >
                                 Update project
@@ -40,19 +43,22 @@
                             <Link
                                 to=""
                                 on:click={() => {}}
-                                class="dropdown-item drop-size"
+                                class="dropdown-item drop-size text-primary"
                             >
                                 Add member
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                to=""
-                                class="dropdown-item drop-size plus-hover"
-                                on:click={() => {}}
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <li class="dropdown-item drop-size plus-hover text-primary --pointer delete-li-a"
+                            on:click={() => {
+                                if($alertStore.isOpen || $notifacationStore.isOpen){
+                                    clearAlertMessage();
+                                    clearNotifacationStore();
+                                };
+                                openDeleteModal = true;
+                            }}
                             >
-                                Delete Project
-                            </Link>
+                            Delete Project
                         </li>
                     </Router>
                 </span>
@@ -79,20 +85,20 @@
             <div class="card mt-4 p-4">
                 <div class="pt-4">
                     <div class="col-6">
-                        <p class="h5 text-muted">Project Statistics</p>
+                        <p class="h5 text-color">Project Statistics</p>
                     </div>
                     <hr />
                 </div>
                 <table class="table table-borderless box-shadow-none">
                     <tbody>
                         <tr>
-                            <th scope="row" class="text-muted">Total test plans</th>
+                            <th scope="row" class="text-color">Total test plans</th>
                             <td class="text-primary"
                                 >{$projectsStore[0].total_test_plan.length}</td
                             >
                         </tr>
                         <tr>
-                            <th scope="row" class="text-muted"
+                            <th scope="row" class="text-color"
                                 >Total Requirements Docs</th
                             >
                             <td class="text-primary"
@@ -101,14 +107,14 @@
                             >
                         </tr>
                         <tr>
-                            <th scope="row" class="text-muted">Total Test Suites</th
+                            <th scope="row" class="text-color">Total Test Suites</th
                             >
                             <td class="text-primary"
                                 >{$projectsStore[0].total_suites.length}</td
                             >
                         </tr>
                         <tr>
-                            <th scope="row" class="text-muted">Total Test Runs</th>
+                            <th scope="row" class="text-color">Total Test Runs</th>
                             <td class="text-primary"
                                 >{$projectsStore[0].total_test_runs.length}</td
                             >
@@ -119,7 +125,7 @@
             <div class="card mt-4 p-4">
                 <div class="pt-4">
                     <div class="col-6">
-                        <p class="h5 text-muted">Project Team</p>
+                        <p class="h5 text-color">Project Team</p>
                     </div>
                     <hr />
                 </div>
@@ -131,7 +137,7 @@
                             >
                         </div>
                     {:else}
-                        <p class="text-muted">There are no members.</p>
+                        <p class="text-color">There are no members.</p>
                     {/each}
                 </div>
             </div>
@@ -139,11 +145,11 @@
                 <div class="pt-4">
                     <div class="row">
                         <div class="col-6">
-                            <p class="h5 text-muted">
+                            <p class="h5 text-color">
                                 Incomplete test runs assigned to you
                             </p>
                         </div>
-                        <div class="col-6 text-muted">
+                        <div class="col-6 text-color">
                             <p class="h5">
                                 People with the most incomplete test runs
                             </p>
@@ -171,7 +177,7 @@
                                 {:else}
                                     <tbody>
                                         <tr>
-                                            <td class="text-muted"
+                                            <td class="text-color"
                                                 >--There are no incompleted task for
                                                 you</td
                                             >
@@ -187,7 +193,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-primary">
-                                                    <strong class="text-muted"
+                                                    <strong class="text-color"
                                                         >TestRun |</strong
                                                     >
                                                     <Link
@@ -198,7 +204,7 @@
                                                     >
                                                 </td>
                                                 <td class="text-primary">
-                                                    <strong class="text-muted"
+                                                    <strong class="text-color"
                                                         >User |</strong
                                                     >
                                                     <Link
@@ -214,7 +220,7 @@
                                 {:else}
                                     <tbody>
                                         <tr>
-                                            <td class="text-muted">--There are no pinding tasks</td>
+                                            <td class="text-color">--There are no pinding tasks</td>
                                         </tr>
                                     </tbody>
                                 {/if}
@@ -228,10 +234,16 @@
             </div>
         {/if}
     </div>
-    <CreateNewProject
-        bind:openModal
-        on:create={() => {
-            projectsStore.reload();
+    <DeleteModal 
+        type={DeleteType.project}
+        bindTitle={$projectsStore[0].title}
+        bind:openModal={openDeleteModal}
+        callableFunction={async () => {
+            const deleted = await Projects.delete($projectsStore[0], $userStore);
+            if(deleted && deleted.status === 204){
+                projectsStore.reload()
+                return navigate("/");
+            };
         }}
     />
 {/if}

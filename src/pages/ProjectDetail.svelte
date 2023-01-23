@@ -16,8 +16,8 @@
 
     onMount(async () => {
         loadActivities = true;
-        clearAlertMessage();
-		clearNotifacationStore();
+        // clearAlertMessage();
+		// clearNotifacationStore();
         const response = await Projects.get(projectID)
         if(response){
             project = response

@@ -1,6 +1,7 @@
-import type { projectsType, onSuccessResponseType } from './../utils/types';
+import { projectsStore } from './../utils/stores';
+import { projectsType, onSuccessResponseType, UserType, ToastEnum, NotifacationTypeEnum } from './../utils/types';
 import httpAxios from '../utils/axios';
-import { onErrorResponse, onSuccessResponse } from '../utils/helpers';
+import { createNewNotifacation, onErrorResponse, onSuccessResponse } from '../utils/helpers';
 
 class Projects{
     public async new(data: projectsType){
@@ -32,6 +33,25 @@ class Projects{
 			const response: onSuccessResponseType = await httpAxios.get(`project/${projectID}/`);
             const project: projectsType = response.data;
 			return project;
+		} catch (error) {
+            return onErrorResponse(error);
+		};
+    };
+    public async delete(project: projectsType, deletedBy: UserType){
+        // Request to delete a project from the database, 
+        // must provide all project data to create a notifacation when redirect to home page.
+        // Should provide the action by[USER] => UserType.
+
+        try {
+			const response: onSuccessResponseType = await httpAxios.delete(`project/${project.id}/`);
+            createNewNotifacation(
+                ToastEnum.danger.toString(),
+                `Success deleted project ${project.title} by ${deletedBy.full_name}`,
+                "Project has ben deleted!",
+                5000,
+                NotifacationTypeEnum.RequestDeleted
+            );
+			return response;
 		} catch (error) {
             return onErrorResponse(error);
 		};

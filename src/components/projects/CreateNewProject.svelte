@@ -6,7 +6,7 @@
     import { validateEmptyInput, validateLink, validateProjectName } from "../../utils/validators";
     import Button from "../UI/Forms/Button.svelte";
     import Alert from "../UI/Alert.svelte";
-    import { alertStore } from "../../utils/stores";
+    import { alertStore, projectsStore } from "../../utils/stores";
     import { createEventDispatcher } from 'svelte';
     import CheckBox from "../UI/Forms/CheckBox.svelte";
     import Projects from "../../apis/projects";
@@ -29,10 +29,8 @@
 
 </script>
 
-<Modal bind:openModal>
-    <div slot="modal-header" class="text-center">
-        <h5 class="text-muted">Create New Project</h5>
-    </div>
+<Modal bind:openModal withFooter={true}>
+    <h5 slot="modal-header" class="text-muted">Create New Project</h5>
     <div slot="modal-body">
         <Input
             bind:value={projectType.title}
@@ -82,6 +80,7 @@
                             projectType.short_description = "";
                             projectType.github_repo = false;
                             projectType.repo_link = "";
+                            projectsStore.reload();
                         };
                     };
                 }

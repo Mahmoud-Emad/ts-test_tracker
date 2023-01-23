@@ -22,14 +22,8 @@
                         <thead class="table-bg">
                             <tr>
                                 <th>
-                                    <span
-                                        class="badge badge-success rounded-pill d-inline"
-                                        >{action.date}</span
-                                    >
-                                    <span
-                                        class="badge rounded-pill d-inline text-muted"
-                                        >Action Date</span
-                                    >
+                                    <span class="badge badge-success rounded-pill d-inline">{action.date}</span>
+                                    <span class="badge rounded-pill d-inline text-color">Action Date</span>
                                 </th>
                             </tr>
                         </thead>
@@ -38,7 +32,7 @@
                                 <td>
                                     <div class="d-inline b-0">
                                         <div class="ms-3">
-                                            <p class="text-muted mb-0">
+                                            <p class="text-color mb-0">
                                                 {action.action}
                                             </p>
                                         </div>

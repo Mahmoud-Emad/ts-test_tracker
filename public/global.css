@@ -375,8 +375,52 @@ input:disabled {
 .btn-primary{
 	background-color: var(--btn-primary);
 }
+.custom-dropdown-menu{
+	border-radius: 0px;
+	background: var(--boxes-bg);
+	left: -50px!important
+}
+.custom-dropdown-menu li a:hover{
+	border-radius: 0px;
+	background: var(--text-primary);
+	color: #fff !important;
+}
+.delete-li-a{
+	color: rgb(249 49 84) !important;
+	font-weight: 700;
+}
+.delete-li-a:hover{
+	background: rgb(249 49 84)!important;
+	color: #fff !important;
+}
 
-
+.modal{
+	background: var(--modal-background);
+}
+.modal-content{
+	background: var(--boxes-bg);
+}
+.close{
+	display: flex;
+	justify-content: end;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+.close i{
+	padding: 5px;
+	cursor: pointer;
+}
+.alert-delete {
+    width: 95%;
+    border-radius: 0px;
+    margin: 0 auto;
+    background: rgb(255 238 203);
+    padding-bottom: 1px;
+    margin-bottom: 20px;
+}
+.--pointer{
+	cursor: pointer
+}
 /* CheckBox */
 
 .check-box {

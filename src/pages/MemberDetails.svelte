@@ -16,8 +16,8 @@
     };
 
     onMount(async () => {
-        clearAlertMessage();
-		clearNotifacationStore();
+        // clearAlertMessage();
+		// clearNotifacationStore();
         member = await Members.getMember(memberID)
         if(member){
             return membersStore.set([member])

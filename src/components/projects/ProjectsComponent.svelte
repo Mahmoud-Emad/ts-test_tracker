@@ -1,7 +1,7 @@
 <script lang="ts">
     import LoadingComponent from "../UI/LoadingComponent.svelte";
     import NavBar from "../UI/Navbar/Navbar.svelte";
-    import { projectsStore } from "../../utils/stores";
+    import { alertStore, notifacationStore, projectsStore } from "../../utils/stores";
     import Alert from "../UI/Alert.svelte";
     import NavAction from "../UI/Navbar/NavAction.svelte";
     import Search from "../UI/Search.svelte";
@@ -9,6 +9,7 @@
     import Greeting from "./Greeting.svelte";
     import Card from "../UI/Card.svelte";
     import { Link } from "svelte-navigator";
+    import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
 
     export let isLoading: boolean = false;
     let openModal: boolean = false;
@@ -21,7 +22,11 @@
 {:else}
     <NavBar>
         <NavAction slot="actionBTN" tooltip={"Create New Project"} onClick={() => {
-            openModal = true
+            if($alertStore.isOpen || $notifacationStore.isOpen){
+                clearAlertMessage();
+                clearNotifacationStore();
+            };
+            openModal = true;
         }}/>
     </NavBar>
     <div class="container pt-4 pb-4">

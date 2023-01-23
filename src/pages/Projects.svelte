@@ -6,8 +6,6 @@
     export let isLoading: boolean = false;
 
     onMount(async () => {
-        clearAlertMessage();
-		clearNotifacationStore();
         await projectsStore.reload();
     });
 </script>

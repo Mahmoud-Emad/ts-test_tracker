@@ -8,6 +8,7 @@ class User{
             const response: onSuccessResponseType = await axios.get("/dashboard/user/");
             return response.data;
         } catch (error) {
+            console.log(error);
             onErrorResponse(error)
         };
     };

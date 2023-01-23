@@ -6,8 +6,8 @@
     export let isLoading: boolean;
 
     onMount(() => {
-        clearAlertMessage();
-		clearNotifacationStore();
+        // clearAlertMessage();
+		// clearNotifacationStore();
     });
 	
 </script>

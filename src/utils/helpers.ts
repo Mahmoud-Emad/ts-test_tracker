@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 import { notifacationStore, alertStore } from './stores';
-import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType, RouteType } from './types';
+import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType, RouteType, NotifacationTypeEnum } from './types';
 
 export const generateUUID = () => {
     // Generate a random uuid
@@ -8,27 +8,29 @@ export const generateUUID = () => {
 }
 
 export function createNewNotifacation(
-    className: string, hint: string, message: string, title: string, timeOut: number, statusCode: number): NotifacationType{
+    className: string, message: string, title: string, timeOut: number, requestType: NotifacationTypeEnum): NotifacationType{
         // Create new notifacation obj
         const createdNotifacation: NotifacationType = {
             className: className,
-            hint: hint,
             message: message,
-            push: true,
+            isOpen: true,
             timeOut: timeOut,
             title: title,
-            statusCode: statusCode
-        }
-        notifacationStore.set(createdNotifacation)
-        return createdNotifacation
+            requestType: requestType
+        };
+        notifacationStore.set(createdNotifacation);
+        console.log("Created");
+        console.log(notifacationStore);
+        
+        return createdNotifacation;
 };
 
 export function clearNotifacationStore(): NotifacationType{
     // clear notifacation store by setting push to false
-    const createdNotifacation: NotifacationType = {
-        push: false,
-    }
+    const createdNotifacation: NotifacationType = {};
     notifacationStore.set(createdNotifacation)
+    console.log("Deleted");
+    console.log(notifacationStore);
     return createdNotifacation
 };
 
@@ -81,11 +83,18 @@ export function onErrorResponse(error: onErrorResponseType){
     } else if (error.response.status === 500){
         createNewNotifacation(
             ToastEnum.danger.toString(),
-            "",
             "Internal server error!.",
             "Oh snap!",
             0,
-            error.response.status
+            NotifacationTypeEnum.RequestServerError
+        );
+    } else if (error.response.status === 0){
+        createNewNotifacation(
+            ToastEnum.danger.toString(),
+            "Internal server error!.",
+            "Oh snap!",
+            0,
+            NotifacationTypeEnum.RequestNetworkError
         );
     } else if (error.response.status === 403){
         createAlertMessage(
@@ -98,11 +107,10 @@ export function onErrorResponse(error: onErrorResponseType){
     } else {
         createNewNotifacation(
             ToastEnum.danger.toString(),
-            "",
             error.message,
             error.name,
             0,
-            error.response.status
+            NotifacationTypeEnum.RequestServerError
         );
     };  
 };

@@ -70,20 +70,33 @@ export enum ToastEnum{
     dark = "dark"
 };
 
+export enum DeleteType{
+    project = "Project",
+    member = "Member",
+}
+
 export enum MemberPermissions{
     full_access = "full_access",
     admin_access = "admin_access",
 };
 
 export type NotifacationType = {
-    push?: boolean
+    isOpen?: boolean
     message?: string
-    hint?: string,
     className?: string
     title?: string
     timeOut?: number
-    statusCode?: number
+    requestType?: NotifacationTypeEnum
 };
+
+export enum NotifacationTypeEnum{
+    RequestServerError = 500,
+    RequestBadRequest = 400,
+    RequestNotFound = 404,
+    RequestDeleted = 204,
+    RequestNetworkError = 503
+
+}
 
 export type AlertType = {
     className?: string
@@ -102,6 +115,7 @@ export type onSuccessResponseType = {
     request: Object
     message: string
 };
+
 
 export type onErrorResponseType = {
     response: {

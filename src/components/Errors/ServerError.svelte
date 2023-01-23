@@ -11,10 +11,10 @@
             <p>An error has occurred and we're working to fix the problem! We’ll be up and running shortly.</p>
             <div class="links">
                 <p class="mb-0">Here are some helpful links instead:</p>
-                <a href="/">Home</a>
-                <a href="/projects">Projects</a>
-                <a href="/members">Members</a>
-                <a href="/settings">Settings</a>
+                <a class="text-primary" href="/">Home</a>
+                <a class="text-primary" href="/projects">Projects</a>
+                <a class="text-primary" href="/members">Members</a>
+                <a class="text-primary" href="/settings">Settings</a>
             </div>
         </div>
         <div class="col-6 col-offset-1 text-center">

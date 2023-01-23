@@ -60,7 +60,8 @@
                 "",
                 "GitHub code must be string not undefined",
                 "GitHub Code Is Required!",
-                0
+                0,
+                400
             );
         };
     };

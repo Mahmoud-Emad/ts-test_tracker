@@ -10,6 +10,7 @@
 	import ServerError from "./components/Errors/ServerError.svelte";
 	import NotFound from "./components/Errors/NotFound.svelte";
     import NetworkError from "./components/Errors/NetworkError.svelte";
+    import { NotifacationTypeEnum } from "./utils/types";
 
 	let isLoading: boolean = false;
 	const mode = localStorage.getItem("mode")
@@ -37,21 +38,23 @@
 		isLoading = false;
     });
 </script>
+
 <!-- If there are internal errors e.g. server error -->
-{#if $notifacationStore.statusCode === 500}
-	<ServerError />
-{:else if $isError404 || $notifacationStore.statusCode === 404}
-	<NotFound />
-{:else if $notifacationStore.push }
-	<NetworkError />
+{#if $notifacationStore.isOpen}
 	<Toast 
 		className={$notifacationStore.className}
 		message={$notifacationStore.message}
 		title={$notifacationStore.title}
-		hint={$notifacationStore.hint}
 		timeOut={$notifacationStore.timeOut}
-		isOpen={$notifacationStore.push}
+		isOpen={$notifacationStore.isOpen}
 	/>
+{/if}
+{#if $notifacationStore.requestType === NotifacationTypeEnum.RequestServerError}
+	<ServerError />
+{:else if $notifacationStore.requestType === NotifacationTypeEnum.RequestNetworkError}
+	<NetworkError />
+{:else if $notifacationStore.requestType === NotifacationTypeEnum.RequestNotFound || $isError404}
+	<NotFound />
 {:else}
 	<Router bind:isLoading />
 {/if}
