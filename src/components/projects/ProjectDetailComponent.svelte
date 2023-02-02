@@ -10,10 +10,13 @@
     import { DeleteType } from "../../utils/types";
     import Projects from "../../apis/projects";
     import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
+    import AddMemberToProject from "./AddMemberToProject.svelte";
 
     export let isLoading: boolean;
     export let loadActivities: boolean;
     let openDeleteModal: boolean;
+    let openAddNewMemberModal: boolean;
+
 </script>
 
 {#if isLoading}
@@ -42,7 +45,9 @@
                         <li>
                             <Link
                                 to=""
-                                on:click={() => {}}
+                                on:click={() => {
+                                    openAddNewMemberModal = true;
+                                }}
                                 class="dropdown-item drop-size text-primary"
                             >
                                 Add member
@@ -246,4 +251,5 @@
             };
         }}
     />
+    <AddMemberToProject bind:openAddNewMemberModal project={$projectsStore[0]}/>
 {/if}
