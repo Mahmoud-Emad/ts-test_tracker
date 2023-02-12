@@ -56,6 +56,21 @@ class Projects{
             return onErrorResponse(error);
 		};
     };
+    public async addORRemoveMember(projectID: number, memberID: number){
+        // Request to add member inside an exact project.
+        try{
+            const response: onSuccessResponseType = await httpAxios.put(`project/${projectID}/members/${memberID}/`,);
+            const project: projectsType = response.data;
+            if(project){
+                console.log(project)
+                projectsStore.set([project])
+            };
+            onSuccessResponse(response)
+            return projectsStore;
+		} catch (error) {
+            return onErrorResponse(error);
+		};
+    };
 };
 
 const projects = new Projects();

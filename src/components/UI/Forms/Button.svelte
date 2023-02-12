@@ -11,7 +11,8 @@
 </script>
 
 <button 
-    class="btn {className}" 
+    class="btn {className}"
+    style={icon ? 'width:60px' : ''}
     disabled={disabled}
     on:click|preventDefault={async () => {
         disabled = true;

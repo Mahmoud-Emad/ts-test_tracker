@@ -2,12 +2,12 @@
     import Modal from "../UI/Modals/Modal.svelte";
     import { membersStore } from "../../utils/stores";
     import { onMount } from "svelte";
-    import type { MemberType, projectsType } from "../../utils/types";
+    import type { projectsType } from "../../utils/types";
     import Button from "../UI/Forms/Button.svelte";
-    import { fade, fly } from 'svelte/transition';
-    import { flip } from 'svelte/animate';
+    import { fly } from 'svelte/transition';
     import Search from "./Search.svelte";
-    
+    import Projects from "../../apis/projects";
+
     export let openAddNewMemberModal: boolean = false;
     export let project: projectsType;
     
@@ -16,10 +16,21 @@
 
     onMount(async() => {
         for (const member of project.teams) {
-            membersInProject.push(member.id)
+            membersInProject.push(member.id);
         }
-        await membersStore.loadMembers()
+        await membersStore.loadMembers();
     });
+
+    const updateProjectMembers = (memberID: number) => {
+        membersInProject = membersInProject;
+        if(membersInProject.includes(memberID)){
+            const index = membersInProject.indexOf(memberID);
+            membersInProject.splice(index, 1);
+        } else {
+            membersInProject.push(memberID);
+        }
+        return membersInProject;
+    }
 
     const filterUsers = (e: { detail: any; }) => {
         const searchTerm = e.detail
@@ -69,15 +80,15 @@
                                     <!-- <p class="user-name">{user.permission}</p> -->
                                 </td>
                                 <td class="text-left">
-                                    {#if membersInProject.includes(user.id) }
-                                        <button class="btn btn-danger" on:click="{() => {}}">
-                                            <i class="fa fa-minus" aria-hidden="true"></i> 
-                                        </button>
-                                    {:else}
-                                        <button class="btn btn-primary" on:click="{() => {}}">
-                                            <i class="fa fa-plus" aria-hidden="true"></i> 
-                                        </button>
-                                    {/if}
+                                    <Button 
+                                        className={membersInProject.includes(user.id) ? "btn-danger": "btn-primary"} 
+                                        onClick={async () => {
+                                            await Projects.addORRemoveMember(project.id, user.id);
+                                            updateProjectMembers(user.id);
+                                        }}
+                                        icon={membersInProject.includes(user.id) ? "fa fa-minus" : "fa fa-plus"}
+                                        text={""}
+                                    />
                                 </td>
                             </tr>
                         {/each}
