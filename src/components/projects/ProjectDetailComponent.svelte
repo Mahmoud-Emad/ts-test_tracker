@@ -11,11 +11,20 @@
     import Projects from "../../apis/projects";
     import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
     import AddMemberToProject from "./AddMemberToProject.svelte";
+    import { onMount } from "svelte";
 
     export let isLoading: boolean;
     export let loadActivities: boolean;
+
     let openDeleteModal: boolean;
     let openAddNewMemberModal: boolean;
+    let membersInProject: Array<Number> = [];
+
+    onMount(() => {
+        for (const member of $projectsStore[0].teams) {
+            membersInProject.push(member.id);
+        }
+    });
 
 </script>
 
@@ -251,5 +260,5 @@
             };
         }}
     />
-    <AddMemberToProject bind:openAddNewMemberModal project={$projectsStore[0]}/>
+    <AddMemberToProject bind:openAddNewMemberModal project={$projectsStore[0]} bind:membersInProject/>
 {/if}

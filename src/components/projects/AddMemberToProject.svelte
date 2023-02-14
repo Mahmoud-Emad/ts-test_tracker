@@ -10,14 +10,11 @@
 
     export let openAddNewMemberModal: boolean = false;
     export let project: projectsType;
+    export let membersInProject: Array<Number>;
     
-    $:filteredUsers = $membersStore;
-    $:membersInProject = [];
+    $:filteredUsers = $membersStore;   
 
     onMount(async() => {
-        for (const member of project.teams) {
-            membersInProject.push(member.id);
-        }
         await membersStore.loadMembers();
     });
 
@@ -81,12 +78,12 @@
                                 </td>
                                 <td class="text-left">
                                     <Button 
-                                        className={membersInProject.includes(user.id) ? "btn-danger": "btn-primary"} 
+                                        className={(membersInProject && membersInProject.includes(user.id)) ? "btn-danger": "btn-primary"} 
                                         onClick={async () => {
                                             await Projects.addORRemoveMember(project.id, user.id);
                                             updateProjectMembers(user.id);
                                         }}
-                                        icon={membersInProject.includes(user.id) ? "fa fa-minus" : "fa fa-plus"}
+                                        icon={(membersInProject && membersInProject.includes(user.id)) ? "fa fa-minus" : "fa fa-plus"}
                                         text={""}
                                     />
                                 </td>

@@ -30,9 +30,11 @@
     });
 </script>
 
-<section>
-    <ProjectDetailComponent bind:isLoading bind:loadActivities/>
-</section>
+{#if $projectsStore.length > 0}
+    <section>
+        <ProjectDetailComponent bind:isLoading bind:loadActivities/>
+    </section>
+{/if}
 
 <svelte:head>
     {#if $projectsStore.length > 0}

@@ -12,7 +12,7 @@
 
 <button 
     class="btn {className}"
-    style={icon ? 'width:60px' : ''}
+    style={(icon && text.length < 1) ? 'width:60px' : ''}
     disabled={disabled}
     on:click|preventDefault={async () => {
         disabled = true;
