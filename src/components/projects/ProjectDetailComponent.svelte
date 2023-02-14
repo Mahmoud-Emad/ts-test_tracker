@@ -260,5 +260,7 @@
             };
         }}
     />
-    <AddMemberToProject bind:openAddNewMemberModal project={$projectsStore[0]} bind:membersInProject/>
+    {#if openAddNewMemberModal}
+        <AddMemberToProject bind:openAddNewMemberModal project={$projectsStore[0]} bind:membersInProject/>
+    {/if}
 {/if}

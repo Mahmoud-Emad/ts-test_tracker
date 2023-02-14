@@ -165,8 +165,9 @@ export function setTheme(mode: string){
 export const getRoute = (routes: RouteType[], currentRoute: string): boolean => {
     const keys: Array<string> = [];
     const paramID = currentRoute.split("/")[2];
+    
     for (const route of routes) {
-        if(route.path.includes(":id")){
+        if(route.path.includes(":id") && paramID != undefined){
             keys.push(route.path.replace(":id", `${paramID}/`).slice(0, route.path.length - 1))
         } else{
             keys.push(route.path.slice(0, route.path.length - 1))
