@@ -70,7 +70,7 @@
                             <tr transition:fly="{{x:-100, duration:200}}">
                                 <td class="text-right">{index + 1}</td>
                                 <td class="d-flex pl-0 pr-0">
-                                    <p style="background-color: {user.background_color};" class="user-name-image">    
+                                    <p style="background-color: {user.background_color};" class="user-name-image">   
                                         {user.first_name[0].toLocaleUpperCase()}{user.last_name[0].toLocaleUpperCase()}
                                     </p>
                                     <p class="user-name">{user.first_name} {user.last_name}</p>

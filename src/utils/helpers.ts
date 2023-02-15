@@ -9,28 +9,23 @@ export const generateUUID = () => {
 
 export function createNewNotifacation(
     className: string, message: string, title: string, timeOut: number, requestType: NotifacationTypeEnum): NotifacationType{
-        // Create new notifacation obj
-        const createdNotifacation: NotifacationType = {
-            className: className,
-            message: message,
-            isOpen: true,
-            timeOut: timeOut,
-            title: title,
-            requestType: requestType
-        };
-        notifacationStore.set(createdNotifacation);
-        console.log("Created");
-        console.log(notifacationStore);
-        
-        return createdNotifacation;
+    // Create new notifacation obj
+    const createdNotifacation: NotifacationType = {
+        className: className,
+        message: message,
+        isOpen: true,
+        timeOut: timeOut,
+        title: title,
+        requestType: requestType
+    };
+    notifacationStore.set(createdNotifacation);
+    return createdNotifacation;
 };
 
 export function clearNotifacationStore(): NotifacationType{
     // clear notifacation store by setting push to false
     const createdNotifacation: NotifacationType = {};
     notifacationStore.set(createdNotifacation)
-    console.log("Deleted");
-    console.log(notifacationStore);
     return createdNotifacation
 };
 

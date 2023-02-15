@@ -4,10 +4,10 @@
     import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
     export let isLoading: boolean = false;
 
-    // onMount(() => {
-    //     clearAlertMessage();
-	// 	clearNotifacationStore();
-    // });
+    onMount(() => {
+        clearAlertMessage();
+		clearNotifacationStore();
+    });
 </script>
 
 <section>

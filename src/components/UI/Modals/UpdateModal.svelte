@@ -9,7 +9,7 @@
 
     export let fields: Array<UpdateFieldsModalObject>;
     export let openModal: boolean = false;
-    export let buffer;
+    export let buffer: any;
     
     let disabledBTN: boolean = false;
     const dispatch = createEventDispatcher();
