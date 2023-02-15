@@ -3,7 +3,7 @@
     import Input from "../UI/Forms/Input.svelte";
     import TextArea from "../UI/Forms/TextArea.svelte";
     import type { projectsType } from "../../utils/types";
-    import { validateEmptyInput, validateLink, validateProjectName } from "../../utils/validators";
+    import { validateEmptyInput, validateLink, validateProjectDescription, validateProjectName } from "../../utils/validators";
     import Button from "../UI/Forms/Button.svelte";
     import Alert from "../UI/Alert.svelte";
     import { alertStore, projectsStore } from "../../utils/stores";
@@ -38,14 +38,17 @@
             type={"text"}
             validation={validateProjectName}
         />
+
         <TextArea 
             bind:value={projectType.short_description}
             label={"Short Description"}
-            validation={validateEmptyInput}
+            validation={validateProjectDescription}
         />
+
         <CheckBox label={"Github repository"} bind:value={projectType.github_repo} onClick={() => {
             githubRepoLinkInput = githubRepoLinkInput ? false : true;
         }}/>
+
         {#if projectType.github_repo}
             <Input 
                 bind:value={projectType.repo_link} 

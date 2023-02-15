@@ -12,12 +12,14 @@
     import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
     import AddMemberToProject from "./AddMemberToProject.svelte";
     import { onMount } from "svelte";
+    import UpdateProject from "./UpdateProject.svelte";
 
     export let isLoading: boolean;
     export let loadActivities: boolean;
 
     let openDeleteModal: boolean;
     let openAddNewMemberModal: boolean;
+    let openUpdateProjectModal: boolean;
     let membersInProject: Array<Number> = [];
 
     onMount(() => {
@@ -45,8 +47,11 @@
                     <Router>
                         <li>
                             <Link
+                                to=""
+                                on:click={() => {
+                                    openUpdateProjectModal = true;
+                                }}
                                 class="dropdown-item drop-size text-primary"
-                                to={`/projects/${$projectsStore[0].id}/update/`}
                             >
                                 Update project
                             </Link>
@@ -262,5 +267,8 @@
     />
     {#if openAddNewMemberModal}
         <AddMemberToProject bind:openAddNewMemberModal project={$projectsStore[0]} bind:membersInProject/>
+    {/if}
+    {#if openUpdateProjectModal}
+        <UpdateProject bind:openUpdateProjectModal project={$projectsStore[0]}/>
     {/if}
 {/if}

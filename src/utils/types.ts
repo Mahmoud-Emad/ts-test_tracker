@@ -246,3 +246,11 @@ export type RouteType = {
     path: string
     component: ComponentType
 };
+
+export type UpdateFieldsModalObject = {
+    fieldLabel: string
+    component: ComponentType
+    validation: CallableFunction
+    fieldValue: any
+    fieldName: string
+}

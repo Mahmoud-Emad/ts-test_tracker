@@ -22,7 +22,21 @@ export function validateEmptyInput (value: string): InputValidationsType{
     let validated: InputValidationsType = {};
     if (value == "" || value == undefined || value == null){
         validated.isValid = false;
-        validated.errorMessage = "This field is required"       
+        validated.errorMessage = "This field may not be blank.";
+    } else {
+        validated.isValid = true;
+    }
+    return validated;
+};
+
+export function validateProjectDescription (value: string): InputValidationsType{
+    let validated: InputValidationsType = {};
+    if (value == "" || value == undefined || value == null){
+        validated.isValid = false;
+        validated.errorMessage = "This field may not be blank.";
+    }else if(value.length > 500){
+        validated.isValid = false;
+        validated.errorMessage = "Ensure this field has no more than 500 characters."
     } else {
         validated.isValid = true;
     }
@@ -45,7 +59,7 @@ export function validateProjectName(name: string): InputValidationsType {
     let validated: InputValidationsType = {};
     if(!name){
         validated.isValid = false;
-        validated.errorMessage = "This field is required.";
+        validated.errorMessage = "This field may not be blank.";
         return validated;
     };
     if(name.length < 4 || name.length > 20){
@@ -67,7 +81,7 @@ export function validateLink(link: string): InputValidationsType {
     let validated: InputValidationsType = {};
     if(!link){
         validated.isValid = false;
-        validated.errorMessage = "This field is required.";
+        validated.errorMessage = "This field may not be blank.";
         return validated;
     };
     if (!LINK_REGEX.test(link)) {

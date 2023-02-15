@@ -62,7 +62,20 @@ class Projects{
             const response: onSuccessResponseType = await httpAxios.put(`project/${projectID}/members/${memberID}/`,);
             const project: projectsType = response.data;
             if(project){
-                console.log(project)
+                projectsStore.set([project])
+            };
+            onSuccessResponse(response)
+            return projectsStore;
+		} catch (error) {
+            return onErrorResponse(error);
+		};
+    };
+    public async update(data: projectsType){
+        // Request to update a project with requested data.
+        try{
+            const response: onSuccessResponseType = await httpAxios.put(`project/${data.id}/`, data);
+            const project: projectsType = response.data;
+            if(project){
                 projectsStore.set([project])
             };
             onSuccessResponse(response)

@@ -118,7 +118,6 @@ export function onErrorResponse(error: onErrorResponseType){
 export function onSuccessResponse(response: onSuccessResponseType){
     clearNotifacationStore();
     clearAlertMessage();
-    
     if(!response.data.message){
         response.message = "Success!";
     } else {
