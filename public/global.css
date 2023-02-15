@@ -471,5 +471,8 @@ input:disabled {
 	border-bottom: none;
 }
 .modal-footer {
-	border-color: var(--input-border);
+	border-bottom: none;
+}
+.radius-5{
+	border-radius: 5px !important
 }

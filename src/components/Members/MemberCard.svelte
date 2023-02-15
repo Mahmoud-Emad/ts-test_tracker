@@ -8,7 +8,7 @@
 
 <div class="col-3">
     <Link to="/members/{member.id}/"> 
-        <Card cardClassName={member.invited ? "invited mb-3" : "mb-3"}
+        <Card cardClassName={member.invited ? "invited mb-3 radius-5" : "mb-3 radius-5"}
             cardClassBody={"pt-0"}
             withHeader={true}
             cardClassHeader={"border-bottom-0"}

@@ -96,6 +96,13 @@
             {/if}
         </div>
     </div>
+    <div slot="modal-footer">
+        <Button 
+            className={"btn-danger"}
+            onClick={() => (openAddNewMemberModal = false)}
+            text={`Close`}
+        />
+    </div>
 </Modal>
 
 <style>
@@ -128,7 +135,6 @@
     .card-header h6 {
         padding: 10px 0;
     }
-    
     .users-table th:first-child {
         width: 30px;
     }

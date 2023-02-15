@@ -64,12 +64,18 @@
         {/if}
     </div>
 
-    <Button 
-        slot="modal-footer"
-        className={"btn-success"}
-        onClick={onUpdate}
-        text={`Update`}
-        disabled={!disabledBTN}
-    />
+    <div slot="modal-footer">
+        <Button 
+            className={"btn-primary"}
+            onClick={onUpdate}
+            text={`Update`}
+            disabled={!disabledBTN}
+        />
+        <Button 
+            className={"btn-danger"}
+            onClick={() => (openModal = false)}
+            text={`Close`}
+        />
+    </div>
 
 </Modal>
