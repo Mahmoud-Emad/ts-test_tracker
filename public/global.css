@@ -467,3 +467,9 @@ input:disabled {
 .right-0 {
 	right: 0px;
 }
+.modal-header {
+	border-bottom: none;
+}
+.modal-footer {
+	border-color: var(--input-border);
+}

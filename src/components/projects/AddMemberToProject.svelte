@@ -55,14 +55,14 @@
             </div>
             <Search on:search={filterUsers}/> 
         </div>
-        <div class="card bg-light mb-2 card-users"> 
+        <div class="mt-3 card mb-2 card-users"> 
             {#if filteredUsers.length > 0}
                 <table class="table users-table m-0">
                     <thead>
                         <tr>
-                            <th class="text-right">#</th>
-                            <th>Name</th>
-                            <th class="text-right">Actions</th>
+                            <th class="text-right tags">#</th>
+                            <th class="tags">Name</th>
+                            <th class="text-right tags">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@
                     </tbody>
                 </table>
             {:else}
-                <p class="text-center text-muted my-3">No members found</p>
+                <p class="text-center tags my-3">No members found</p>
             {/if}
         </div>
     </div>
@@ -102,17 +102,21 @@
     .user-name-image{
         height: 40px;
         width: 40px;
-        color: rgb(255 255 255);
         font-weight: 700;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
+        color: #fff !important;
+    }
+    .tags{
+        color: var(--text-color) !important;
     }
     .user-name{
         display: flex;
         align-items: center;
         justify-content: center;
+        color: var(--text-color);
         font-size: 16px;
         font-weight: 500;
         margin-left: 5px;
