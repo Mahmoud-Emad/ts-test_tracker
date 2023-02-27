@@ -1,15 +1,15 @@
 <script lang="ts">
     import { Route, Router } from "svelte-navigator";
-    import Home from "../pages/Home.svelte";
-    import Settings from "../pages/Settings.svelte";
-    import Projects from "../pages/Projects.svelte";
-    import TestPlan from "../pages/TestPlan.svelte";
-    import ProjectDetail from "../pages/ProjectDetail.svelte";
-    import Members from "../pages/Members.svelte";
-    import MemberDetails from "../pages/MemberDetails.svelte";
-    import Login from "../pages/Login.svelte";
-    import Logout from "../pages/Logout.svelte";
-    import Register from "../pages/Register.svelte";
+    import Home from "../views/Home.svelte";
+    import Settings from "../views/Settings.svelte";
+    import Projects from "../views/Projects.svelte";
+    import TestPlan from "../views/TestPlan.svelte";
+    import ProjectDetail from "../views/ProjectDetail.svelte";
+    import Members from "../views/Members.svelte";
+    import MemberDetails from "../views/MemberDetails.svelte";
+    import Login from "../views/Login.svelte";
+    import Logout from "../views/Logout.svelte";
+    import Register from "../views/Register.svelte";
     import type { RouteType } from "../utils/types";
     import { getRoute } from "../utils/helpers";
     import { isError404 } from "../utils/stores";
