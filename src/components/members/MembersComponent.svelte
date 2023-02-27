@@ -1,13 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
-    import NavBar from "../UI/Navbar/Navbar.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import NavBar from "../ui/Navbar/Navbar.svelte";
     import { membersStore } from "../../utils/stores";
-    import Alert from "../UI/Alert.svelte";
+    import Alert from "../ui/Alert.svelte";
     import MemberCard from "./MemberCard.svelte";
-    import NavAction from "../UI/Navbar/NavAction.svelte";
+    import NavAction from "../ui/Navbar/NavAction.svelte";
     import AddNewMember from "./AddNewMember.svelte";
-    import Search from "../UI/Search.svelte";
+    import Search from "../ui/Search.svelte";
     import User from "../../apis/users";
 
     export let isLoading: boolean = false;

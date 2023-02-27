@@ -1,5 +1,5 @@
 <script lang="ts">
-    import RegisterComponent from "../components/Auth/Signup/RegisterComponent.svelte";
+    import RegisterComponent from "../components/auth/Signup/RegisterComponent.svelte";
 </script>
 
 <section class="container">

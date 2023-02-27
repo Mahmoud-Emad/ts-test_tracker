@@ -159,20 +159,16 @@ export function setTheme(mode: string){
 export const getRoute = (routes: RouteType[], currentRoute: string): boolean => {
     const keys: Array<string> = [];
     const paramID = currentRoute.split("/")[2];
-    
+    if (!currentRoute.endsWith('/')){
+        currentRoute = currentRoute + '/'
+    };
+ 
     for (const route of routes) {
         if(route.path.includes(":id") && paramID != undefined){
-            keys.push(route.path.replace(":id", `${paramID}/`).slice(0, route.path.length - 1))
-        } else{
-            keys.push(route.path.slice(0, route.path.length - 1))
-        }
+            keys.push(route.path.replace(":id", `${paramID}`));
+        } else {
+            keys.push(route.path);
+        };
     };
-    if(currentRoute.startsWith("/")){
-        currentRoute = currentRoute.substring(1);
-    };
-    if(currentRoute.endsWith("/")){
-        currentRoute = currentRoute.substring(0, currentRoute.length - 1);
-    };
-
     return !keys.includes(currentRoute);
 };

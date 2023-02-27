@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import ProjectDetailComponent from "../components/projects/ProjectDetailComponent.svelte";
-    import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
     import { useParams } from 'svelte-navigator';
     import Projects from "../apis/projects";
     import type { projectsType } from "../utils/types";
@@ -16,8 +15,6 @@
 
     onMount(async () => {
         loadActivities = true;
-        // clearAlertMessage();
-		// clearNotifacationStore();
         const response = await Projects.get(projectID)
         if(response){
             project = response

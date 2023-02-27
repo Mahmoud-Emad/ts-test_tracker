@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Modal from "../UI/Modals/Modal.svelte";
-    import Input from "../UI/Forms/Input.svelte";
+    import Modal from "../ui/Modals/Modal.svelte";
+    import Input from "../ui/Forms/Input.svelte";
     import { MemberPermissions, MemberType } from "../../utils/types";
     import { validateEmail, validateName } from "../../utils/validators";
     import Members from "../../apis/users";
-    import Button from "../UI/Forms/Button.svelte";
-    import Alert from "../UI/Alert.svelte";
+    import Button from "../ui/Forms/Button.svelte";
+    import Alert from "../ui/Alert.svelte";
     import { alertStore } from "../../utils/stores";
     import { createEventDispatcher } from 'svelte';
 

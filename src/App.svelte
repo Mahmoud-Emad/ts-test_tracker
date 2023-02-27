@@ -2,14 +2,14 @@
 	// Routers
 	import Router from "./routes/Router.svelte";
 	import { isError404, notifacationStore, userStore } from "./utils/stores";
-	import Toast from "./components/UI/Toast.svelte";
+	import Toast from "./components/ui/Toast.svelte";
 	import User from "./apis/users";
     import { onMount } from "svelte";
     import parseJwt from "./apis/authentication/JWTPars";
     import { setTheme } from "./utils/helpers";
-	import ServerError from "./components/Errors/ServerError.svelte";
-	import NotFound from "./components/Errors/NotFound.svelte";
-    import NetworkError from "./components/Errors/NetworkError.svelte";
+	import ServerError from "./components/errors/ServerError.svelte";
+	import NotFound from "./components/errors/NotFound.svelte";
+    import NetworkError from "./components/errors/NetworkError.svelte";
     import { NotifacationTypeEnum } from "./utils/types";
 
 	let isLoading: boolean = false;

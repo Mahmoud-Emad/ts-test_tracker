@@ -1,7 +1,7 @@
 |<script lang="ts">
     import { userStore } from "../../utils/stores";
     import { validateEmail, validateName, validatePhone } from "../../utils/validators";
-    import Input from "../UI/Forms/Input.svelte";
+    import Input from "../ui/Forms/Input.svelte";
 </script>
 
 <div class="card card-style">

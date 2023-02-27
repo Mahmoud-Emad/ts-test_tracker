@@ -1,6 +1,6 @@
 <script lang="ts">
     import { membersStore } from "../../../utils/stores";
-    import Alert from "../../UI/Alert.svelte";
+    import Alert from "../../ui/Alert.svelte";
 </script>
 
 {#if $membersStore[0].last_project_working_on}

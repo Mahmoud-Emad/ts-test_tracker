@@ -1,12 +1,12 @@
 <script lang="ts">
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
-    import NavBar from "../UI/Navbar/Navbar.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import NavBar from "../ui/Navbar/Navbar.svelte";
     import { alertStore, notifacationStore, projectsStore, userStore } from "../../utils/stores";
-    import Dropdown from "../UI/Dropdown.svelte";
+    import Dropdown from "../ui/Dropdown.svelte";
     import { Link, navigate, Router } from "svelte-navigator";
-    import Alert from "../UI/Alert.svelte";
-    import ActivityTable from "../Home/ActivityTable.svelte";
-    import DeleteModal from "../UI/Modals/DeleteModal.svelte";
+    import Alert from "../ui/Alert.svelte";
+    import ActivityTable from "../home/ActivityTable.svelte";
+    import DeleteModal from "../ui/Modals/DeleteModal.svelte";
     import { DeleteType } from "../../utils/types";
     import Projects from "../../apis/projects";
     import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
@@ -33,7 +33,7 @@
 {#if isLoading}
     <LoadingComponent className="page" />
 {:else if $projectsStore.length > 0}
-    <NavBar>
+    <NavBar projectView={true}>
         <span slot="actionBTN">
             <Dropdown>
                 <span slot="dropdown-toggle">

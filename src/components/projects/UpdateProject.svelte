@@ -2,9 +2,9 @@
     import Projects from "../../apis/projects";
     import type { projectsType, UpdateFieldsModalObject } from "../../utils/types";
     import { validateProjectDescription, validateProjectName } from "../../utils/validators";
-    import Input from "../UI/Forms/Input.svelte";
-    import TextArea from "../UI/Forms/TextArea.svelte";
-    import UpdateModal from "../UI/Modals/UpdateModal.svelte";
+    import Input from "../ui/Forms/Input.svelte";
+    import TextArea from "../ui/Forms/TextArea.svelte";
+    import UpdateModal from "../ui/Modals/UpdateModal.svelte";
 
     export let openUpdateProjectModal: boolean = false;
     export let project: projectsType;

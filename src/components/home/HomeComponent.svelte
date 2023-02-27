@@ -2,14 +2,14 @@
     import { onMount } from "svelte";
     import Greeting from "./Greeting.svelte";
     import RecentProjectsUpdated from "./RecentProjectsUpdated.svelte";
-    import Search from "../UI/Search.svelte";
+    import Search from "../ui/Search.svelte";
     import {
         projectsActivitiesStore,
         recentProjectsStore,
     } from "../../utils/stores";
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
-    import NavBar from "../UI/Navbar/Navbar.svelte";
-    import NavAction from "../UI/Navbar/NavAction.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import NavBar from "../ui/Navbar/Navbar.svelte";
+    import NavAction from "../ui/Navbar/NavAction.svelte";
     import Dashboard from "../../apis/dashboard";
     import CreateNewProject from "../projects/CreateNewProject.svelte";
     import ActivityTable from "./ActivityTable.svelte";

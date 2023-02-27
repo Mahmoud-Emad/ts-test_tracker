@@ -1,5 +1,5 @@
 <script lang="ts">
-    import HomeComponent from "../components/Home/HomeComponent.svelte";
+    import HomeComponent from "../components/home/HomeComponent.svelte";
     import { onMount } from "svelte";
     import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
     

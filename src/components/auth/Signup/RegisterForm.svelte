@@ -1,10 +1,10 @@
 <script lang="ts">
-    import Input from "../../UI/Forms/Input.svelte";
-    import Botton from "../../UI/Forms/Button.svelte";
+    import Input from "../../ui/Forms/Input.svelte";
+    import Botton from "../../ui/Forms/Button.svelte";
     import { validateEmail, validateName, validateEmptyInput } from "../../../utils/validators";
     import type { registerCredentials, TokensType } from "../../../utils/types";
     import authenticationAPI from "../../../apis/authentication/Authentication";
-    import Alert from "../../UI/Alert.svelte";
+    import Alert from "../../ui/Alert.svelte";
     import { alertStore, authStore } from "../../../utils/stores";
     import { onMount } from "svelte";
     import { clearAlertMessage, clearNotifacationStore, updateThem } from "../../../utils/helpers"

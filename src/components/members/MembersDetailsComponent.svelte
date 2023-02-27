@@ -1,7 +1,7 @@
 <script lang="ts">
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
     import { membersStore } from "../../utils/stores";
-    import NavBar from "../UI/Navbar/Navbar.svelte"
+    import NavBar from "../ui/Navbar/Navbar.svelte"
     import PersonalInfo from "./sections/PersonalInfo.svelte";
     import LastProjects from "./sections/LastProjects.svelte";
     import LastTestRun from "./sections/LastTestRun.svelte";

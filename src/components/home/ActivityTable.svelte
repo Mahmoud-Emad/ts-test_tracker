@@ -1,7 +1,7 @@
 <script lang="ts">
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
     import { projectsActivitiesStore } from "../../utils/stores";
-    import Alert from "../UI/Alert.svelte";
+    import Alert from "../ui/Alert.svelte";
 
     export let loadActivities: boolean;
 </script>

@@ -1,15 +1,15 @@
 <script lang="ts">
     export let isLoading: boolean;
-    import Tabs from "../UI/Tabs.svelte";
+    import Tabs from "../ui/Tabs.svelte";
     import type { TabType } from "../../utils/types";
-    import Navbar from "../UI/Navbar/Navbar.svelte";
+    import Navbar from "../ui/Navbar/Navbar.svelte";
     import { alertStore, userStore } from "../../utils/stores";
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
     import ProfileInformation from "./ProfileInformation.svelte";
     import UpdatePassword from "./UpdatePassword.svelte";
     import SettingsService from "../../apis/settings";
-    import Alert from "../UI/Alert.svelte";
-    import Button from "../UI/Forms/Button.svelte";
+    import Alert from "../ui/Alert.svelte";
+    import Button from "../ui/Forms/Button.svelte";
     import { validateName, validatePhone } from "../../utils/validators";
     import ChangeMode from "./ChangeMode.svelte";
 

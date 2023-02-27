@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import MembersDetailsComponent from "../components/Members/MembersDetailsComponent.svelte";
-    import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
+    import MembersDetailsComponent from "../components/members/MembersDetailsComponent.svelte";
     import { useParams } from 'svelte-navigator';
     import Members from "../apis/users";
     import type { MemberType } from "../utils/types";
@@ -16,8 +15,6 @@
     };
 
     onMount(async () => {
-        // clearAlertMessage();
-		// clearNotifacationStore();
         member = await Members.getMember(memberID)
         if(member){
             return membersStore.set([member])

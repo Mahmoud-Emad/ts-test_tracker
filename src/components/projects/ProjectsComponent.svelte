@@ -1,13 +1,13 @@
 <script lang="ts">
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
-    import NavBar from "../UI/Navbar/Navbar.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import NavBar from "../ui/Navbar/Navbar.svelte";
     import { alertStore, notifacationStore, projectsStore } from "../../utils/stores";
-    import Alert from "../UI/Alert.svelte";
-    import NavAction from "../UI/Navbar/NavAction.svelte";
-    import Search from "../UI/Search.svelte";
+    import Alert from "../ui/Alert.svelte";
+    import NavAction from "../ui/Navbar/NavAction.svelte";
+    import Search from "../ui/Search.svelte";
     import CreateNewProject from "./CreateNewProject.svelte";
     import Greeting from "./Greeting.svelte";
-    import Card from "../UI/Card.svelte";
+    import Card from "../ui/Card.svelte";
     import { Link } from "svelte-navigator";
     import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
 

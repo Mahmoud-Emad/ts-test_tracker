@@ -1,14 +1,14 @@
 <script lang="ts">
-    import Modal from "../UI/Modals/Modal.svelte";
-    import Input from "../UI/Forms/Input.svelte";
-    import TextArea from "../UI/Forms/TextArea.svelte";
+    import Modal from "../ui/Modals/Modal.svelte";
+    import Input from "../ui/Forms/Input.svelte";
+    import TextArea from "../ui/Forms/TextArea.svelte";
     import type { projectsType } from "../../utils/types";
     import { validateEmptyInput, validateLink, validateProjectDescription, validateProjectName } from "../../utils/validators";
-    import Button from "../UI/Forms/Button.svelte";
-    import Alert from "../UI/Alert.svelte";
+    import Button from "../ui/Forms/Button.svelte";
+    import Alert from "../ui/Alert.svelte";
     import { alertStore, projectsStore } from "../../utils/stores";
     import { createEventDispatcher } from 'svelte';
-    import CheckBox from "../UI/Forms/CheckBox.svelte";
+    import CheckBox from "../ui/Forms/CheckBox.svelte";
     import Projects from "../../apis/projects";
 
     export let openModal: boolean;

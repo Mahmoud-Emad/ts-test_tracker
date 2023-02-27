@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import MembersComponent from "../components/Members/MembersComponent.svelte";
+    import MembersComponent from "../components/members/MembersComponent.svelte";
     import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
     export let isLoading: boolean = false;
 

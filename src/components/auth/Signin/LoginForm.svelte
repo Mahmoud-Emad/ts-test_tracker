@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Input from "../../UI/Forms/Input.svelte";
-    import Botton from "../../UI/Forms/Button.svelte"
+    import Input from "../../ui/Forms/Input.svelte";
+    import Botton from "../../ui/Forms/Button.svelte"
     import { validateEmail, validateEmptyInput } from "../../../utils/validators"
     import { loginCredentials, ToastEnum, TokensType } from "../../../utils/types";
     import authenticationAPI from "../../../apis/authentication/Authentication";
     import GitHubAPI from "../../../apis/authentication/GitHub";
-    import Alert from "../../UI/Alert.svelte";
+    import Alert from "../../ui/Alert.svelte";
     import { alertStore, authStore } from "../../../utils/stores";
     import { createNewNotifacation, updateThem } from "../../../utils/helpers"
     import { Link, navigate } from "svelte-navigator";

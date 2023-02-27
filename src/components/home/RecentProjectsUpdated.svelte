@@ -1,9 +1,9 @@
 <script lang="ts">
     import { Link } from "svelte-navigator";
     import { recentProjectsStore } from "../../utils/stores";
-    import Alert from "../UI/Alert.svelte";
-    import Card from "../UI/Card.svelte";
-    import LoadingComponent from "../UI/LoadingComponent.svelte";
+    import Alert from "../ui/Alert.svelte";
+    import Card from "../ui/Card.svelte";
+    import LoadingComponent from "../ui/LoadingComponent.svelte";
     export let loadProjects: boolean;
 </script>
 

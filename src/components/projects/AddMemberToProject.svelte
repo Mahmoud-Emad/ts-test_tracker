@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Modal from "../UI/Modals/Modal.svelte";
+    import Modal from "../ui/Modals/Modal.svelte";
     import { membersStore } from "../../utils/stores";
     import { onMount } from "svelte";
     import type { projectsType } from "../../utils/types";
-    import Button from "../UI/Forms/Button.svelte";
+    import Button from "../ui/Forms/Button.svelte";
     import { fly } from 'svelte/transition';
     import Search from "./Search.svelte";
     import Projects from "../../apis/projects";
