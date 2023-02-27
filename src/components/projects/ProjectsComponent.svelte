@@ -13,7 +13,6 @@
 
     export let isLoading: boolean = false;
     let openModal: boolean = false;
-    let loadProjects: boolean = false;
 </script>
 
 

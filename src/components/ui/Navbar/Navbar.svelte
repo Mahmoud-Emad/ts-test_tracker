@@ -36,9 +36,6 @@
                     {/if}
                     {#if projectView && projectID}
                         <li class="nav-item">
-                            <Link to="/projects" class="nav-link">Projects</Link>
-                        </li>
-                        <li class="nav-item">
                             <Link to="/projects/{projectID}/test-plans/" class="nav-link">Test Plans</Link>
                         </li>
                         <li class="nav-item">
@@ -50,14 +47,13 @@
                         <li class="nav-item">
                             <Link to="/projects/{projectID}/runs/" class="nav-link">Test Runs</Link>
                         </li>
-                    {:else}
-                        <li class="nav-item">
-                            <Link to="/projects" class="nav-link">Projects</Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link to="/settings/" class="nav-link">Settings</Link>
-                        </li>
                     {/if}
+                    <li class="nav-item">
+                        <Link to="/projects" class="nav-link">Projects</Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link to="/settings/" class="nav-link">Settings</Link>
+                    </li>
                 </Router>
             </ul>
         </div>

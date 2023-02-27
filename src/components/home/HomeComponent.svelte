@@ -58,7 +58,7 @@
         />
     </NavBar>
     <div class="container pt-4">
-        <Greeting bind:isLoading />
+        <Greeting />
         <Search
             label={"Search Members"}
             searchStore={recentProjectsStore}

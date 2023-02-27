@@ -2,7 +2,8 @@ import { writable, get } from "svelte/store";
 import isAuthenticated from "../apis/authentication/IsAuthenticated";
 import Dashboard from "../apis/dashboard";
 import Projects from "../apis/projects";
-import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType, MemberType, ProjectActivity } from "./types";
+import TestPlans from "../apis/testPlan";
+import type { AlertType, IAuthStore, NotifacationType, projectsType, UserType, MemberType, ProjectActivity, TestPlanChart } from "./types";
 import User from "../apis/users"
 
 function createRecentProjectsStore() {
@@ -107,6 +108,33 @@ function createMembersStore() {
 	};
 };
 
+function createTestPlansStore() {
+	const store = writable<Array<TestPlanChart>>([]);
+	const { subscribe, update, set } = store;
+
+	async function all(projectID: number) {
+		const res: TestPlanChart[] = await TestPlans.all(projectID);
+		if (res) {
+			return update((s) => {
+				s = res;
+				return s;
+			});
+		};
+	};
+	
+	async function create(data: TestPlanChart, projectID: number) {
+		await TestPlans.new(data, projectID);
+		return this.all(projectID)
+	};
+
+	return {
+		subscribe,
+		set,
+		all,
+		create,
+	};
+};
+
 function createAuthStore() {
 	const store = writable<IAuthStore>({});
 	const { subscribe, update } = store;
@@ -176,6 +204,7 @@ export const membersStore = createMembersStore();
 export const notifacationStore = writable<NotifacationType>({});
 export const alertStore = writable<AlertType>({});
 export const projectsStore = createProjectsStore();
+export const testPlansStore = createTestPlansStore();
 export const recentProjectsStore = createRecentProjectsStore();
 export const projectsActivitiesStore = createActivitiesStore();
 export const isError404 = writable(false);

@@ -192,11 +192,11 @@ export type TestSuiteChart = {
 };
 
 export type TestPlanChart = {
-    created: string
-    id: number
-    title: string
-    modified: string
-    type: string
+    created?: string
+    id?: number
+    title?: string
+    modified?: string
+    type?: string
 };
 
 export type TestRunChart = {

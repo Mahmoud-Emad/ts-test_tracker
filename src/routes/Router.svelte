@@ -3,7 +3,7 @@
     import Home from "../views/Home.svelte";
     import Settings from "../views/Settings.svelte";
     import Projects from "../views/Projects.svelte";
-    import TestPlan from "../views/TestPlan.svelte";
+    import TestPlan from "../views/TestPlans.svelte";
     import ProjectDetail from "../views/ProjectDetail.svelte";
     import Members from "../views/Members.svelte";
     import MemberDetails from "../views/MemberDetails.svelte";

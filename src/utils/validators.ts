@@ -62,9 +62,9 @@ export function validateProjectName(name: string): InputValidationsType {
         validated.errorMessage = "This field may not be blank.";
         return validated;
     };
-    if(name.length < 4 || name.length > 20){
+    if(name.length < 4 || name.length > 30){
         validated.isValid = false;
-        validated.errorMessage = "Must be in range (4, 20)";
+        validated.errorMessage = "Must be in range (4, 30)";
         return validated;
     };
     if (!VALID_PROJECT_NAME.test(name)) {

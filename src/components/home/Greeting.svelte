@@ -1,12 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { userStore, projectsStore } from "../../utils/stores";
-    export let isLoading: boolean = false;
 
     onMount(async() => {
-        // isLoading = true;
         await projectsStore.reload();
-        // isLoading = false;
     })
 </script>
 
@@ -19,8 +16,10 @@
             Dashboard
         </p>
         <p class="text-muted">
-            There are <strong class="text-primary">{$projectsStore.length}</strong>
-            {$projectsStore.length === 1 ? "project" : "projects"}
+            There {$projectsStore.length <= 1 ? "is" : "are"} 
+            <strong class="text-primary">{$projectsStore.length}</strong>
+            {$projectsStore.length <= 1 ? "project" : "projects"}
+            associated.
         </p>
     {:else if $projectsStore && $userStore.permission !== "admin"}
         <p class="h5">
