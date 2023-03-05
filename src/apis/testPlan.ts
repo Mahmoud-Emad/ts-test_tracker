@@ -24,6 +24,15 @@ class TestPlans{
             return onErrorResponse(error);
 		};
     };
+    public async get(projectID: number, testPlanID: number){
+        // Request to get test plan details from the server.
+        try {
+			const response: onSuccessResponseType = await httpAxios.get(`/test_plan/${projectID}/actions/${testPlanID}/`);
+            return response.data;
+		} catch (error) {
+            return onErrorResponse(error);
+		};
+    };
 };
 
 const testPlans = new TestPlans();

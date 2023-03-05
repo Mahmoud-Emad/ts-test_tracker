@@ -13,6 +13,7 @@
     import type { RouteType } from "../utils/types";
     import { getRoute } from "../utils/helpers";
     import { isError404 } from "../utils/stores";
+    import TestPlanDetails from "../views/TestPlanDetails.svelte";
 
     export let isLoading: boolean;
     
@@ -23,8 +24,10 @@
         {path: "/members/:id/", component: MemberDetails},
         
         {path: "/projects/", component: Projects},
-        {path: "/projects/:id/test-plans/", component: TestPlan},
         {path: "/projects/:id/", component: ProjectDetail},
+
+        {path: "/projects/:id/test-plans/", component: TestPlan},
+        {path: "/projects/:id/test-plans/:details/", component: TestPlanDetails},
         
         {path: "/auth/login/", component: Login},
         {path: "/auth/register/", component: Register},

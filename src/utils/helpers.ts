@@ -1,5 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 import { notifacationStore, alertStore } from './stores';
+import { useParams } from 'svelte-navigator';
 import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType, RouteType, NotifacationTypeEnum } from './types';
 
 export const generateUUID = () => {
@@ -158,17 +159,20 @@ export function setTheme(mode: string){
 
 export const getRoute = (routes: RouteType[], currentRoute: string): boolean => {
     const keys: Array<string> = [];
-    const paramID = currentRoute.split("/")[2];
+    const fParam = currentRoute.split("/")[2];
+    const sParam = currentRoute.split("/")[4];
     if (!currentRoute.endsWith('/')){
         currentRoute = currentRoute + '/'
     };
  
-    for (const route of routes) {
-        if(route.path.includes(":id") && paramID != undefined){
-            keys.push(route.path.replace(":id", `${paramID}`));
-        } else {
-            keys.push(route.path);
+    for (let route of routes) {
+        if(route.path.includes(":id") && fParam != undefined){
+            if (route.path.includes(":details") && sParam != undefined){
+                route.path = route.path.replace(":details", sParam)
+            };
+            route.path = route.path.replace(":id", fParam)
         };
+        keys.push(route.path)
     };
     return !keys.includes(currentRoute);
 };

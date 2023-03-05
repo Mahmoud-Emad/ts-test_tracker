@@ -1,15 +1,6 @@
 <script lang="ts">
-    import HomeComponent from "../components/home/HomeComponent.svelte";
-    import { onMount } from "svelte";
-    import { clearAlertMessage, clearNotifacationStore } from "../utils/helpers";
-    
+    import HomeComponent from "../components/home/HomeComponent.svelte";    
     export let isLoading: boolean;
-
-    onMount(() => {
-        // clearAlertMessage();
-		// clearNotifacationStore();
-    });
-	
 </script>
 
 <section>

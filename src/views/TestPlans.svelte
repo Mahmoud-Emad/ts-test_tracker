@@ -13,11 +13,11 @@
     let project: projectsType = {};
 
     onMount(async () => {
-        const response = await Projects.get(projectID)
+        const response = await Projects.get(projectID);
         if(response){
-            project = response
-            projectsActivitiesStore.set(project.activity)
-            projectsStore.set([project])
+            project = response;
+            projectsActivitiesStore.set(project.activity);
+            projectsStore.set([project]);
         } else{
             $isError404 = true;
         };
