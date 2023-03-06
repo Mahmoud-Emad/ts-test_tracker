@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Loadingbtn from "../Loadingbtn.svelte";
+    import Loadingbtn from "../loading/Loadingbtn.svelte";
 
     export let className: string;
     export let onClick: CallableFunction;

@@ -1,7 +1,8 @@
 import {v4 as uuidv4} from 'uuid';
-import { notifacationStore, alertStore } from './stores';
+import { notifacationStore, alertStore, isError404, projectsStore, projectsActivitiesStore } from './stores';
 import { useParams } from 'svelte-navigator';
-import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType, RouteType, NotifacationTypeEnum } from './types';
+import { NotifacationType, AlertType, ToastEnum, onSuccessResponseType, onErrorResponseType, RouteType, NotifacationTypeEnum, projectsType } from './types';
+import projects from '../apis/projects';
 
 export const generateUUID = () => {
     // Generate a random uuid
@@ -175,4 +176,23 @@ export const getRoute = (routes: RouteType[], currentRoute: string): boolean => 
         keys.push(route.path)
     };
     return !keys.includes(currentRoute);
+};
+
+export const setProject = async () => {
+    const currentRoute: string = window.location.pathname;
+    const projectID = currentRoute.split("/")[2];
+    let project: projectsType = {};
+    if(!projectID){
+        isError404.set(true);
+    } else {
+        const response = await projects.get(+projectID);
+        if (response){
+            project = response;
+            projectsStore.set([project]);
+            projectsActivitiesStore.set(project.activity);
+        } else {
+            isError404.set(true);
+        };
+    };
+    return projectsStore;
 };

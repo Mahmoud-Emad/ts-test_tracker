@@ -2,7 +2,7 @@
     import { validateEmptyInput } from "../../utils/validators";
     import { createEventDispatcher } from 'svelte';
     import Input from "./Forms/Input.svelte";
-    import LoadingComponent from "./LoadingComponent.svelte";
+    import LoadingComponent from "./loading/LoadingComponent.svelte";
     export let searchMethod: CallableFunction;
     export let searchField: string; // title, name, etc..
     export let searchArgs: any = null;

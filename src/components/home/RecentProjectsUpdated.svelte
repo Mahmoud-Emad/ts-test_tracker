@@ -3,7 +3,7 @@
     import { recentProjectsStore } from "../../utils/stores";
     import Alert from "../ui/Alert.svelte";
     import Card from "../ui/Card.svelte";
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     export let loadProjects: boolean;
 </script>
 

@@ -7,7 +7,7 @@
         projectsActivitiesStore,
         recentProjectsStore,
     } from "../../utils/stores";
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     import NavBar from "../ui/Navbar/Navbar.svelte";
     import NavAction from "../ui/Navbar/NavAction.svelte";
     import Dashboard from "../../apis/dashboard";

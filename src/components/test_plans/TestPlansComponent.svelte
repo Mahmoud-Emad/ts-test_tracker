@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { alertStore, notifacationStore, projectsStore, testPlansStore } from "../../utils/stores";
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     import NavBar from "../ui/Navbar/Navbar.svelte";
     import NavAction from "../ui/Navbar/NavAction.svelte";
     import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";

@@ -4,7 +4,7 @@
     import type { TabType } from "../../utils/types";
     import Navbar from "../ui/Navbar/Navbar.svelte";
     import { alertStore, userStore } from "../../utils/stores";
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     import ProfileInformation from "./ProfileInformation.svelte";
     import UpdatePassword from "./UpdatePassword.svelte";
     import SettingsService from "../../apis/settings";

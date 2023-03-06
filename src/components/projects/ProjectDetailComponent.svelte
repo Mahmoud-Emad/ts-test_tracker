@@ -1,5 +1,5 @@
 <script lang="ts">
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     import NavBar from "../ui/Navbar/Navbar.svelte";
     import { alertStore, notifacationStore, projectsStore, userStore } from "../../utils/stores";
     import Dropdown from "../ui/Dropdown.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     import { projectsActivitiesStore } from "../../utils/stores";
     import Alert from "../ui/Alert.svelte";
 

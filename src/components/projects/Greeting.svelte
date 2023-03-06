@@ -1,6 +1,8 @@
 <script lang="ts">
     import { userStore, projectsStore } from "../../utils/stores";
+    import Loadingbtn from "../ui/loading/Loadingbtn.svelte";
     export let projectTitle: string = "";
+    export let isLoading: boolean;
 </script>
 
 <div class="pt-0">
@@ -18,7 +20,14 @@
             {/if}
         </p>
         <p class="text-muted">
-            There are <strong class="text-primary">{$projectsStore.length}</strong>
+            There are 
+            <strong class="text-primary">
+                {#if isLoading}
+                    <Loadingbtn />
+                {:else}
+                    {$projectsStore.length}
+                {/if}
+            </strong>
             {$projectsStore.length === 1 ? "project" : "projects"}
         </p>
     {:else if $projectsStore && $userStore.permission !== "admin"}

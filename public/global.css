@@ -476,3 +476,9 @@ input:disabled {
 .radius-5{
 	border-radius: 5px !important
 }
+.b-none{
+	border: none;
+}
+.outline-none{
+	outline: none;
+}

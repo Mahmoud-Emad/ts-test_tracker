@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import LoadingComponent from "../ui/LoadingComponent.svelte";
+    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
     import NavBar from "../ui/Navbar/Navbar.svelte";
     import { membersStore } from "../../utils/stores";
     import Alert from "../ui/Alert.svelte";
