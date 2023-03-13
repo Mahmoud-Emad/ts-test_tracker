@@ -1,75 +1,87 @@
 <script lang="ts">
-    import Modal from "../ui/Modals/Modal.svelte";
-    import Input from "../ui/Forms/Input.svelte";
-    import type { TestPlanChart } from "../../utils/types";
-    import {  validateProjectName } from "../../utils/validators";
-    import Button from "../ui/Forms/Button.svelte";
-    import Alert from "../ui/Alert.svelte";
-    import { alertStore, projectsStore, testPlansStore } from "../../utils/stores";
-    import CheckBox from "../ui/Forms/CheckBox.svelte";
+  import Modal from '../UI/modals/Modal.svelte';
+  import Input from '../UI/forms/Input.svelte';
+  import type { ProjectsType, TestPlanChart } from '../../utils/types';
+  import { validateProjectName } from '../../utils/validators';
+  import Button from '../UI/forms/Button.svelte';
+  import Alert from '../UI/Alert.svelte';
+  import { alertStore, testPlansStore } from '../../utils/store';
+  import CheckBox from '../UI/forms/CheckBox.svelte';
 
-    export let openModal: boolean;
+  export let openModal: boolean;
+  export let project: ProjectsType;
 
-    let planType: TestPlanChart = {};
-    let withTemplate: boolean = false;
+  const planType: TestPlanChart = {};
+  let withTemplate = false;
 
-    const setTestPlanType = () => {
-        if(withTemplate){
-            planType.type = "template"
-        } else {
-            planType.type = "blank"
-        }
-        return withTemplate;
-    };
-    
-    let disabledForm: boolean = true;
+  const setTestPlanType = () => {
+    if ( withTemplate ) {
+      planType.type = 'template';
+    } else {
+      planType.type = 'blank';
+    }
+    return withTemplate;
+  };
 
-    $: disabledForm = !validateProjectName(planType.title).isValid;
+  let disabledForm = true;
 
+  $: disabledForm = !validateProjectName( planType.title ).isValid;
 </script>
 
 <Modal bind:openModal withFooter={true}>
-    <h5 slot="modal-header" class="text-muted">Create New Test Plan</h5>
-    <div slot="modal-body">
-        <Input
-            bind:value={planType.title}
-            label={"Title"}
-            type={"text"}
-            validation={validateProjectName}
-        />
-        <CheckBox 
-            label={"With Template"}
-            bind:value={withTemplate}
-            onClick={setTestPlanType}
-        />
-        {#if $alertStore.isOpen}
-            <Alert
-                isOpen={$alertStore.isOpen} 
-                message={$alertStore.message} 
-                title={$alertStore.title}
-                className={$alertStore.className}
-                error={$alertStore.error}
-            />
-        {/if}
-    </div>
-    <div slot="modal-footer">
-        <Button 
-            className={"btn-primary"}
-            onClick={
-                async () => {
-                    await testPlansStore.create(planType, $projectsStore[0].id)
-                }
-            }
-            disabled={disabledForm}
-            text={"New Test Plan"}
-        />
-        <Button 
-            className={"btn-danger"}
-            onClick={() => {
-                openModal = false;
-            }}
-            disabled={!openModal}
-            text={"Close"}
-        />
-    </div>
+  <h5 slot="modal-header" class="text-muted">Create New Test Plan</h5>
+  <div slot="modal-body">
+    <Input
+      bind:value={planType.title}
+      label={'Title'}
+      type={'text'}
+      validation={validateProjectName}
+    />
+    <CheckBox
+      label={'With Template'}
+      bind:value={withTemplate}
+      onClick={setTestPlanType}
+    />
+    {#if withTemplate}
+      <small class="ml-7 text-muted"
+        >* A suggested test plan structure will be created.</small
+      >
+    {:else}
+      <small class="ml-7 text-muted">* A blank test plan will be created.</small
+      >
+    {/if}
+    {#if $alertStore.isOpen}
+      <Alert
+        isOpen={$alertStore.isOpen}
+        message={$alertStore.message}
+        title={$alertStore.title}
+        className={$alertStore.className}
+        error={$alertStore.error}
+      />
+    {/if}
+  </div>
+  <div slot="modal-footer">
+    <Button
+      className={'btn-primary'}
+      onClick={async () => {
+        await testPlansStore.create( planType, project.id );
+      }}
+      disabled={disabledForm}
+      text={'New Test Plan'}
+    />
+    <Button
+      className={'btn-danger'}
+      onClick={() => {
+        openModal = false;
+      }}
+      disabled={!openModal}
+      text={'Close'}
+    />
+  </div>
 </Modal>
+
+<style>
+  .ml-7 {
+    margin-left: 7px;
+  }
+</style>

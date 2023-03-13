@@ -1,18 +1,19 @@
+// import '/global.css'
 import App from './App.svelte';
 
-const app = new App({
-  target: document.body,
-});
+const app = new App( {
+  target: document.getElementById( 'app' ),
+} );
 
 interface AppConfigs {
   SERVER_BASE_URL: string;
   SERVER_API_URL: string;
-};
+}
 
 declare global {
   interface Window {
-    configs: AppConfigs;
+    config: AppConfigs;
   }
-};
+}
 
 export default app;

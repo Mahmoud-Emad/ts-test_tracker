@@ -1,68 +1,95 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { alertStore, notifacationStore, projectsStore, testPlansStore } from "../../utils/stores";
-    import LoadingComponent from "../ui/loading/LoadingComponent.svelte";
-    import NavBar from "../ui/Navbar/Navbar.svelte";
-    import NavAction from "../ui/Navbar/NavAction.svelte";
-    import { clearAlertMessage, clearNotifacationStore } from "../../utils/helpers";
-    import Search from "../ui/Search.svelte";
-    import Greeting from "./Greeting.svelte";
-    import PlanCard from "./PlanCard.svelte";
-    import Alert from "../ui/Alert.svelte";
-    import CreatePlanModal from "./CreatePlanModal.svelte";
+  import { onMount } from 'svelte';
+  import {
+    alertStore,
+    notifacationStore,
+    testPlansStore,
+  } from '../../utils/store';
+  import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
+  import NavBar from '../UI/navbar/Navbar.svelte';
+  import NavAction from '../UI/navbar/NavAction.svelte';
+  import {
+    clearAlertMessage,
+    clearNotifacationStore,
+    filterStore,
+  } from '../../utils/helpers';
+  import Search from '../UI/Search.svelte';
+  import PlanCard from './TestPlanCard.svelte';
+  import Alert from '../UI/Alert.svelte';
+  import CreatePlanModal from './CreatePlanModal.svelte';
+  import { useParams } from 'svelte-navigator';
+  import projects from '../../apis/projects';
+  import type { ProjectsType } from '../../utils/types';
 
-    export let isLoading: boolean;
-    let openModal: boolean;
+  export let isLoading: boolean;
+  let openModal: boolean;
+  let value: string;
+  const params = useParams();
+  let project: ProjectsType = {};
 
-    onMount(async () => {
-        isLoading = true;
-        await testPlansStore.all($projectsStore[0].id);
-        isLoading = false;
-    });
+  onMount( async () => {
+    isLoading = true;
+    await testPlansStore.all( +$params.projectID );
+    await projects.get( +$params.projectID ).then( ( resp ) => {
+      if ( resp ) {
+        project = resp;
+      }
+    } );
+    isLoading = false;
+  } );
 </script>
 
 {#if isLoading}
-    <LoadingComponent className="page" />
-{:else}
-    <NavBar projectView={true}>
-        <NavAction slot="actionBTN" tooltip={"Create New Test Plan"} onClick={() => {
-            if($alertStore.isOpen || $notifacationStore.isOpen){
-                clearAlertMessage();
-                clearNotifacationStore();
-            };
-            openModal = true;
-        }}/>
-    </NavBar>
-    <div class="container pt-4 pb-4">
-        <Greeting />
-        <Search 
-            label={"Search Plans"}
-            searchStore={testPlansStore}
-            searchMethod={testPlansStore.all}
-            searchArgs={$projectsStore[0].id}
-            searchField={"title"}
-            on:Search={
-                (event) => {
-                    testPlansStore.set(event.detail.objects)
-                }
-            }
-        />
-        <div class="container mt-3">
-            {#if $testPlansStore.length > 0}
-                {#each $testPlansStore as plan}
-                    <PlanCard {plan}/>
-                {/each}
-            {:else}
-                <Alert 
-                    className={"light not-available"}
-                    isOpen={true}
-                    close={$testPlansStore.length > 0}
-                    message={"There are no plans inside this project, try to create new one from the navbar."}
-                />
-            {/if}
-        </div>
+  <LoadingComponent className="page" />
+{:else if project && project.title}
+  <NavBar projectView={true}>
+    <NavAction
+      slot="action-btn"
+      tooltip={'Create New Test Plan'}
+      onClick={() => {
+        if ( $alertStore.isOpen || $notifacationStore.isOpen ) {
+          clearAlertMessage();
+          clearNotifacationStore();
+        }
+        openModal = true;
+      }}
+    />
+  </NavBar>
+  <div class="container pt-4 pb-4">
+    <div class="pt-0">
+      <p class="h5">
+        <span class="text-primary">
+          {project.title}
+        </span>
+        | Test-Plans
+      </p>
+      <p class="text-muted">
+        There {$testPlansStore.length <= 1 ? 'is' : 'are'}
+        <strong class="text-primary">{$testPlansStore.length}</strong>
+        {$testPlansStore.length <= 1 ? 'plan' : 'plans'}
+        associated.
+      </p>
     </div>
-    {#if openModal}
-        <CreatePlanModal bind:openModal/>
-    {/if}
+    <Search
+      label={'Search Plans'}
+      store={testPlansStore}
+      bind:value
+      searchField={'title'}
+    />
+    <div class="container mt-3">
+      {#each filterStore( $testPlansStore, 'title', value ) as plan}
+        <PlanCard {plan} {project} />
+      {:else}
+        <Alert
+          className={'light not-available'}
+          isOpen={true}
+          close={false}
+          message={'There are no plans inside this project, try to create new one from the navbar.'}
+        />
+      {/each}
+    </div>
+  </div>
+  {#if openModal}
+    <CreatePlanModal bind:openModal {project} />
+  {/if}
 {/if}

@@ -1,43 +1,47 @@
 <script lang="ts">
-    import Projects from "../../apis/projects";
-    import type { projectsType, UpdateFieldsModalObject } from "../../utils/types";
-    import { validateProjectDescription, validateProjectName } from "../../utils/validators";
-    import Input from "../ui/Forms/Input.svelte";
-    import TextArea from "../ui/Forms/TextArea.svelte";
-    import UpdateModal from "../ui/Modals/UpdateModal.svelte";
+  import Projects from '../../apis/projects';
+  import type {
+    ProjectsType,
+    UpdateFieldsModalobject,
+  } from '../../utils/types';
+  import {
+    validateProjectDescription,
+    validateProjectName,
+  } from '../../utils/validators';
+  import Input from '../UI/forms/Input.svelte';
+  import TextArea from '../UI/forms/TextArea.svelte';
+  import UpdateModal from '../UI/modals/UpdateModal.svelte';
 
-    export let openUpdateProjectModal: boolean = false;
-    export let project: projectsType;
+  export let openUpdateProjectModal = false;
+  export let project: ProjectsType;
 
-    const onUpdateProject = async (data: projectsType) => {
-        return Projects.update(data)
-    };
+  const onUpdateProject = async ( data: ProjectsType ) => {
+    return Projects.update( data );
+  };
 
-    let fields: Array<UpdateFieldsModalObject> = [
-        {
-            fieldName: 'title',
-            fieldLabel: "Project Name",
-            fieldValue: project.title,
-            component: Input,
-            validation: validateProjectName,
-        },
-        {
-            fieldName: 'short_description',
-            fieldLabel: "Short Description",
-            fieldValue: project.short_description,
-            component: TextArea,
-            validation: validateProjectDescription,
-        },
-    ];
+  let fields: Array<UpdateFieldsModalobject> = [
+    {
+      fieldName: 'title',
+      fieldLabel: 'Project Name',
+      fieldValue: project.title,
+      component: Input,
+      validation: validateProjectName,
+    },
+    {
+      fieldName: 'short_description',
+      fieldLabel: 'Short Description',
+      fieldValue: project.short_description,
+      component: TextArea,
+      validation: validateProjectDescription,
+    },
+  ];
 </script>
 
-<UpdateModal 
-    bind:fields
-    bind:openModal={openUpdateProjectModal}
-    buffer={project}
-    on:update={ 
-        async (event) => {
-            await onUpdateProject(event.detail.data)            
-        }
-    }
+<UpdateModal
+  bind:fields
+  bind:openModal={openUpdateProjectModal}
+  buffer={project}
+  on:update={async ( event ) => {
+    await onUpdateProject( event.detail.data );
+  }}
 />
