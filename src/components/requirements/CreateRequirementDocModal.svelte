@@ -4,7 +4,8 @@
   import Input from '../UI/forms/Input.svelte';
   import type { RequirementsDocChart } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
-  import { alertStore, requirementsDocStore } from '../../utils/store';
+  import { requirementsDocStore } from '../../stores/requirements';
+  import { alertStore } from '../../stores/utils';
   import Alert from '../UI/Alert.svelte';
   import Button from '../UI/forms/Button.svelte';
 

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { notifacationStore, alertStore } from './store';
+import { notifacationStore, alertStore } from '../stores/utils';
 import type {
   NotifacationType,
   AlertType,

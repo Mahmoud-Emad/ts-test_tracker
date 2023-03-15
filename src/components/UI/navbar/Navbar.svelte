@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Router, Link } from 'svelte-navigator';
-  import { userStore } from '../../../utils/store';
+  import { userStore } from '../../../stores/users';
   import { useParams } from 'svelte-navigator';
   import Dropdown from '../Dropdown.svelte';
 

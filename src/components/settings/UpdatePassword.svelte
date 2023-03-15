@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { userStore } from '../../utils/store';
+  import { userStore } from '../../stores/users';
   import { validateEmptyInput } from '../../utils/validators';
   import Input from '../UI/forms/Input.svelte';
 </script>

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { alertStore, userStore } from '../../../utils/store';
+  import { alertStore } from '../../../stores/utils';
+  import { userStore } from '../../../stores/users';
   import type { DeleteType, InputValidationsType } from '../../../utils/types';
   import Alert from '../Alert.svelte';
   import Button from '../forms/Button.svelte';

@@ -3,11 +3,10 @@
   import { useParams } from 'svelte-navigator';
   import testPlans from '../../apis/testPlan';
   import {
-    alertStore,
-    notifacationStore,
     testPlanSectionsStore,
     testPlansStore,
-  } from '../../utils/store';
+  } from '../../stores/test_plans';
+  import { alertStore, notifacationStore } from '../../stores/utils';
   import type { TestPlanChart, TestPlanSection } from '../../utils/types';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import NavBar from '../UI/navbar/Navbar.svelte';

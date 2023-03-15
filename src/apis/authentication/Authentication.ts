@@ -7,7 +7,7 @@ import type {
 } from '../../utils/types';
 import httpAxios from '../../utils/axios';
 import { onErrorResponse, onSuccessResponse } from '../../utils/helpers';
-import { userStore } from '../../utils/store';
+import { userStore } from '../../stores/users';
 
 class Authentication {
   async refresh( refresh: string ) {

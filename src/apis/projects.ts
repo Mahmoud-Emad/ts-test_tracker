@@ -1,4 +1,4 @@
-import { projectsStore } from './../utils/store';
+import { projectsStore } from './../stores/projects';
 import type {
   ProjectsType,
   onSuccessResponseType,

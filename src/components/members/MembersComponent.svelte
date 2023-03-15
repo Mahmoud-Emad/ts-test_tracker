@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import NavBar from '../UI/navbar/Navbar.svelte';
-  import { membersStore } from '../../utils/store';
+  import { membersStore } from '../../stores/users';
   import Alert from '../UI/Alert.svelte';
   import MemberCard from './MemberCard.svelte';
   import NavAction from '../UI/navbar/NavAction.svelte';
@@ -48,7 +48,7 @@
         <p class="h4 mb-2">
           <strong class="h4 text-primary">All Members</strong>
         </p>
-        <p class="text-muted">
+        <p class="text-color">
           -- There are <strong class="text-primary"
             >{$membersStore.length}</strong
           >

@@ -1,13 +1,12 @@
 <script lang="ts">
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import NavBar from '../UI/navbar/Navbar.svelte';
+  import { alertStore, notifacationStore } from '../../stores/utils';
+  import { userStore } from '../../stores/users';
   import {
-    alertStore,
-    notifacationStore,
     projectsActivitiesStore,
     projectsStore,
-    userStore,
-  } from '../../utils/store';
+  } from '../../stores/projects';
   import Dropdown from '../UI/Dropdown.svelte';
   import { Link, navigate, Router, useParams } from 'svelte-navigator';
   import Alert from '../UI/Alert.svelte';

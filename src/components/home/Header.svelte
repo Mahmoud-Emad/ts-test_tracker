@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { userStore, projectsStore } from '../../utils/store';
+  import { userStore } from '../../stores/users';
+  import { projectsStore } from '../../stores/projects';
   import Loadingbtn from '../UI/loading/Loadingbtn.svelte';
 
   export let isLoading: boolean;
@@ -20,7 +21,7 @@
       <span class="text-primary"> Admin </span>
       Dashboard
     </p>
-    <p class="text-muted">
+    <p class="text-color">
       There {$projectsStore.length <= 1 ? 'is' : 'are'}
       <strong class="text-primary">
         {#if isLoading}

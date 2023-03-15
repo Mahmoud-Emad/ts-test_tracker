@@ -1,6 +1,6 @@
 <script lang="ts">
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
-  import { projectsActivitiesStore } from '../../utils/store';
+  import { projectsActivitiesStore } from '../../stores/projects';
   import Alert from '../UI/Alert.svelte';
   import type { ProjectActivity } from '../../utils/types';
 
@@ -26,7 +26,7 @@
       message={`Last ${$projectsActivitiesStore.length} ${
         $projectsActivitiesStore.length > 1 ? 'Activities' : 'Activity'
       }`}
-      className={'light not-available mt-2 mb-3 '}
+      className={'light not-available mt-2 mb-5'}
       close={false}
     />
   </div>

@@ -1,7 +1,7 @@
 <!-- TestPlanDetailsComponent.svelte -->
 <script lang="ts">
   import TestPlanDetailsComponent from '../components/test_plans/TestPlanDetailsComponent.svelte';
-  import { testPlansStore } from '../utils/store';
+  import { testPlansStore } from '../stores/test_plans';
 
   export let isLoading: boolean;
 </script>

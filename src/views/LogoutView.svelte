@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { authStore } from '../utils/store';
+  import { authStore } from '../stores/users';
 
   onMount( () => {
     authStore.removeSession();

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { userStore } from '../../utils/store';
+  import { userStore } from '../../stores/users';
   import {
     validateEmail,
     validateName,

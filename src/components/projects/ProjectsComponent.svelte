@@ -1,10 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import {
-    alertStore,
-    notifacationStore,
-    projectsStore,
-  } from '../../utils/store';
+  import { alertStore, notifacationStore } from '../../stores/utils';
+  import { projectsStore } from '../../stores/projects';
   import NavBar from '../UI/navbar/Navbar.svelte';
   import NavAction from '../UI/navbar/NavAction.svelte';
   import {
@@ -47,7 +44,7 @@
   </NavBar>
   <div class="container pt-4 pb-4">
     <span class="text-primary h5"> Projects </span>
-    <p class="text-muted">
+    <p class="text-color">
       There are
       <strong class="text-primary">
         {#if isLoading}

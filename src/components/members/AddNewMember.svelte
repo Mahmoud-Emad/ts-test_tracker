@@ -7,7 +7,7 @@
   import Members from '../../apis/users';
   import Button from '../UI/forms/Button.svelte';
   import Alert from '../UI/Alert.svelte';
-  import { alertStore } from '../../utils/store';
+  import { alertStore } from '../../stores/utils';
   import { createEventDispatcher } from 'svelte';
 
   export let openModal: boolean;

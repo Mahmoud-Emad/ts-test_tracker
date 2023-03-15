@@ -9,7 +9,8 @@
   import type { registerCredentials, TokensType } from '../../../utils/types';
   import authenticationAPI from '../../../apis/authentication/Authentication';
   import Alert from '../../UI/Alert.svelte';
-  import { alertStore, authStore } from '../../../utils/store';
+  import { alertStore } from '../../../stores/utils';
+  import { authStore } from '../../../stores/users';
   import { onMount } from 'svelte';
   import {
     clearAlertMessage,

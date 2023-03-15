@@ -11,7 +11,8 @@
   } from '../../utils/validators';
   import Button from '../UI/forms/Button.svelte';
   import Alert from '../UI/Alert.svelte';
-  import { alertStore, projectsStore } from '../../utils/store';
+  import { alertStore } from '../../stores/utils';
+  import { projectsStore } from '../../stores/projects';
   import { createEventDispatcher } from 'svelte';
   import CheckBox from '../UI/forms/CheckBox.svelte';
   import Projects from '../../apis/projects';

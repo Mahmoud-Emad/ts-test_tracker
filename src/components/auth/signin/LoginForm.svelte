@@ -7,7 +7,8 @@
   import authenticationAPI from '../../../apis/authentication/Authentication';
   import GitHubAPI from '../../../apis/authentication/GitHub';
   import Alert from '../../UI/Alert.svelte';
-  import { alertStore, authStore } from '../../../utils/store';
+  import { alertStore } from '../../../stores/utils';
+  import { authStore } from '../../../stores/users';
   import { createNewNotifacation, updateThem } from '../../../utils/helpers';
   import { Link, navigate } from 'svelte-navigator';
   import { onMount } from 'svelte';

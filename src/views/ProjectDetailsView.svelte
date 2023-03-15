@@ -1,6 +1,6 @@
 <script lang="ts">
   import ProjectDetailComponent from '../components/projects/ProjectsDetailsComponent.svelte';
-  import { projectsStore } from '../utils/store';
+  import { projectsStore } from '../stores/projects';
 
   export let isLoading: boolean;
 </script>

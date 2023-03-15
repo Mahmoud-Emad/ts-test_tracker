@@ -17,7 +17,7 @@
 
   import Modal from '../UI/modals/Modal.svelte';
   import UpdateModal from '../UI/modals/UpdateModal.svelte';
-  import { testPlanSectionsStore } from '../../utils/store';
+  import { testPlanSectionsStore } from '../../stores/test_plans';
 
   export let openViewModal: boolean;
   export let openDeleteModal: boolean;

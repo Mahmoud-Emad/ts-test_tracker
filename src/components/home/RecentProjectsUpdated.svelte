@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Link } from 'svelte-navigator';
   import { filterStore } from '../../utils/helpers';
-  import { recentProjectsStore } from '../../utils/store';
+  import { recentProjectsStore } from '../../stores/projects';
   import Alert from '../UI/Alert.svelte';
   import Card from '../UI/Card.svelte';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';

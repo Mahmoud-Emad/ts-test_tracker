@@ -5,7 +5,8 @@
   import { validateProjectName } from '../../utils/validators';
   import Button from '../UI/forms/Button.svelte';
   import Alert from '../UI/Alert.svelte';
-  import { alertStore, testPlansStore } from '../../utils/store';
+  import { testPlansStore } from '../../stores/test_plans';
+  import { alertStore } from '../../stores/utils';
   import CheckBox from '../UI/forms/CheckBox.svelte';
 
   export let openModal: boolean;

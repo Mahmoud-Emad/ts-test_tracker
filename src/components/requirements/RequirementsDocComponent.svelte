@@ -2,11 +2,8 @@
   import { onMount } from 'svelte';
   import { useParams } from 'svelte-navigator';
   import projects from '../../apis/projects';
-  import {
-    alertStore,
-    notifacationStore,
-    requirementsDocStore,
-  } from '../../utils/store';
+  import { alertStore, notifacationStore } from '../../stores/utils';
+  import { requirementsDocStore } from '../../stores/requirements';
   import type { ProjectsType } from '../../utils/types';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import NavBar from '../UI/navbar/Navbar.svelte';

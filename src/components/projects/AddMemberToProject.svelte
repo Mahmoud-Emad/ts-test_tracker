@@ -1,6 +1,6 @@
 <script lang="ts">
   import Modal from '../UI/modals/Modal.svelte';
-  import { membersStore } from '../../utils/store';
+  import { membersStore } from '../../stores/users';
   import { onMount } from 'svelte';
   import type { ProjectsType } from '../../utils/types';
   import Button from '../UI/forms/Button.svelte';

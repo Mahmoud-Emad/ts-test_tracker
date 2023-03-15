@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { authStore } from './store';
+import { authStore } from '../stores/users';
 
 const noConfigs = () => {
   throw new Error(

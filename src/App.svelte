@@ -1,6 +1,7 @@
 <script lang="ts">
   import Router from './Router.svelte';
-  import { notifacationStore, userStore } from './utils/store';
+  import { notifacationStore } from './stores/utils';
+  import { userStore } from './stores/users';
   import User from './apis/users';
   import { onMount } from 'svelte';
   import parseJwt from './apis/authentication/JWTPars';

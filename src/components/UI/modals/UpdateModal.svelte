@@ -4,7 +4,7 @@
   import Button from '../forms/Button.svelte';
   import Modal from './Modal.svelte';
   import { createEventDispatcher, onMount } from 'svelte';
-  import { alertStore } from '../../../utils/store';
+  import { alertStore } from '../../../stores/utils';
   import { clearAlertMessage } from '../../../utils/helpers';
 
   export let fields: Array<UpdateFieldsModalobject>;

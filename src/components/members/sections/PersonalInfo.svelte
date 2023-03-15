@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { userStore } from '../../../utils/store';
+  import { userStore } from '../../../stores/users';
   import type { MemberType } from '../../../utils/types';
   export let member: MemberType;
 </script>

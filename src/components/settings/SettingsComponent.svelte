@@ -3,7 +3,8 @@
   import Tabs from '../UI/Tabs.svelte';
   import type { TabType } from '../../utils/types';
   import Navbar from '../UI/navbar/Navbar.svelte';
-  import { alertStore, userStore } from '../../utils/store';
+  import { alertStore } from '../../stores/utils';
+  import { userStore } from '../../stores/users';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import ProfileInformation from './ProfileInformation.svelte';
   import UpdatePassword from './UpdatePassword.svelte';
