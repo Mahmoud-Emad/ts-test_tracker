@@ -14,6 +14,17 @@
   const planType: TestPlanChart = {};
   let withTemplate = false;
 
+  const onCreateTestPlan = async () => {
+    await testPlansStore.create( planType, project.id ).then( ( plan ) => {
+      if ( plan ) {
+        const plans = project.test_plans;
+        plans.splice( 0, 0, plan );
+        project.test_plans = plans;
+        testPlansStore.set( project.test_plans );
+      }
+    } );
+  };
+
   const setTestPlanType = () => {
     if ( withTemplate ) {
       planType.type = 'template';
@@ -29,7 +40,7 @@
 </script>
 
 <Modal bind:openModal withFooter={true}>
-  <h5 slot="modal-header" class="text-muted">Create New Test Plan</h5>
+  <h5 slot="modal-header" class="text-color">Create New Test Plan</h5>
   <div slot="modal-body">
     <Input
       bind:value={planType.title}
@@ -63,9 +74,7 @@
   <div slot="modal-footer">
     <Button
       className={'btn-primary'}
-      onClick={async () => {
-        await testPlansStore.create( planType, project.id );
-      }}
+      onClick={onCreateTestPlan}
       disabled={disabledForm}
       text={'New Test Plan'}
     />

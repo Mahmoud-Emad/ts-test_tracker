@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { useParams } from 'svelte-navigator';
+  import projects from '../../apis/projects';
   import {
     alertStore,
     notifacationStore,
-    testPlansStore,
+    requirementsDocStore,
   } from '../../utils/store';
+  import type { ProjectsType } from '../../utils/types';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import NavBar from '../UI/navbar/Navbar.svelte';
   import NavAction from '../UI/navbar/NavAction.svelte';
@@ -14,25 +17,23 @@
     filterStore,
   } from '../../utils/helpers';
   import Search from '../UI/Search.svelte';
-  import PlanCard from './TestPlanCard.svelte';
   import Alert from '../UI/Alert.svelte';
-  import CreatePlanModal from './CreatePlanModal.svelte';
-  import { useParams } from 'svelte-navigator';
-  import projects from '../../apis/projects';
-  import type { ProjectsType } from '../../utils/types';
+  import RequirementDocCard from './RequirementDocCard.svelte';
+  import CreateRequirementDocModal from './CreateRequirementDocModal.svelte';
 
   export let isLoading: boolean;
-  let openModal: boolean;
-  let value: string;
+
   const params = useParams();
   let project: ProjectsType = {};
+  let openModal: boolean;
+  let value = '';
 
   onMount( async () => {
     isLoading = true;
     await projects.get( +$params.projectID ).then( ( resp ) => {
       if ( resp ) {
         project = resp;
-        testPlansStore.set( project.test_plans );
+        requirementsDocStore.set( project.requirements_docs );
       }
     } );
     isLoading = false;
@@ -61,35 +62,35 @@
         <span class="text-primary">
           {project.title}
         </span>
-        | Test-Plans
+        | Requirements Document
       </p>
       <p class="text-color">
-        There {$testPlansStore.length <= 1 ? 'is' : 'are'}
-        <strong class="text-primary">{$testPlansStore.length}</strong>
-        {$testPlansStore.length <= 1 ? 'plan' : 'plans'}
+        There {$requirementsDocStore.length <= 1 ? 'is' : 'are'}
+        <strong class="text-primary">{$requirementsDocStore.length}</strong>
+        {$requirementsDocStore.length <= 1 ? 'document' : 'document'}
         associated.
       </p>
     </div>
     <Search
-      label={'Search Plan\'s'}
-      store={testPlansStore}
+      label={'Search Document\'s'}
+      store={requirementsDocStore}
       bind:value
       searchField={'title'}
     />
     <div class="container mt-3">
-      {#each filterStore( $testPlansStore, 'title', value ) as plan}
-        <PlanCard {plan} {project} />
+      {#each filterStore( $requirementsDocStore, 'title', value ) as document}
+        <RequirementDocCard {document} {project} />
       {:else}
         <Alert
           className={'light not-available'}
           isOpen={true}
           close={false}
-          message={'There are no plans inside this project, try to create new one from the navbar.'}
+          message={'There are no requirement documents inside this project, try to create new one from the navbar.'}
         />
       {/each}
     </div>
   </div>
   {#if openModal}
-    <CreatePlanModal bind:openModal {project} />
+    <CreateRequirementDocModal bind:openModal {project} />
   {/if}
 {/if}

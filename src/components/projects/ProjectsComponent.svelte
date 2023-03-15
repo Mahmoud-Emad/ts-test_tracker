@@ -59,7 +59,7 @@
       {$projectsStore.length === 1 ? 'project' : 'projects'} associated.
     </p>
     <Search
-      label={'Search Projects'}
+      label={'Search Project\'s'}
       store={projectsStore}
       bind:value
       searchField={'title'}

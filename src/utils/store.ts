@@ -13,9 +13,12 @@ import type {
   ProjectActivity,
   TestPlanChart,
   TestPlanSection,
+  RequirementsDocChart,
 } from './types';
 import User from '../apis/users';
 import testPlans from '../apis/testPlan';
+import Requirements from '../apis/requirements';
+import requirements from '../apis/requirements';
 
 function createRecentProjectsStore() {
   const store = writable<Array<ProjectsType>>( [] );
@@ -113,6 +116,31 @@ function createMembersStore() {
     loadMembers,
   };
 }
+function createRequirementDocStore() {
+  const store = writable<Array<RequirementsDocChart>>( [] );
+  const { subscribe, update, set } = store;
+
+  async function create( data: TestPlanChart, projectID: number ) {
+    return await requirements.new( data, projectID );
+  }
+
+  async function all( projectID: number ) {
+    const res = await Requirements.all( projectID );
+    if ( res ) {
+      return update( ( s ) => {
+        s = res;
+        return s;
+      } );
+    }
+  }
+  return {
+    subscribe,
+    set,
+    all,
+    get,
+    create,
+  };
+}
 
 function createTestPlansStore() {
   const store = writable<Array<TestPlanChart>>( [] );
@@ -139,8 +167,7 @@ function createTestPlansStore() {
   }
 
   async function create( data: TestPlanChart, projectID: number ) {
-    await TestPlans.new( data, projectID );
-    return this.all( projectID );
+    return await TestPlans.new( data, projectID );
   }
 
   return {
@@ -254,4 +281,5 @@ export const testPlansStore = createTestPlansStore();
 export const recentProjectsStore = createRecentProjectsStore();
 export const projectsActivitiesStore = createActivitiesStore();
 export const testPlanSectionsStore = createTestPlanSectionsStore();
+export const requirementsDocStore = createRequirementDocStore();
 export const isError404 = writable( false );

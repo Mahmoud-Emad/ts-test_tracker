@@ -3,9 +3,7 @@
   export let isLoading: boolean;
 </script>
 
-<section>
-  <TestPlansComponent bind:isLoading />
-</section>
+<TestPlansComponent bind:isLoading />
 
 <svelte:head>
   <title>Test-Tracker | Test Plans</title>

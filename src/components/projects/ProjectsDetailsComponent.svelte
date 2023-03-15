@@ -136,13 +136,11 @@
         <tbody>
           <tr>
             <th scope="row" class="text-color">Total test plans</th>
-            <td class="text-primary">{project.total_test_plan.length}</td>
+            <td class="text-primary">{project.test_plans.length}</td>
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Requirements Docs</th>
-            <td class="text-primary"
-              >{project.total_requirements_docs.length}</td
-            >
+            <td class="text-primary">{project.requirements_docs.length}</td>
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Test Suites</th>

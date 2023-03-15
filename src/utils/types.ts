@@ -207,6 +207,13 @@ export type TestPlanChart = {
   temps?: Array<TestPlanSection>;
 };
 
+export type RequirementsDocChart = {
+  title?: string;
+  created?: string;
+  id?: number;
+  updated?: string;
+};
+
 export type TestRunChart = {
   assigned_user: UserType;
   completed: string;
@@ -236,9 +243,9 @@ export type ProjectsType = {
   github_repo?: boolean;
   repo_link?: string;
   total_suites?: TestSuiteChart[];
-  total_test_plan?: TestPlanChart[];
+  test_plans?: TestPlanChart[];
   total_test_runs?: TestRunChart[];
-  total_requirements_docs?: [];
+  requirements_docs?: RequirementsDocChart[];
   people_with_the_most_incomplete_test_runs?: TestRunChart[];
   incomplete_test_runs_assigned_to_you?: TestRunChart;
 };
