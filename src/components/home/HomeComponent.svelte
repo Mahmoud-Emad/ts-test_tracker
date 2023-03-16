@@ -27,7 +27,7 @@
     loadProjects = true;
     loadActivities = true;
     await projectsStore.reload();
-    await Dashboard.recentProjectsUpdated( 4 )
+    await Dashboard.recentProjectsUpdated( 5 )
       .then( ( data ) => {
         if ( data ) {
           recentProjectsStore.set( data );

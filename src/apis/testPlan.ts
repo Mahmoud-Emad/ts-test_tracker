@@ -72,6 +72,36 @@ class TestPlans {
       return onErrorResponse( error );
     }
   }
+  public async delete( projectID: number, testPlanID: number ) {
+    // Request to delete test plan from the server.
+    try {
+      const response: onSuccessResponseType<TestPlanChart> =
+        await httpAxios.delete(
+          `/test_plan/${projectID}/actions/${testPlanID}/`,
+        );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
+  public async update(
+    projectID: number,
+    testPlanID: number,
+    testPlan: TestPlanChart,
+  ) {
+    // Request to update test plan from the server.
+    try {
+      const response: onSuccessResponseType<TestPlanChart> =
+        await httpAxios.put(
+          `/test_plan/${projectID}/${testPlanID}/update/`,
+          testPlan,
+        );
+      onSuccessResponse( response );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
 }
 
 const testPlans = new TestPlans();

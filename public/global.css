@@ -358,10 +358,8 @@ html .btn {
 	box-shadow: none;
 }
 .card{
-	border-radius: 0px;
 	background-color: var(--boxes-bg);
 	box-shadow: var(--boxes-shadow);
-	border: 0 !important;
 }
 .input{
 	outline: none !important;
@@ -506,6 +504,16 @@ input:disabled {
 .test-plan-content-actions-btns{
 	color: var(--text-primary);
 }
+.test-plan-content-actions-btns:hover{
+	color: var(--text-primary);
+}
+.btn-trash{
+	color: #ff4646;;
+}
+.btn-trash:hover{
+	color: #ff4646;;
+}
+
 .btn-simple:focus{
 	background: transparent;
     box-shadow: none;
@@ -602,3 +610,8 @@ input:disabled {
     font-size: 19px;
     font-weight: 600;
   }
+
+.card-component {
+    border-left: 4px solid var(--text-primary) !important;
+    border-radius: 10px !important;
+}

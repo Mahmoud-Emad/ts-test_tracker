@@ -22,12 +22,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  .card {
-    border-radius: 0px;
-    background-color: var(--boxes-bg);
-    box-shadow: var(--boxes-shadow);
-    border: 0 !important;
-  }
-</style>

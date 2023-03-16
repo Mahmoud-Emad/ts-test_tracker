@@ -8,11 +8,12 @@
   export let isLoading = false;
   export let icon: string = null;
   export let tooltip = ''; // prevent blank tooltips
+  export let iconWidth = 60;
 </script>
 
 <button
   class="btn {className}"
-  style={icon && text.length < 1 ? 'width:60px' : ''}
+  style={icon && text.length < 1 ? `width:${iconWidth}px` : ''}
   data-tooltip={tooltip.length > 0 ? tooltip : null}
   {disabled}
   on:click|preventDefault={async () => {

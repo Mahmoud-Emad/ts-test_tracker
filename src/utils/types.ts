@@ -74,6 +74,7 @@ export enum DeleteType {
   project = 'Project',
   member = 'Member',
   testPlanSection = 'Test Plan Section',
+  testPlan = 'Test Plan',
 }
 
 export enum MemberPermissions {

@@ -127,6 +127,16 @@
               </span>
               <div slot="card-footer" class="text-center">
                 <Button
+                  icon="fa fa-eye"
+                  onClick={() => {
+                    openViewModal = true;
+                    selectedSection = section;
+                  }}
+                  className="btn-simple test-plan-content-actions-btns"
+                  text=""
+                  tooltip="View"
+                />
+                <Button
                   icon="fa fa-pencil"
                   onClick={() => {
                     openUpdateModal = true;
@@ -142,19 +152,9 @@
                     openDeleteModal = true;
                     selectedSection = section;
                   }}
-                  className="btn-simple test-plan-content-actions-btns"
+                  className="btn-simple btn-trash test-plan-content-actions-btns"
                   text=""
                   tooltip="Delete"
-                />
-                <Button
-                  icon="fa fa-eye"
-                  onClick={() => {
-                    openViewModal = true;
-                    selectedSection = section;
-                  }}
-                  className="btn-simple test-plan-content-actions-btns"
-                  text=""
-                  tooltip="View"
                 />
               </div>
             </Card>
