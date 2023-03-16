@@ -30,16 +30,37 @@ class Requirements {
     }
   }
 
-  //   public async get( projectID: number, testPlanID: number ) {
-  //     // Request to get test plan details from the server.
-  //     try {
-  //       const response: onSuccessResponseType<TestPlanChart> =
-  //         await httpAxios.get( `/test_plan/${projectID}/actions/${testPlanID}/` );
-  //       return response.data;
-  //     } catch ( error ) {
-  //       return onErrorResponse( error );
-  //     }
-  //   }
+  public async deleteDocument( projectID: number, docID: number ) {
+    // Request to delete project requirement documents from the server.
+    try {
+      const response: onSuccessResponseType<RequirementsDocChart[]> =
+        await httpAxios.delete(
+          `/requirements/projects/${projectID}/details/${docID}/`,
+        );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
+
+  public async updateDocument(
+    projectID: number,
+    docID: number,
+    document: RequirementsDocChart,
+  ) {
+    // Request to update project requirement documents from the server.
+    try {
+      const response: onSuccessResponseType<RequirementsDocChart[]> =
+        await httpAxios.put(
+          `/requirements/projects/${projectID}/details/${docID}/`,
+          document,
+        );
+      onSuccessResponse( response );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
 }
 
 const requirements = new Requirements();

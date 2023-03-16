@@ -27,6 +27,7 @@ class TestPlans {
       return onErrorResponse( error );
     }
   }
+
   public async deleteSection(
     projectID: number,
     planID: number,
@@ -43,6 +44,7 @@ class TestPlans {
       return onErrorResponse( error );
     }
   }
+
   public async updateSection(
     projectID: number,
     planID: number,
@@ -62,6 +64,7 @@ class TestPlans {
       return onErrorResponse( error );
     }
   }
+
   public async get( projectID: number, testPlanID: number ) {
     // Request to get test plan details from the server.
     try {
@@ -72,6 +75,7 @@ class TestPlans {
       return onErrorResponse( error );
     }
   }
+
   public async delete( projectID: number, testPlanID: number ) {
     // Request to delete test plan from the server.
     try {
@@ -84,6 +88,7 @@ class TestPlans {
       return onErrorResponse( error );
     }
   }
+
   public async update(
     projectID: number,
     testPlanID: number,
