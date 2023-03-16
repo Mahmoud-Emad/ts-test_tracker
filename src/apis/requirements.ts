@@ -30,6 +30,19 @@ class Requirements {
     }
   }
 
+  public async allRequirements( projectID: number, documentID: number ) {
+    // Request to all project document requirement from the server.
+    try {
+      const response: onSuccessResponseType<RequirementsDocChart[]> =
+        await httpAxios.get(
+          `requirements/projects/${projectID}/details/${documentID}/`,
+        );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
+
   public async deleteDocument( projectID: number, docID: number ) {
     // Request to delete project requirement documents from the server.
     try {

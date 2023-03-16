@@ -103,7 +103,7 @@
               }}
               className="btn-simple p-0 test-plan-content-actions-btns"
               text=""
-              tooltip="Update Title"
+              tooltip="edit title"
             />
             <Button
               icon="fa fa-trash"

@@ -2,21 +2,22 @@
   import { Link } from 'svelte-navigator';
   import {
     DeleteType,
-    type ProjectsType,
     type RequirementsDocChart,
+    type ProjectsType,
+    type Requirements,
     type UpdateFieldsModalobject,
   } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
   import Card from '../UI/Card.svelte';
   import Button from '../UI/forms/Button.svelte';
   import Input from '../UI/forms/Input.svelte';
-  import Requirements from '../../apis/requirements';
+  import requirements from '../../apis/requirements';
   import { requirementsDocStore } from '../../stores/requirements';
   import { alertStore } from '../../stores/utils';
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
   import UpdateModal from '../UI/modals/UpdateModal.svelte';
 
-  export let document: RequirementsDocChart;
+  export let document: RequirementsDocChart | Requirements;
   export let project: ProjectsType;
 
   let openDeleteModal: boolean;
@@ -34,7 +35,7 @@
   ];
 
   const onDelete = async () => {
-    await Requirements.deleteDocument( project.id, document.id ).then( () => {
+    await requirements.deleteDocument( project.id, document.id ).then( () => {
       const docs: RequirementsDocChart[] = project.requirements_docs;
       const indx = project.requirements_docs.findIndex(
         ( doc ) => document.id === doc.id,
@@ -56,8 +57,9 @@
   };
 
   const onUpdate = async ( _document: RequirementsDocChart ) => {
-    await Requirements.updateDocument( project.id, document.id, document ).then(
-      () => {
+    await requirements
+      .updateDocument( project.id, document.id, document )
+      .then( () => {
         const docs: RequirementsDocChart[] = project.requirements_docs;
         const indx = project.requirements_docs.findIndex(
           ( doc ) => document.id === doc.id,
@@ -68,8 +70,7 @@
         setTimeout( () => {
           openUpdateModal = false;
         }, 3000 );
-      },
-    );
+      } );
   };
 </script>
 
@@ -105,7 +106,7 @@
               }}
               className="btn-simple p-0 test-plan-content-actions-btns"
               text=""
-              tooltip="Update Title"
+              tooltip="edit title"
             />
             <Button
               icon="fa fa-trash"

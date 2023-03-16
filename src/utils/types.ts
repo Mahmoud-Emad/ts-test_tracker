@@ -213,6 +213,17 @@ export type RequirementsDocChart = {
   created?: string;
   id?: number;
   updated?: string;
+  requirements?: Requirements[];
+};
+
+export type Requirements = {
+  title?: string;
+  description?: string;
+  requirement_doc?: number;
+  created?: string;
+  id?: number;
+  updated?: string;
+  requirement_title?: string;
 };
 
 export type TestRunChart = {

@@ -13,6 +13,7 @@
   import TestPlansView from './views/TestPlansView.svelte';
   import TestPlanDetailsView from './views/TestPlanDetailsView.svelte';
   import RequirementsDocView from './views/RequirementsDocView.svelte';
+  import RequirementsDocDetailsView from './views/RequirementsDocDetailsView.svelte';
 
   export let isLoading: boolean;
 </script>
@@ -52,6 +53,9 @@
   <!-- Requirements -->
   <Route path="projects/:projectID/requirements/" primary={false}>
     <RequirementsDocView bind:isLoading />
+  </Route>
+  <Route path="projects/:projectID/requirements/:documentID" primary={false}>
+    <RequirementsDocDetailsView bind:isLoading />
   </Route>
 
   <!-- Members || Member followers -->
