@@ -5,14 +5,6 @@
   import Loadingbtn from '../UI/loading/Loadingbtn.svelte';
 
   export let isLoading: boolean;
-
-  onMount( async () => {
-    if ( !$projectsStore.length ) {
-      isLoading = true;
-      await projectsStore.reload();
-      isLoading = false;
-    }
-  } );
 </script>
 
 <div class="pt-0">

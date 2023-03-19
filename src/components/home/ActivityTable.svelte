@@ -20,16 +20,18 @@
 </script>
 
 <section class="activity mb-4 pb-4">
-  <div class="mt-2">
-    <Alert
-      isOpen={true}
-      message={`Last ${$projectsActivitiesStore.length} ${
-        $projectsActivitiesStore.length > 1 ? 'Activities' : 'Activity'
-      }`}
-      className={'light not-available mt-2 mb-5'}
-      close={false}
-    />
-  </div>
+  {#if $projectsActivitiesStore.length}
+    <div class="mt-2">
+      <Alert
+        isOpen={true}
+        message={`Last ${$projectsActivitiesStore.length} ${
+          $projectsActivitiesStore.length > 1 ? 'Activities' : 'Activity'
+        }`}
+        className={'light not-available mt-2 mb-5'}
+        close={false}
+      />
+    </div>
+  {/if}
   {#if loadActivities}
     <div class="mt-4">
       <LoadingComponent className={'component'} />
@@ -67,6 +69,7 @@
           </table>
         {/if}
       {:else}
+          <h6 class="text-color mb-3">Activities section.</h6>
         <Alert
           close={false}
           message={'Seems to be no activities available'}

@@ -65,7 +65,7 @@
 </script>
 
 <Modal bind:openModal withFooter={true}>
-  <h5 slot="modal-header" class="text-muted">Create New Project</h5>
+  <h5 slot="modal-header" class="text-color">Create New Project</h5>
   <div slot="modal-body">
     <Input
       bind:value={projectType.title}
@@ -113,6 +113,7 @@
         await handleClick();
       }}
       text={'New Project'}
+      disabled={disabledForm}
     />
     <Button
       className={'btn-danger'}

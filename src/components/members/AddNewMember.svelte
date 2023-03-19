@@ -18,6 +18,22 @@
     incomplete_test_runs_assigned_to_you: [],
   };
 
+  const onCreateMember = async () => {
+    await Members.inviteNewMember( memberType ).then((rsp) => {
+      if(rsp){
+        dispatch( 'create', {
+          text: 'created!',
+        } );
+        setTimeout(() => {
+          openModal = false;
+          memberType.last_name = '';
+          memberType.first_name = '';
+          memberType.email = '';
+        }, 3000)
+      }
+    });
+  }
+
   $: disabledForm =
     !validateName( memberType.first_name ).isValid ||
     !validateName( memberType.last_name ).isValid ||
@@ -75,16 +91,7 @@
   <div slot="modal-footer">
     <Button
       className={'btn-primary'}
-      onClick={async () => {
-        await Members.inviteNewMember( memberType );
-        dispatch( 'create', {
-          text: 'created!',
-        } );
-        memberType.first_name = '';
-        memberType.last_name = '';
-        memberType.email = '';
-        openModal = false;
-      }}
+      onClick={onCreateMember}
       disabled={disabledForm}
       text={'Invite'}
     />

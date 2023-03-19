@@ -26,7 +26,6 @@
     isLoading = true;
     loadProjects = true;
     loadActivities = true;
-    await projectsStore.reload();
     await Dashboard.recentProjectsUpdated( 5 )
       .then( ( data ) => {
         if ( data ) {

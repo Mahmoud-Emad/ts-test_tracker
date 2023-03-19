@@ -6,18 +6,22 @@
   import Card from '../UI/Card.svelte';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   export let loadProjects: boolean;
-  export let value: string;
+  export let value: string;  
 </script>
 
-{#if $recentProjectsStore.length > 0}
   <section class="projects mb-4">
+    {#if $recentProjectsStore.length}
     <div class="mt-2">
-      <p class="last-projects">
-        Last <strong class="text-primary">{$recentProjectsStore.length}</strong>
-        of
-        {$recentProjectsStore.length === 1 ? 'Project' : 'Projects'} Updated
-      </p>
+      <Alert
+        isOpen={true}
+        message={`Last ${$recentProjectsStore.length} ${
+          $recentProjectsStore.length > 1 ? 'Projects' : 'Project'
+        } Updated`}
+        className={'light not-available mt-2 mb-5'}
+        close={false}
+      />
     </div>
+  {/if}
     {#if loadProjects}
       <div class="mt-4 pt-4">
         <LoadingComponent className={'component'} />
@@ -46,6 +50,7 @@
             </Card>
           </div>
         {:else}
+        <h6 class="text-color mb-3 mt-3">Last projects updated section.</h6>
           <Alert
             className={'light not-available'}
             isOpen={true}
@@ -56,7 +61,6 @@
       </div>
     {/if}
   </section>
-{/if}
 
 <style>
   .projects {

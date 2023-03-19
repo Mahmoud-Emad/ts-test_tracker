@@ -1,13 +1,13 @@
 <!-- TestPlanDetailsComponent.svelte -->
 <script lang="ts">
-  import RequirementDocumentComponent from '../components/requirements/RequirementDocumentComponent.svelte';
+  import RequirementDetailsComponent from '../components/requirements/RequirementDetailsComponent.svelte';
   import { requirementsDocStore } from '../stores/requirements';
 
   export let isLoading: boolean;
 </script>
 
 <section>
-  <RequirementDocumentComponent bind:isLoading />
+  <RequirementDetailsComponent bind:isLoading />
 </section>
 
 <svelte:head>
