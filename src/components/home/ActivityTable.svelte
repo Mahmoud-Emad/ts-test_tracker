@@ -69,7 +69,7 @@
           </table>
         {/if}
       {:else}
-          <h6 class="text-color mb-3">Activities section.</h6>
+        <h6 class="text-color mb-3">Activities section.</h6>
         <Alert
           close={false}
           message={'Seems to be no activities available'}

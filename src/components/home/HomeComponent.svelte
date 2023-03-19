@@ -5,7 +5,6 @@
   import Search from '../UI/Search.svelte';
   import {
     projectsActivitiesStore,
-    projectsStore,
     recentProjectsStore,
   } from '../../stores/projects';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';

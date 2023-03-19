@@ -15,7 +15,7 @@
   import { alertStore, notifacationStore } from '../../stores/utils';
   import Alert from '../UI/Alert.svelte';
   import Search from '../UI/Search.svelte';
-  import RequirementDocCard from './RequirementDocCard.svelte';
+  import CardExpand from '../UI/CardExpand.svelte';
 
   export let isLoading: boolean;
   const params = useParams();
@@ -33,7 +33,7 @@
           ( doc ) => +$params.documentID === doc.id,
         );
         document = project.requirements_docs[indx];
-        requirementsStore.set( [ document ] );
+        requirementsStore.set( document.requirements );
       }
     } );
     isLoading = false;
@@ -79,7 +79,7 @@
     />
     <div class="container mt-3">
       {#each filterStore( $requirementsStore, 'title', value ) as requirement}
-        <RequirementDocCard document={requirement} {project} />
+        <CardExpand item={requirement} />
       {:else}
         <Alert
           className={'light not-available'}

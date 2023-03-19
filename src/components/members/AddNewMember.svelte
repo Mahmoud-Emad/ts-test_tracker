@@ -19,20 +19,20 @@
   };
 
   const onCreateMember = async () => {
-    await Members.inviteNewMember( memberType ).then((rsp) => {
-      if(rsp){
+    await Members.inviteNewMember( memberType ).then( ( rsp ) => {
+      if ( rsp ) {
         dispatch( 'create', {
           text: 'created!',
         } );
-        setTimeout(() => {
+        setTimeout( () => {
           openModal = false;
           memberType.last_name = '';
           memberType.first_name = '';
           memberType.email = '';
-        }, 3000)
+        }, 3000 );
       }
-    });
-  }
+    } );
+  };
 
   $: disabledForm =
     !validateName( memberType.first_name ).isValid ||

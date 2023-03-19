@@ -615,3 +615,32 @@ input:disabled {
     border-left: 4px solid var(--text-primary) !important;
     border-radius: 10px !important;
 }
+
+.card-expand{
+	border-radius: 0px !important;
+	border-left: 3px solid var(--text-primary);
+	transition: .5s;
+}
+.card-expand-details{
+	display: none;
+	border-radius: 0px !important;
+	transition: .5s;
+}
+
+.i-draggble-left{
+	font-size: 20px;
+}
+
+.c-grab{
+	cursor: all-scroll!important;
+}
+.card-expand-header{
+	font-size: 20px;
+    font-family: revert;
+    font-weight: 500;
+}
+.drag-btn{
+	padding: 0;
+    margin: 0;
+    width: 0;
+}

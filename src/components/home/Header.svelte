@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { userStore } from '../../stores/users';
   import { projectsStore } from '../../stores/projects';
   import Loadingbtn from '../UI/loading/Loadingbtn.svelte';
