@@ -10,7 +10,7 @@
     type UpdateFieldsModalobject,
   } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
-  import Card from '../UI/Card.svelte';
+  import Card from '../UI/cards/Card.svelte';
   import Button from '../UI/forms/Button.svelte';
   import Input from '../UI/forms/Input.svelte';
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
@@ -91,7 +91,7 @@
           </div>
           <div class="col-6 col-md-6 col-sm-6 col-xs-12">
             <p class="text-color">
-              Updated: <strong>{plan.modified}</strong>
+              Updated: <strong>{plan.updated}</strong>
             </p>
           </div>
           <div class="col d-flex justify-content-between">

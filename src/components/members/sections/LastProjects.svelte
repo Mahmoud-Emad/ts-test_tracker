@@ -25,7 +25,7 @@
           </td>
           <th scope="row" class="text-color"> Updated date </th>
           <td class="text-primary">
-            {member.last_project_working_on.modified}
+            {member.last_project_working_on.updated}
           </td>
         </tr>
         <tr>

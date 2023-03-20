@@ -8,7 +8,7 @@
     type UpdateFieldsModalobject,
   } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
-  import Card from '../UI/Card.svelte';
+  import Card from '../UI/cards/Card.svelte';
   import Button from '../UI/forms/Button.svelte';
   import Input from '../UI/forms/Input.svelte';
   import requirements from '../../apis/requirements';

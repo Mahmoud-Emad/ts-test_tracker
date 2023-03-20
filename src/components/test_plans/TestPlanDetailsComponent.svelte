@@ -17,10 +17,11 @@
     clearNotifacationStore,
     filterStore,
   } from '../../utils/helpers';
-  import Card from '../UI/Card.svelte';
+  import Card from '../UI/cards/Card.svelte';
   import Search from '../UI/Search.svelte';
   import Button from '../UI/forms/Button.svelte';
   import TestPlanActions from './TestPlanActions.svelte';
+  import LastUpdatedCard from '../UI/cards/LastUpdatedCard.svelte';
 
   export let isLoading: boolean;
 
@@ -78,28 +79,7 @@
         Associated.
       </p>
     </div>
-    <div class="row mt-4">
-      <div class="col-6">
-        <Card
-          cardClassBody={'pb-2'}
-          cardClassName={'mb-3 text-center text-content-card'}
-        >
-          <div slot="card-body">
-            <p>Created : {testPlan.created}</p>
-          </div>
-        </Card>
-      </div>
-      <div class="col-6">
-        <Card
-          cardClassBody={'pb-2'}
-          cardClassName={'mb-3 text-center text-content-card'}
-        >
-          <div slot="card-body">
-            <p>Updated : {testPlan.modified}</p>
-          </div>
-        </Card>
-      </div>
-    </div>
+    <LastUpdatedCard obj={testPlan}/>
     <Search
       label={'Search Test Plan Contents'}
       store={testPlansStore}

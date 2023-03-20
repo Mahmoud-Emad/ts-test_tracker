@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "npx eslint ./src && vite build",
-    "dev": "vite dev --port=8080",
+    "serve": "vite dev --port=8080",
     "preview": "vite preview",
-    "serve": "vite sirv public --port=8080",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "yarn format && npx eslint --fix --ext .js,.ts,.svelte ./src",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|svelte)\""

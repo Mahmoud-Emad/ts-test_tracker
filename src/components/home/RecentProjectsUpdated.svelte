@@ -3,7 +3,7 @@
   import { filterStore } from '../../utils/helpers';
   import { recentProjectsStore } from '../../stores/projects';
   import Alert from '../UI/Alert.svelte';
-  import Card from '../UI/Card.svelte';
+  import Card from '../UI/cards/Card.svelte';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   export let loadProjects: boolean;
   export let value: string;

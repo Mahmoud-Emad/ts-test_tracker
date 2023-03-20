@@ -11,7 +11,7 @@
   } from '../../utils/helpers';
   import Search from '../UI/Search.svelte';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
-  import Card from '../UI/Card.svelte';
+  import Card from '../UI/cards/Card.svelte';
   import Alert from '../UI/Alert.svelte';
   import { Link } from 'svelte-navigator';
   import Loadingbtn from '../UI/loading/Loadingbtn.svelte';

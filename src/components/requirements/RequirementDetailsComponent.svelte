@@ -15,7 +15,8 @@
   import { alertStore, notifacationStore } from '../../stores/utils';
   import Alert from '../UI/Alert.svelte';
   import Search from '../UI/Search.svelte';
-  import CardExpand from '../UI/CardExpand.svelte';
+  import CardExpand from '../UI/cards/CardExpand.svelte';
+  import LastUpdatedCard from '../UI/cards/LastUpdatedCard.svelte';
 
   export let isLoading: boolean;
   const params = useParams();
@@ -60,9 +61,9 @@
     <div class="pt-0">
       <p class="h5">
         <span class="text-primary">
-          {document.title}
+          Requirement Document
         </span>
-        | Requirements Document
+       | {document.title}
       </p>
       <p class="text-color">
         There {document.requirements.length <= 1 ? 'is' : 'are'}
@@ -71,6 +72,7 @@
         associated.
       </p>
     </div>
+    <LastUpdatedCard obj={document}/>
     <Search
       label={'Search Requirement\'s'}
       store={requirementsStore}

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Link } from 'svelte-navigator';
   import type { MemberType } from '../../utils/types';
-  import Card from '../UI/Card.svelte';
+  import Card from '../UI/cards/Card.svelte';
 
   export let member: MemberType;
 </script>

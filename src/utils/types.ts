@@ -45,7 +45,7 @@ export type MemberType = {
   permission?: string;
   phone?: string;
   created?: string;
-  modified?: string;
+  updated?: string;
   invited?: boolean;
   accepted?: boolean;
   last_project_working_on?: ProjectsType | null;
@@ -158,7 +158,7 @@ export type ProjectActivity = {
 
 export type ProjectTestCase = {
   created: string;
-  modified: string;
+  updated: string;
   expected_result: string;
   description: string;
   id: number;
@@ -175,7 +175,7 @@ export type ProjectTestCase = {
 
 export type ProjectTestSuite = {
   created: string;
-  modified: string;
+  updated: string;
   failed: number;
   not_run: number;
   number_of_test_cases: number;
@@ -188,7 +188,7 @@ export type ProjectTestSuite = {
 export type TestSuiteChart = {
   created: string;
   id: number;
-  modified: string;
+  updated: string;
   number_of_test_cases: number;
   test_plan: number;
   title: string;
@@ -203,7 +203,7 @@ export type TestPlanChart = {
   created?: string;
   id?: number;
   title?: string;
-  modified?: string;
+  updated?: string;
   type?: string;
   temps?: Array<TestPlanSection>;
 };
@@ -224,13 +224,14 @@ export type Requirements = {
   id?: number;
   updated?: string;
   requirement_title?: string;
+  associated_test_cases: number;
 };
 
 export type TestRunChart = {
   assigned_user: UserType;
   completed: string;
   created: string;
-  modified: string;
+  updated: string;
   status: string;
   title: string;
   failed: number;
@@ -250,7 +251,7 @@ export type ProjectsType = {
   short_description?: string;
   teams?: UserType[];
   activity?: ProjectActivity[];
-  modified?: string;
+  updated?: string;
   user?: string;
   github_repo?: boolean;
   repo_link?: string;
