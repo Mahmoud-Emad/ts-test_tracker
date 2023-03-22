@@ -27,7 +27,14 @@ function createTestPlansStore() {
   }
 
   async function create( data: TestPlanChart, projectID: number ) {
-    return await testPlans.new( data, projectID );
+    return await testPlans.new( data, projectID ).then( ( rsp ) => {
+      if ( rsp ) {
+        return update( ( s: TestPlanChart[] ) => {
+          s.splice( 0, 0, rsp );
+          return s;
+        } );
+      }
+    } );
   }
 
   return {

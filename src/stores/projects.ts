@@ -69,10 +69,6 @@ function createRecentProjectsStore() {
   const store = writable<Array<ProjectsType>>( [] );
   const { subscribe, update, set } = store;
 
-  function search( count: number ) {
-    return this.reload( count );
-  }
-
   async function reload( count: number ) {
     const res = await Dashboard.recentProjectsUpdated( count );
     if ( res ) {
@@ -85,7 +81,6 @@ function createRecentProjectsStore() {
   return {
     subscribe,
     set,
-    search,
     reload,
   };
 }

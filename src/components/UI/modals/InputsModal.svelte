@@ -62,6 +62,7 @@
         onClick={field.onClick}
       />
     {/each}
+    <slot name="modal-hint" />
     {#if $alertStore.isOpen}
       <Alert
         className={$alertStore.className}
