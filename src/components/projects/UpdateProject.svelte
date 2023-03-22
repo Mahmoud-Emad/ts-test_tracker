@@ -10,7 +10,7 @@
   } from '../../utils/validators';
   import Input from '../UI/forms/Input.svelte';
   import TextArea from '../UI/forms/TextArea.svelte';
-  import UpdateModal from '../UI/modals/UpdateModal.svelte';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
 
   export let openUpdateProjectModal = false;
   export let project: ProjectsType;
@@ -37,7 +37,7 @@
   ];
 </script>
 
-<UpdateModal
+<InputsModal
   bind:fields
   bind:openModal={openUpdateProjectModal}
   buffer={project}

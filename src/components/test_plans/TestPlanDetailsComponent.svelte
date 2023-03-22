@@ -33,7 +33,7 @@
   let testPlan: TestPlanChart = {};
   let value = '';
   let openDeleteModal: boolean;
-  let openUpdateModal: boolean;
+  let openInputsModal: boolean;
   let openViewModal: boolean;
   let selectedSection: TestPlanSection;
 
@@ -79,7 +79,7 @@
         Associated.
       </p>
     </div>
-    <LastUpdatedCard obj={testPlan}/>
+    <LastUpdatedCard obj={testPlan} />
     <Search
       label={'Search Test Plan Contents'}
       store={testPlansStore}
@@ -119,7 +119,7 @@
                 <Button
                   icon="fa fa-pencil"
                   onClick={() => {
-                    openUpdateModal = true;
+                    openInputsModal = true;
                     selectedSection = section;
                   }}
                   className="btn-simple test-plan-content-actions-btns"
@@ -155,7 +155,7 @@
 <TestPlanActions
   bind:openDeleteModal
   bind:openViewModal
-  bind:openUpdateModal
+  bind:openInputsModal
   {projectID}
   {testPlan}
   {selectedSection}

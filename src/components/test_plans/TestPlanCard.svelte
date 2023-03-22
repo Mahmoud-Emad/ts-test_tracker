@@ -14,13 +14,13 @@
   import Button from '../UI/forms/Button.svelte';
   import Input from '../UI/forms/Input.svelte';
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
-  import UpdateModal from '../UI/modals/UpdateModal.svelte';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
 
   export let plan: TestPlanChart;
   export let project: ProjectsType;
 
   let openDeleteModal: boolean;
-  let openUpdateModal: boolean;
+  let openInputsModal: boolean;
   const titleOnDelete = `${project.title}/${plan.title}`;
 
   const fields: Array<UpdateFieldsModalobject> = [
@@ -65,7 +65,7 @@
       project.test_plans = plans;
       testPlansStore.set( project.test_plans );
       setTimeout( () => {
-        openUpdateModal = false;
+        openInputsModal = false;
       }, 3000 );
     } );
   };
@@ -99,7 +99,7 @@
               iconWidth={35}
               icon="fa fa-pencil"
               onClick={() => {
-                openUpdateModal = true;
+                openInputsModal = true;
               }}
               className="btn-simple p-0 test-plan-content-actions-btns"
               text=""
@@ -129,9 +129,9 @@
     bind:openModal={openDeleteModal}
     callableFunction={onDelete}
   />
-{:else if openUpdateModal}
-  <UpdateModal
-    bind:openModal={openUpdateModal}
+{:else if openInputsModal}
+  <InputsModal
+    bind:openModal={openInputsModal}
     buffer={plan}
     {fields}
     on:update={async ( event ) => {

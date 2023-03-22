@@ -16,12 +16,12 @@
   import TestPlans from '../../apis/testPlan';
 
   import Modal from '../UI/modals/Modal.svelte';
-  import UpdateModal from '../UI/modals/UpdateModal.svelte';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
   import { testPlanSectionsStore } from '../../stores/test_plans';
 
   export let openViewModal: boolean;
   export let openDeleteModal: boolean;
-  export let openUpdateModal: boolean;
+  export let openInputsModal: boolean;
   export let selectedSection: TestPlanSection;
   export let testPlan: TestPlanChart;
   export let projectID: string;
@@ -77,7 +77,7 @@
       temps[indx] = section;
       testPlan.temps = temps;
       testPlanSectionsStore.set( testPlan.temps );
-      openUpdateModal = false;
+      openInputsModal = false;
     } );
   };
 </script>
@@ -107,11 +107,11 @@
     callableFunction={deleteTestPlanSection}
     bind:openModal={openDeleteModal}
   />
-{:else if openUpdateModal}
-  <UpdateModal
+{:else if openInputsModal}
+  <InputsModal
     buffer={{}}
     fields={getFields()}
-    bind:openModal={openUpdateModal}
+    bind:openModal={openInputsModal}
     on:update={async ( event ) => {
       await onUpdateTestPlanSection( event.detail.data );
     }}
