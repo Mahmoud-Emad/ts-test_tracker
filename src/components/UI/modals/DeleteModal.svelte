@@ -1,14 +1,17 @@
 <script lang="ts">
   import { alertStore } from '../../../stores/utils';
   import { userStore } from '../../../stores/users';
-  import type { DeleteType, InputValidationsType } from '../../../utils/types';
+  import type {
+    ObjectTypeEnum,
+    InputValidationsType,
+  } from '../../../utils/types';
   import Alert from '../Alert.svelte';
   import Button from '../forms/Button.svelte';
   import Input from '../forms/Input.svelte';
   import Modal from './Modal.svelte';
 
   export let bindTitle: string;
-  export let type: DeleteType; // Member, Project,
+  export let type: ObjectTypeEnum; // Member, Project,
   export let openModal = false;
   export let callableFunction: CallableFunction;
 

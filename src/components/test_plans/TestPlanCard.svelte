@@ -4,10 +4,10 @@
   import { testPlansStore } from '../../stores/test_plans';
   import { alertStore } from '../../stores/utils';
   import {
-    DeleteType,
+    ObjectTypeEnum,
     type ProjectsType,
     type TestPlanChart,
-    type UpdateFieldsModalobject,
+    type FieldsModalObject,
   } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
   import Card from '../UI/cards/Card.svelte';
@@ -23,7 +23,7 @@
   let openInputsModal: boolean;
   const titleOnDelete = `${project.title}/${plan.title}`;
 
-  const fields: Array<UpdateFieldsModalobject> = [
+  const fields: Array<FieldsModalObject> = [
     {
       component: Input,
       fieldLabel: 'Test Plan Tilte',
@@ -125,7 +125,7 @@
 {#if openDeleteModal}
   <DeleteModal
     bindTitle={titleOnDelete}
-    type={DeleteType.testPlan}
+    type={ObjectTypeEnum.testPlan}
     bind:openModal={openDeleteModal}
     callableFunction={onDelete}
   />

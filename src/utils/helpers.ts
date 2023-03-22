@@ -5,6 +5,7 @@ import type {
   AlertType,
   onSuccessResponseType,
   onErrorResponseType,
+  FieldsModalObject,
 } from './types';
 import { ToastEnum, NotifacationTypeEnum } from './types';
 
@@ -208,3 +209,18 @@ export function filterStore(
     v[searchField].toLocaleLowerCase().includes( value.toLocaleLowerCase() ),
   );
 }
+
+export const clearFields = ( fields: Array<FieldsModalObject> ) => {
+  for ( const object of fields ) {
+    if ( typeof object.fieldValue === 'string' ) {
+      object.fieldValue = '';
+    } else if ( typeof object.fieldValue === 'number' ) {
+      object.fieldValue = 0;
+    } else if ( typeof object.fieldValue === 'boolean' ) {
+      object.fieldValue = false;
+    } else {
+      object.fieldValue = undefined;
+    }
+  }
+  return fields;
+};

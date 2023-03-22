@@ -3,12 +3,20 @@
   import { useParams } from 'svelte-navigator';
   import projects from '../../apis/projects';
   import { requirementsStore } from '../../stores/requirements';
-  import type { ProjectsType, RequirementsDocChart } from '../../utils/types';
+  import {
+    RequestActionEnum,
+    ObjectTypeEnum,
+    type ProjectsType,
+    type RequirementsDocChart,
+    type FieldsModalObject,
+    type RequirementsType,
+  } from '../../utils/types';
   import LoadingComponent from '../UI/loading/LoadingComponent.svelte';
   import NavBar from '../UI/navbar/Navbar.svelte';
   import NavAction from '../UI/navbar/NavAction.svelte';
   import {
     clearAlertMessage,
+    clearFields,
     clearNotifacationStore,
     filterStore,
   } from '../../utils/helpers';
@@ -17,6 +25,9 @@
   import Search from '../UI/Search.svelte';
   import CardExpand from './CardExpand.svelte';
   import LastUpdatedCard from '../UI/cards/LastUpdatedCard.svelte';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
+  import { validateProjectName } from '../../utils/validators';
+  import Input from '../UI/forms/Input.svelte';
 
   export let isLoading: boolean;
   const params = useParams();
@@ -24,6 +35,34 @@
   let document: RequirementsDocChart;
   let openModal: boolean;
   let value: string;
+  const requirement: RequirementsType = {};
+
+  let fields: Array<FieldsModalObject> = [
+    {
+      fieldLabel: 'Requirement Title',
+      fieldName: 'title',
+      fieldValue: '',
+      validation: validateProjectName,
+      component: Input,
+    },
+  ];
+
+  const onCreateRequirement = async () => {
+    await requirementsStore
+      .create( project.id, document.id, requirement )
+      .then( ( rsp ) => {
+        if ( rsp ) {
+          const requirements = document.requirements;
+          requirements.splice( 0, 0, rsp );
+          document.requirements = requirements;
+          requirementsStore.set( document.requirements );
+          setTimeout( () => {
+            openModal = false;
+            fields = clearFields( fields );
+          }, 3000 );
+        }
+      } );
+  };
 
   onMount( async () => {
     isLoading = true;
@@ -47,7 +86,7 @@
   <NavBar projectView={true}>
     <NavAction
       slot="action-btn"
-      tooltip={'Create New Test Plan'}
+      tooltip={'Create New Requirement'}
       onClick={() => {
         if ( $alertStore.isOpen || $notifacationStore.isOpen ) {
           clearAlertMessage();
@@ -90,4 +129,12 @@
       {/each}
     </div>
   </div>
+  <InputsModal
+    bind:openModal
+    bind:fields
+    buffer={requirement}
+    action={RequestActionEnum.create}
+    type={ObjectTypeEnum.requirement}
+    on:create={onCreateRequirement}
+  />
 {/if}

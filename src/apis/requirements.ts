@@ -3,6 +3,7 @@ import { onErrorResponse, onSuccessResponse } from '../utils/helpers';
 import type {
   onSuccessResponseType,
   RequirementsDocChart,
+  RequirementsType,
 } from '../utils/types';
 
 class Requirements {
@@ -33,10 +34,28 @@ class Requirements {
   public async allRequirements( projectID: number, documentID: number ) {
     // Request to all project document requirement from the server.
     try {
-      const response: onSuccessResponseType<RequirementsDocChart[]> =
+      const response: onSuccessResponseType<RequirementsType[]> =
         await httpAxios.get(
           `requirements/projects/${projectID}/details/${documentID}/`,
         );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
+  public async createNewRequirementSection(
+    projectID: number,
+    documentID: number,
+    data: RequirementsType,
+  ) {
+    // Request to all project document requirement from the server.
+    try {
+      const response: onSuccessResponseType<RequirementsType> =
+        await httpAxios.post(
+          `requirements/projects/${projectID}/requirement/${documentID}/`,
+          data,
+        );
+      onSuccessResponse( response );
       return response.data;
     } catch ( error ) {
       return onErrorResponse( error );

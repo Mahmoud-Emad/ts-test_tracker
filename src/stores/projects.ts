@@ -10,8 +10,18 @@ function createProjectsStore() {
   async function reload() {
     const res = await Projects.all();
     if ( res ) {
-      return update( ( s ) => {
+      return update( ( s: ProjectsType[] ) => {
         s = res;
+        return s;
+      } );
+    }
+  }
+
+  async function create( project: ProjectsType ) {
+    const res = await Projects.new( project );
+    if ( res ) {
+      return update( ( s: ProjectsType[] ) => {
+        s.splice( 0, 0, res );
         return s;
       } );
     }
@@ -30,6 +40,7 @@ function createProjectsStore() {
     subscribe,
     set,
     reload,
+    create,
     recentProjectsUpdated,
   };
 }

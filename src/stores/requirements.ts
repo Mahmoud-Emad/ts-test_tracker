@@ -1,9 +1,5 @@
 import { writable, get } from 'svelte/store';
-import type {
-  TestPlanChart,
-  RequirementsDocChart,
-  Requirements,
-} from '../utils/types';
+import type { RequirementsDocChart, RequirementsType } from '../utils/types';
 
 import requirements from '../apis/requirements';
 
@@ -11,7 +7,7 @@ function createRequirementDocStore() {
   const store = writable<Array<RequirementsDocChart>>( [] );
   const { subscribe, update, set } = store;
 
-  async function create( data: TestPlanChart, projectID: number ) {
+  async function create( data: RequirementsDocChart, projectID: number ) {
     return await requirements.new( data, projectID );
   }
 
@@ -34,7 +30,7 @@ function createRequirementDocStore() {
 }
 
 function createRequiremensStore() {
-  const store = writable<Array<Requirements>>( [] );
+  const store = writable<Array<RequirementsType>>( [] );
   const { subscribe, update, set } = store;
 
   async function all( projectID: number, documentID: number ) {
@@ -46,11 +42,24 @@ function createRequiremensStore() {
       } );
     }
   }
+  async function create(
+    projectID: number,
+    documentID: number,
+    data: RequirementsType,
+  ) {
+    return await requirements.createNewRequirementSection(
+      projectID,
+      documentID,
+      data,
+    );
+  }
+
   return {
     subscribe,
     set,
     all,
     get,
+    create,
   };
 }
 

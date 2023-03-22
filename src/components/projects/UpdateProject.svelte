@@ -1,8 +1,10 @@
 <script lang="ts">
   import Projects from '../../apis/projects';
-  import type {
-    ProjectsType,
-    UpdateFieldsModalobject,
+  import {
+    ObjectTypeEnum,
+    RequestActionEnum,
+    type ProjectsType,
+    type FieldsModalObject,
   } from '../../utils/types';
   import {
     validateProjectDescription,
@@ -19,7 +21,7 @@
     return Projects.update( data );
   };
 
-  let fields: Array<UpdateFieldsModalobject> = [
+  let fields: Array<FieldsModalObject> = [
     {
       fieldName: 'title',
       fieldLabel: 'Project Name',
@@ -38,6 +40,8 @@
 </script>
 
 <InputsModal
+  action={RequestActionEnum.update}
+  type={ObjectTypeEnum.project}
   bind:fields
   bind:openModal={openUpdateProjectModal}
   buffer={project}

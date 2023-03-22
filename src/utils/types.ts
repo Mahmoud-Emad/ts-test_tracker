@@ -70,11 +70,13 @@ export enum ToastEnum {
   dark = 'dark',
 }
 
-export enum DeleteType {
+export enum ObjectTypeEnum {
   project = 'Project',
   member = 'Member',
   testPlanSection = 'Test Plan Section',
   testPlan = 'Test Plan',
+  requirementDoc = 'Requirement Document',
+  requirement = 'Requirement',
 }
 
 export enum MemberPermissions {
@@ -213,10 +215,10 @@ export type RequirementsDocChart = {
   created?: string;
   id?: number;
   updated?: string;
-  requirements?: Requirements[];
+  requirements?: RequirementsType[];
 };
 
-export type Requirements = {
+export type RequirementsType = {
   title?: string;
   description?: string;
   requirement_doc?: number;
@@ -224,7 +226,7 @@ export type Requirements = {
   id?: number;
   updated?: string;
   requirement_title?: string;
-  associated_test_cases: number;
+  associated_test_cases?: number;
 };
 
 export type TestRunChart = {
@@ -270,10 +272,16 @@ export type TabType = {
   component: ComponentType;
 };
 
-export type UpdateFieldsModalobject = {
+export type FieldsModalObject = {
   fieldLabel: string;
   component: ComponentType;
-  validation: CallableFunction;
+  validation?: CallableFunction;
+  onClick?: CallableFunction;
   fieldValue: unknown;
   fieldName: string;
 };
+
+export enum RequestActionEnum {
+  create = 'create',
+  update = 'update',
+}

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Requirements } from '../../utils/types';
+  import type { RequirementsType } from '../../utils/types';
   import Card from '../UI/cards/Card.svelte';
   import Button from '../UI/forms/Button.svelte';
 
-  export let item: Requirements;
+  export let item: RequirementsType;
 
   let details: HTMLDivElement;
   let openInputsModal: boolean;
@@ -20,7 +20,7 @@
 
 <!-- svelte-ignore a11y-invalid-attribute -->
 
-<Card cardClassName={'card-expand'} cardClassBody={'pb-0 pr-none'}>
+<Card cardClassName={'card-expand mt-3'} cardClassBody={'pb-0 pr-none'}>
   <span slot="card-body">
     <div class="row">
       <div class="col-1 col-left-custom">
@@ -68,11 +68,15 @@
                 tooltip="edit title"
               />
               <Button
-                icon={details && details.style.display === 'block'? "fa fa-solid fa-arrow-up i-expand" : "fa fa-solid fa-arrow-down i-expand"}
+                icon={details && details.style.display === 'block'
+                  ? 'fa fa-solid fa-arrow-up i-expand'
+                  : 'fa fa-solid fa-arrow-down i-expand'}
                 onClick={viewDetails}
                 className="btn-simple p-0 test-plan-content-actions-btns"
                 text=""
-                tooltip={details && details.style.display === 'block' ? "Collapse" : "Expand"}
+                tooltip={details && details.style.display === 'block'
+                  ? 'Collapse'
+                  : 'Expand'}
                 iconWidth={35}
               />
               <Button

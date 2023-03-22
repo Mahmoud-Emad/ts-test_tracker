@@ -15,6 +15,7 @@
   import Alert from '../UI/Alert.svelte';
   import { Link } from 'svelte-navigator';
   import Loadingbtn from '../UI/loading/Loadingbtn.svelte';
+  import CreateNewProject from './CreateNewProject.svelte';
 
   export let isLoading: boolean;
 
@@ -98,6 +99,7 @@
             />
           {/each}
         </div>
+        <CreateNewProject bind:openModal />
       {/if}
     </div>
   </div>

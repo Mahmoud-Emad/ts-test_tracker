@@ -1,5 +1,9 @@
 <script lang="ts">
-  import type { UpdateFieldsModalobject } from '../../../utils/types';
+  import {
+    RequestActionEnum,
+    type FieldsModalObject,
+    ObjectTypeEnum,
+  } from '../../../utils/types';
   import Alert from '../Alert.svelte';
   import Button from '../forms/Button.svelte';
   import Modal from './Modal.svelte';
@@ -7,9 +11,11 @@
   import { alertStore } from '../../../stores/utils';
   import { clearAlertMessage } from '../../../utils/helpers';
 
-  export let fields: Array<UpdateFieldsModalobject>;
+  export let fields: Array<FieldsModalObject>;
   export let openModal = false;
   export let buffer: unknown;
+  export let action: RequestActionEnum;
+  export let type: ObjectTypeEnum;
 
   let disabledBtn = false;
   const dispatch = createEventDispatcher();
@@ -21,7 +27,9 @@
   const checkValidations = () => {
     const values: Array<boolean> = [];
     fields.forEach( ( field ) => {
-      values.push( field.validation( field.fieldValue ).isValid );
+      if ( field.validation ) {
+        values.push( field.validation( field.fieldValue ).isValid );
+      }
     } );
     disabledBtn = !values.includes( false );
   };
@@ -31,7 +39,7 @@
     fields.forEach( ( field ) => {
       buffer[field.fieldName] = field.fieldValue;
     } );
-    dispatch( 'update', {
+    dispatch( action, {
       data: buffer,
     } );
   };
@@ -51,7 +59,7 @@
         validation={field.validation}
         bind:value={field.fieldValue}
         label={field.fieldLabel}
-        onClick={field.validation}
+        onClick={field.onClick}
       />
     {/each}
     {#if $alertStore.isOpen}
@@ -68,7 +76,9 @@
     <Button
       className={'btn-primary'}
       onClick={onUpdate}
-      text={'Update'}
+      text={action === RequestActionEnum.create
+        ? `New ${type}`
+        : `Update ${type}`}
       disabled={!disabledBtn}
     />
     <Button

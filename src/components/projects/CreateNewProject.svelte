@@ -1,125 +1,97 @@
 <script lang="ts">
-  import Modal from '../UI/modals/Modal.svelte';
+  import {
+    ObjectTypeEnum,
+    RequestActionEnum,
+    type FieldsModalObject,
+    type ProjectsType,
+  } from '../../utils/types';
   import Input from '../UI/forms/Input.svelte';
   import TextArea from '../UI/forms/TextArea.svelte';
-  import type { ProjectsType } from '../../utils/types';
+  import CheckBox from '../UI/forms/CheckBox.svelte';
+  import { projectsStore } from '../../stores/projects';
   import {
-    validateEmptyInput,
     validateLink,
     validateProjectDescription,
     validateProjectName,
   } from '../../utils/validators';
-  import Button from '../UI/forms/Button.svelte';
-  import Alert from '../UI/Alert.svelte';
-  import { alertStore } from '../../stores/utils';
-  import { projectsStore } from '../../stores/projects';
-  import { createEventDispatcher } from 'svelte';
-  import CheckBox from '../UI/forms/CheckBox.svelte';
-  import Projects from '../../apis/projects';
-  import { clearAlertMessage } from '../../utils/helpers';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
+  import { clearFields } from '../../utils/helpers';
 
   export let openModal: boolean;
-  const dispatch = createEventDispatcher();
 
-  const projectType: ProjectsType = {};
   let githubRepoLinkInput = false;
-  let disabledForm = true;
+  const projectBuffer: ProjectsType = {};
 
-  $: if ( projectType.github_repo ) {
-    disabledForm =
-      !validateProjectName( projectType.title ).isValid ||
-      !validateEmptyInput( projectType.short_description ).isValid ||
-      !validateLink( projectType.repo_link ).isValid;
-  } else {
-    disabledForm =
-      !validateProjectName( projectType.title ).isValid ||
-      !validateEmptyInput( projectType.short_description ).isValid;
-  }
-
-  const handleClear = () => {
-    openModal = false;
-    projectType.title = '';
-    projectType.short_description = '';
-    projectType.github_repo = false;
-    projectType.repo_link = '';
-    clearAlertMessage();
+  let fields: Array<FieldsModalObject> = [
+    {
+      fieldName: 'title',
+      fieldLabel: 'Project Name',
+      fieldValue: '',
+      component: Input,
+      validation: validateProjectName,
+    },
+    {
+      fieldName: 'short_description',
+      fieldLabel: 'Short Description',
+      fieldValue: '',
+      component: TextArea,
+      validation: validateProjectDescription,
+    },
+    {
+      fieldLabel: 'Github repository',
+      fieldName: 'github_repo',
+      onClick: () => {
+        githubRepoLinkInput = githubRepoLinkInput ? false : true;
+        if ( githubRepoLinkInput ) {
+          fields.push( {
+            fieldLabel: 'Repository Link',
+            fieldName: 'repo_link',
+            validation: validateLink,
+            component: Input,
+            fieldValue: '',
+          } );
+        } else {
+          fields.splice( fields.length - 1, 1 );
+        }
+      },
+      component: CheckBox,
+      fieldValue: false,
+    },
+  ];
+  const onCreateProject = async () => {
+    if (
+      !githubRepoLinkInput &&
+      projectBuffer.repo_link &&
+      projectBuffer.repo_link.length
+    ) {
+      delete projectBuffer.repo_link;
+    }
+    await projectsStore.create( projectBuffer );
+    fields = clearFields( fields );
   };
 
-  const handleClick = async () => {
-    if ( !disabledForm ) {
-      const response = await Projects.new( projectType );
-      if ( response != undefined ) {
-        dispatch( 'create', {
-          text: 'created!',
-        } );
-        openModal = false;
-        projectType.title = '';
-        projectType.short_description = '';
-        projectType.github_repo = false;
-        projectType.repo_link = '';
-        projectsStore.reload();
+  const checkIfHasRepo = () => {
+    // When clear the fields and the checkbox of the repo = ture,
+    // we should remove the created input for the link of the repo.
+    for ( const field of fields ) {
+      if (
+        field.fieldName == 'github_repo' &&
+        field.fieldValue === false &&
+        fields.length > 3
+      ) {
+        fields.splice( fields.length - 1, 1 );
+        githubRepoLinkInput = false;
       }
-      clearAlertMessage();
     }
   };
+  $: fields, checkIfHasRepo();
 </script>
 
-<Modal bind:openModal withFooter={true}>
-  <h5 slot="modal-header" class="text-color">Create New Project</h5>
-  <div slot="modal-body">
-    <Input
-      bind:value={projectType.title}
-      label={'Title'}
-      type={'text'}
-      validation={validateProjectName}
-    />
-
-    <TextArea
-      bind:value={projectType.short_description}
-      label={'Short Description'}
-      validation={validateProjectDescription}
-    />
-
-    <CheckBox
-      label={'Github repository'}
-      bind:value={projectType.github_repo}
-      onClick={() => {
-        githubRepoLinkInput = githubRepoLinkInput ? false : true;
-      }}
-    />
-
-    {#if projectType.github_repo}
-      <Input
-        bind:value={projectType.repo_link}
-        label={'Repository Link'}
-        type={'text'}
-        validation={validateLink}
-      />
-    {/if}
-    {#if $alertStore.isOpen}
-      <Alert
-        isOpen={$alertStore.isOpen}
-        message={$alertStore.message}
-        title={$alertStore.title}
-        className={$alertStore.className}
-        error={$alertStore.error}
-      />
-    {/if}
-  </div>
-  <div slot="modal-footer">
-    <Button
-      className={'btn-primary'}
-      onClick={async () => {
-        await handleClick();
-      }}
-      text={'New Project'}
-      disabled={disabledForm}
-    />
-    <Button
-      className={'btn-danger'}
-      onClick={handleClear}
-      disabled={!openModal}
-      text={'Close'}
-    />
-  </div>
-</Modal>
+<InputsModal
+  action={RequestActionEnum.create}
+  type={ObjectTypeEnum.project}
+  bind:fields
+  bind:openModal
+  buffer={projectBuffer}
+  on:create={onCreateProject}
+/>

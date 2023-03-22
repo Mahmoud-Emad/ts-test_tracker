@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Link } from 'svelte-navigator';
   import {
-    DeleteType,
+    ObjectTypeEnum,
     type RequirementsDocChart,
     type ProjectsType,
     type Requirements,
-    type UpdateFieldsModalobject,
+    type FieldsModalObject,
   } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
   import Card from '../UI/cards/Card.svelte';
@@ -24,7 +24,7 @@
   let openInputsModal: boolean;
   const titleOnDelete = `${project.title}/${document.title}`;
 
-  const fields: Array<UpdateFieldsModalobject> = [
+  const fields: Array<FieldsModalObject> = [
     {
       component: Input,
       fieldLabel: 'Requirement Document Tilte',
@@ -128,7 +128,7 @@
 {#if openDeleteModal}
   <DeleteModal
     bindTitle={titleOnDelete}
-    type={DeleteType.testPlan}
+    type={ObjectTypeEnum.testPlan}
     bind:openModal={openDeleteModal}
     callableFunction={onDelete}
   />

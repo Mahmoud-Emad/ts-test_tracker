@@ -12,7 +12,7 @@
   import Alert from '../UI/Alert.svelte';
   import ActivityTable from '../home/ActivityTable.svelte';
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
-  import { DeleteType } from '../../utils/types';
+  import { ObjectTypeEnum } from '../../utils/types';
   import type { ProjectsType } from '../../utils/types';
   import Projects from '../../apis/projects';
   import {
@@ -253,7 +253,7 @@
     </div>
   </div>
   <DeleteModal
-    type={DeleteType.project}
+    type={ObjectTypeEnum.project}
     bindTitle={project.title}
     bind:openModal={openDeleteModal}
     callableFunction={async () => {

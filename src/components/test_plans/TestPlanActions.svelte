@@ -2,9 +2,9 @@
   import type {
     TestPlanChart,
     TestPlanSection,
-    UpdateFieldsModalobject,
+    FieldsModalObject,
   } from '../../utils/types';
-  import { DeleteType } from '../../utils/types';
+  import { ObjectTypeEnum } from '../../utils/types';
   import {
     validateProjectDescription,
     validateProjectName,
@@ -26,7 +26,7 @@
   export let testPlan: TestPlanChart;
   export let projectID: string;
 
-  let selectedSectionFields: Array<UpdateFieldsModalobject>;
+  let selectedSectionFields: Array<FieldsModalObject>;
 
   const getFields = () => {
     if ( selectedSection && selectedSection.title ) {
@@ -103,7 +103,7 @@
 {:else if openDeleteModal}
   <DeleteModal
     bindTitle={testPlan.title + '/' + selectedSection.title}
-    type={DeleteType.testPlanSection}
+    type={ObjectTypeEnum.testPlanSection}
     callableFunction={deleteTestPlanSection}
     bind:openModal={openDeleteModal}
   />
