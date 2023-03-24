@@ -94,12 +94,36 @@ class Requirements {
     }
   }
 
-  public async removeRequirementSection( projectID: number, reqID: number ) {
+  public async removeRequirementSection(
+    projectID: number,
+    documentID: number,
+    reqID: number,
+  ) {
     // Request to update project requirement documents from the server.
     try {
-      const response: onSuccessResponseType<RequirementsDocChart[]> =
+      const response: onSuccessResponseType<RequirementsType> =
         await httpAxios.delete(
-          `/requirements/projects/${projectID}/details/${reqID}/`,
+          `/requirements/projects/${projectID}/${documentID}/${reqID}/`,
+        );
+      onSuccessResponse( response );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
+
+  public async updateRequirementSection(
+    projectID: number,
+    documentID: number,
+    reqID: number,
+    data: RequirementsType,
+  ) {
+    // Request to update project requirement documents from the server.
+    try {
+      const response: onSuccessResponseType<RequirementsType> =
+        await httpAxios.put(
+          `/requirements/projects/${projectID}/${documentID}/${reqID}/`,
+          data,
         );
       onSuccessResponse( response );
       return response.data;

@@ -56,19 +56,41 @@ function createRequiremensStore() {
     );
   }
 
-  async function remove( projectID: number, reqID: number ) {
-    await requirements.removeRequirementSection( projectID, reqID ).then( () => {
-      return update( ( s ) => {
-        s = s.filter( ( item ) => item.id !== reqID );
-        alertStore.set( {
-          isOpen: true,
-          message: 'Requirement deleted successfully.',
-          className: 'danger',
-          close: false,
+  async function remove( projectID: number, documentID: number, reqID: number ) {
+    await requirements
+      .removeRequirementSection( projectID, documentID, reqID )
+      .then( () => {
+        return update( ( s ) => {
+          s = s.filter( ( item ) => item.id !== reqID );
+          alertStore.set( {
+            isOpen: true,
+            message: 'The requirement was deleted successfully.',
+            className: 'danger',
+            close: false,
+          } );
+          return s;
         } );
-        return s;
       } );
-    } );
+  }
+
+  async function edit(
+    projectID: number,
+    documentID: number,
+    reqID: number,
+    data: RequirementsType,
+  ) {
+    await requirements
+      .updateRequirementSection( projectID, documentID, reqID, data )
+      .then( ( res ) => {
+        if ( res ) {
+          console.log( 'res, ', res );
+          return update( ( s ) => {
+            const indx = s.findIndex( ( item ) => item.id === reqID );
+            s[indx] = res;
+            return s;
+          } );
+        }
+      } );
   }
 
   return {
@@ -78,6 +100,7 @@ function createRequiremensStore() {
     get,
     remove,
     create,
+    edit,
   };
 }
 

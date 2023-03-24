@@ -2,22 +2,49 @@
   import { requirementsStore } from '../../stores/requirements';
   import {
     ObjectTypeEnum,
+    RequestActionEnum,
+    type FieldsModalObject,
     type ProjectsType,
     type RequirementsDocChart,
     type RequirementsType,
   } from '../../utils/types';
+  import {
+    validateProjectDescription,
+    validateProjectName,
+  } from '../../utils/validators';
   import Card from '../UI/cards/Card.svelte';
   import Button from '../UI/forms/Button.svelte';
+  import Input from '../UI/forms/Input.svelte';
+  import TextArea from '../UI/forms/TextArea.svelte';
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
 
   export let item: RequirementsType;
   export let document: RequirementsDocChart;
   export let project: ProjectsType;
 
   let details: HTMLDivElement;
-  let openInputsModal: boolean;
+  let openUpdateModal: boolean;
   let openDeleteModal: boolean;
+  const requirementsBuffer: RequirementsType = {};
   const reqTitle = `${document.title}/${item.title}`;
+
+  let fields: Array<FieldsModalObject> = [
+    {
+      fieldLabel: 'Requirement Title',
+      fieldName: 'title',
+      fieldValue: item.title,
+      validation: validateProjectName,
+      component: Input,
+    },
+    {
+      fieldLabel: 'Requirement Description',
+      fieldName: 'description',
+      fieldValue: item.description,
+      validation: validateProjectDescription,
+      component: TextArea,
+    },
+  ];
 
   const viewDetails = () => {
     if ( details.style.display === 'none' || details.style.display === '' ) {
@@ -28,10 +55,20 @@
   };
 
   const onDeleteRequirement = async () => {
-    requirementsStore.remove( project.id, item.id );
+    await requirementsStore.remove( project.id, document.id, item.id );
     setTimeout( () => {
       openDeleteModal = false;
     }, 2000 );
+  };
+
+  const onUpdateRequirement = async () => {
+    await requirementsStore
+      .edit( project.id, document.id, item.id, requirementsBuffer )
+      .then( () => {
+        setTimeout( () => {
+          openDeleteModal = false;
+        }, 2000 );
+      } );
   };
 </script>
 
@@ -77,7 +114,7 @@
                 iconWidth={35}
                 icon="fa fa-pencil"
                 onClick={() => {
-                  openInputsModal = true;
+                  openUpdateModal = true;
                 }}
                 className="btn-simple p-0 test-plan-content-actions-btns"
                 text=""
@@ -124,6 +161,15 @@
   type={ObjectTypeEnum.requirement}
   bind:openModal={openDeleteModal}
   callableFunction={onDeleteRequirement}
+/>
+
+<InputsModal
+  bind:openModal={openUpdateModal}
+  bind:fields
+  buffer={requirementsBuffer}
+  action={RequestActionEnum.update}
+  type={ObjectTypeEnum.requirement}
+  on:update={onUpdateRequirement}
 />
 
 <style>
