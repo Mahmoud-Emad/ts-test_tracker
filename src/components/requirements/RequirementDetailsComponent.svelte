@@ -26,8 +26,9 @@
   import CardExpand from './CardExpand.svelte';
   import LastUpdatedCard from '../UI/cards/LastUpdatedCard.svelte';
   import InputsModal from '../UI/modals/InputsModal.svelte';
-  import { validateProjectName } from '../../utils/validators';
+  import { validateProjectDescription, validateProjectName } from '../../utils/validators';
   import Input from '../UI/forms/Input.svelte';
+  import TextArea from '../UI/forms/TextArea.svelte';
 
   export let isLoading: boolean;
   const params = useParams();
@@ -44,6 +45,13 @@
       fieldValue: '',
       validation: validateProjectName,
       component: Input,
+    },
+    {
+      fieldLabel: 'Requirement Description',
+      fieldName: 'description',
+      fieldValue: '',
+      validation: validateProjectDescription,
+      component: TextArea,
     },
   ];
 
