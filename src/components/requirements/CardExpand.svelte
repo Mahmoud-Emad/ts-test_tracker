@@ -47,7 +47,7 @@
   ];
 
   const viewDetails = () => {
-    if ( details.style.display === 'none' || details.style.display === '' ) {
+    if (details.style.display === 'none' || details.style.display === '') {
       details.style.display = 'block';
     } else {
       details.style.display = 'none';
@@ -55,20 +55,20 @@
   };
 
   const onDeleteRequirement = async () => {
-    await requirementsStore.remove( project.id, document.id, item.id );
-    setTimeout( () => {
+    await requirementsStore.remove(project.id, document.id, item.id);
+    setTimeout(() => {
       openDeleteModal = false;
-    }, 2000 );
+    }, 2000);
   };
 
   const onUpdateRequirement = async () => {
     await requirementsStore
-      .edit( project.id, document.id, item.id, requirementsBuffer )
-      .then( () => {
-        setTimeout( () => {
-          openDeleteModal = false;
-        }, 2000 );
-      } );
+      .edit(project.id, document.id, item.id, requirementsBuffer)
+      .then(() => {
+        setTimeout(() => {
+          openUpdateModal = false;
+        }, 2000);
+      });
   };
 </script>
 
@@ -81,7 +81,7 @@
           icon={'fas fa-solid fa-up-down-left-right i-draggble-left'}
           className={'btn-simple drag-btn c-grab'}
           onClick={() => {
-            console.log( '' );
+            console.log('');
           }}
           text={''}
         />

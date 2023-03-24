@@ -83,7 +83,6 @@ function createRequiremensStore() {
       .updateRequirementSection( projectID, documentID, reqID, data )
       .then( ( res ) => {
         if ( res ) {
-          console.log( 'res, ', res );
           return update( ( s ) => {
             const indx = s.findIndex( ( item ) => item.id === reqID );
             s[indx] = res;
