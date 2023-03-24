@@ -150,13 +150,15 @@
       </div>
     </div>
   </div>
+  {#if selectedSection}
+    <TestPlanActions
+      bind:openDeleteModal
+      bind:openViewModal
+      bind:openInputsModal
+      {projectID}
+      {testPlan}
+      {selectedSection}
+    />
+  {/if}
 {/if}
 
-<TestPlanActions
-  bind:openDeleteModal
-  bind:openViewModal
-  bind:openInputsModal
-  {projectID}
-  {testPlan}
-  {selectedSection}
-/>

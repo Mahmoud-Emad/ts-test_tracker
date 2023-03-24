@@ -36,6 +36,8 @@
 
   const onUpdate = () => {
     // On update functions used to update fields that exported by the new changes, then dispatch the updated fields.
+    console.log(fields);
+    console.log(buffer);
     fields.forEach( ( field ) => {
       buffer[field.fieldName] = field.fieldValue;
     } );

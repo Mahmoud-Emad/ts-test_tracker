@@ -1,8 +1,9 @@
 <script lang="ts">
-  import type {
-    TestPlanChart,
-    TestPlanSection,
-    FieldsModalObject,
+  import {
+    type TestPlanChart,
+    type TestPlanSection,
+    type FieldsModalObject,
+    RequestActionEnum,
   } from '../../utils/types';
   import { ObjectTypeEnum } from '../../utils/types';
   import {
@@ -16,7 +17,7 @@
   import TestPlans from '../../apis/testPlan';
 
   import Modal from '../UI/modals/Modal.svelte';
-  import InputsModal from '../UI/modals/InputsModal.svelte';
+  import UpdateTestPlanSection from '../UI/modals/InputsModal.svelte';
   import { testPlanSectionsStore } from '../../stores/test_plans';
 
   export let openViewModal: boolean;
@@ -26,29 +27,23 @@
   export let testPlan: TestPlanChart;
   export let projectID: string;
 
-  let selectedSectionFields: Array<FieldsModalObject>;
-
-  const getFields = () => {
-    if ( selectedSection && selectedSection.title ) {
-      selectedSectionFields = [
-        {
-          fieldName: 'title',
-          fieldLabel: 'Section Title',
-          fieldValue: selectedSection.title,
-          component: Input,
-          validation: validateProjectName,
-        },
-        {
-          fieldName: 'content',
-          fieldLabel: 'Section Content',
-          fieldValue: selectedSection.content,
-          component: TextArea,
-          validation: validateProjectDescription,
-        },
-      ];
-    }
-    return selectedSectionFields;
-  };
+  let fields: Array<FieldsModalObject> = [
+    {
+      fieldName: 'title',
+      fieldLabel: 'Section Title',
+      fieldValue: selectedSection.title,
+      component: Input,
+      validation: validateProjectName,
+    },
+    {
+      fieldName: 'content',
+      fieldLabel: 'Section Content',
+      fieldValue: selectedSection.content,
+      component: TextArea,
+      validation: validateProjectDescription,
+    },
+  ];
+  let sectionBuffer: TestPlanSection = {};
 
   const deleteTestPlanSection = async () => {
     await TestPlans.deleteSection(
@@ -65,16 +60,16 @@
     } );
   };
 
-  const onUpdateTestPlanSection = async ( section: TestPlanSection ) => {
+  const onUpdateTestPlanSection = async ( ) => {
     await TestPlans.updateSection(
       +projectID,
       testPlan.id,
       selectedSection.title,
-      section,
+      sectionBuffer,
     ).then( () => {
       const temps: TestPlanSection[] = testPlan.temps;
       const indx = temps.findIndex( ( v ) => v.title === selectedSection.title );
-      temps[indx] = section;
+      temps[indx] = sectionBuffer;
       testPlan.temps = temps;
       testPlanSectionsStore.set( testPlan.temps );
       openInputsModal = false;
@@ -108,12 +103,12 @@
     bind:openModal={openDeleteModal}
   />
 {:else if openInputsModal}
-  <InputsModal
-    buffer={{}}
-    fields={getFields()}
+  <UpdateTestPlanSection
+    action={RequestActionEnum.update}
+    type={ObjectTypeEnum.testPlanSection}
+    buffer={sectionBuffer}
+    bind:fields
     bind:openModal={openInputsModal}
-    on:update={async ( event ) => {
-      await onUpdateTestPlanSection( event.detail.data );
-    }}
+    on:update={onUpdateTestPlanSection}
   />
 {/if}

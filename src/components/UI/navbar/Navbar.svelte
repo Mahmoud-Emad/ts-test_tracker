@@ -29,6 +29,9 @@
           <li class="nav-item">
             <Link to="/" class="nav-link">Dashboard</Link>
           </li>
+          <li class="nav-item">
+            <Link to="/projects" class="nav-link">Projects</Link>
+          </li>
           {#if $userStore && $userStore.permission == 'admin'}
             <li class="nav-item">
               <Link to="/members/" class="nav-link">Members</Link>
@@ -56,9 +59,6 @@
               >
             </li>
           {/if}
-          <li class="nav-item">
-            <Link to="/projects" class="nav-link">Projects</Link>
-          </li>
           <li class="nav-item">
             <Link to="/settings/" class="nav-link">Settings</Link>
           </li>
