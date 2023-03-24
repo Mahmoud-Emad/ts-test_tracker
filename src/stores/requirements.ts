@@ -2,6 +2,7 @@ import { writable, get } from 'svelte/store';
 import type { RequirementsDocChart, RequirementsType } from '../utils/types';
 
 import requirements from '../apis/requirements';
+import { alertStore } from './utils';
 
 function createRequirementDocStore() {
   const store = writable<Array<RequirementsDocChart>>( [] );
@@ -42,6 +43,7 @@ function createRequiremensStore() {
       } );
     }
   }
+
   async function create(
     projectID: number,
     documentID: number,
@@ -54,11 +56,27 @@ function createRequiremensStore() {
     );
   }
 
+  async function remove( projectID: number, reqID: number ) {
+    await requirements.removeRequirementSection( projectID, reqID ).then( () => {
+      return update( ( s ) => {
+        s = s.filter( ( item ) => item.id !== reqID );
+        alertStore.set( {
+          isOpen: true,
+          message: 'Requirement deleted successfully.',
+          className: 'danger',
+          close: false,
+        } );
+        return s;
+      } );
+    } );
+  }
+
   return {
     subscribe,
     set,
     all,
     get,
+    remove,
     create,
   };
 }

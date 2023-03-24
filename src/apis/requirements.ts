@@ -93,6 +93,20 @@ class Requirements {
       return onErrorResponse( error );
     }
   }
+
+  public async removeRequirementSection( projectID: number, reqID: number ) {
+    // Request to update project requirement documents from the server.
+    try {
+      const response: onSuccessResponseType<RequirementsDocChart[]> =
+        await httpAxios.delete(
+          `/requirements/projects/${projectID}/details/${reqID}/`,
+        );
+      onSuccessResponse( response );
+      return response.data;
+    } catch ( error ) {
+      return onErrorResponse( error );
+    }
+  }
 }
 
 const requirements = new Requirements();

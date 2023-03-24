@@ -4,8 +4,8 @@
     ObjectTypeEnum,
     type RequirementsDocChart,
     type ProjectsType,
-    type Requirements,
     type FieldsModalObject,
+    RequestActionEnum,
   } from '../../utils/types';
   import { validateProjectName } from '../../utils/validators';
   import Card from '../UI/cards/Card.svelte';
@@ -17,7 +17,7 @@
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
   import InputsModal from '../UI/modals/InputsModal.svelte';
 
-  export let document: RequirementsDocChart | Requirements;
+  export let document: RequirementsDocChart;
   export let project: ProjectsType;
 
   let openDeleteModal: boolean;
@@ -134,6 +134,8 @@
   />
 {:else if openInputsModal}
   <InputsModal
+    action={RequestActionEnum.update}
+    type={ObjectTypeEnum.requirementDoc}
     bind:openModal={openInputsModal}
     buffer={document}
     {fields}

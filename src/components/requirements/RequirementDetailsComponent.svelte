@@ -26,7 +26,10 @@
   import CardExpand from './CardExpand.svelte';
   import LastUpdatedCard from '../UI/cards/LastUpdatedCard.svelte';
   import InputsModal from '../UI/modals/InputsModal.svelte';
-  import { validateProjectDescription, validateProjectName } from '../../utils/validators';
+  import {
+    validateProjectDescription,
+    validateProjectName,
+  } from '../../utils/validators';
   import Input from '../UI/forms/Input.svelte';
   import TextArea from '../UI/forms/TextArea.svelte';
 
@@ -126,7 +129,7 @@
     />
     <div class="container mt-3">
       {#each filterStore( $requirementsStore, 'title', value ) as requirement}
-        <CardExpand item={requirement} />
+        <CardExpand item={requirement} {document} {project} />
       {:else}
         <Alert
           className={'light not-available'}

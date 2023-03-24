@@ -43,7 +43,7 @@
       validation: validateProjectDescription,
     },
   ];
-  let sectionBuffer: TestPlanSection = {};
+  const sectionBuffer: TestPlanSection = {};
 
   const deleteTestPlanSection = async () => {
     await TestPlans.deleteSection(
@@ -60,7 +60,7 @@
     } );
   };
 
-  const onUpdateTestPlanSection = async ( ) => {
+  const onUpdateTestPlanSection = async () => {
     await TestPlans.updateSection(
       +projectID,
       testPlan.id,

@@ -1,13 +1,23 @@
 <script lang="ts">
-  import type { RequirementsType } from '../../utils/types';
+  import { requirementsStore } from '../../stores/requirements';
+  import {
+    ObjectTypeEnum,
+    type ProjectsType,
+    type RequirementsDocChart,
+    type RequirementsType,
+  } from '../../utils/types';
   import Card from '../UI/cards/Card.svelte';
   import Button from '../UI/forms/Button.svelte';
+  import DeleteModal from '../UI/modals/DeleteModal.svelte';
 
   export let item: RequirementsType;
+  export let document: RequirementsDocChart;
+  export let project: ProjectsType;
 
   let details: HTMLDivElement;
   let openInputsModal: boolean;
   let openDeleteModal: boolean;
+  const reqTitle = `${document.title}/${item.title}`;
 
   const viewDetails = () => {
     if ( details.style.display === 'none' || details.style.display === '' ) {
@@ -16,10 +26,16 @@
       details.style.display = 'none';
     }
   };
+
+  const onDeleteRequirement = async () => {
+    requirementsStore.remove( project.id, item.id );
+    setTimeout( () => {
+      openDeleteModal = false;
+    }, 2000 );
+  };
 </script>
 
 <!-- svelte-ignore a11y-invalid-attribute -->
-
 <Card cardClassName={'card-expand mt-3'} cardClassBody={'pb-0 pr-none'}>
   <span slot="card-body">
     <div class="row">
@@ -102,6 +118,13 @@
     </div>
   </span>
 </Card>
+
+<DeleteModal
+  bindTitle={reqTitle}
+  type={ObjectTypeEnum.requirement}
+  bind:openModal={openDeleteModal}
+  callableFunction={onDeleteRequirement}
+/>
 
 <style>
   .col-left-custom {
