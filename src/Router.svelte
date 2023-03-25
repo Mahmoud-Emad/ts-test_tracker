@@ -14,6 +14,7 @@
   import TestPlanDetailsView from './views/TestPlanDetailsView.svelte';
   import RequirementsDocView from './views/RequirementsDocView.svelte';
   import RequirementsDocDetailsView from './views/RequirementsDocDetailsView.svelte';
+  import TestSuitesView from './views/TestSuitesView.svelte';
 
   export let isLoading: boolean;
 </script>
@@ -48,6 +49,11 @@
   </Route>
   <Route path="projects/:projectID/test-plans/:planID/" primary={false}>
     <TestPlanDetailsView bind:isLoading />
+  </Route>
+
+  <!-- Test-Suites -->
+  <Route path="projects/:projectID/test-suites/" primary={false}>
+    <TestSuitesView bind:isLoading />
   </Route>
 
   <!-- Requirements -->

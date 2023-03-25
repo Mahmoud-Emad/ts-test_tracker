@@ -1,6 +1,6 @@
 import type { TestPlanChart, TestPlanSection } from '../utils/types';
 import { writable } from 'svelte/store';
-import testPlans from '../apis/testPlan';
+import testPlans from '../apis/test_plan';
 
 function createTestPlansStore() {
   const store = writable<Array<TestPlanChart>>( [] );

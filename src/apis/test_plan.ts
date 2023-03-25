@@ -1,4 +1,4 @@
-import type { TestPlanSection } from './../utils/types';
+import type { TestPlanSection } from '../utils/types';
 import httpAxios from '../utils/axios';
 import { onErrorResponse, onSuccessResponse } from '../utils/helpers';
 import type { onSuccessResponseType, TestPlanChart } from '../utils/types';

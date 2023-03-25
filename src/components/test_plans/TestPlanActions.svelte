@@ -14,7 +14,7 @@
   import TextArea from '../UI/forms/TextArea.svelte';
   import Input from '../UI/forms/Input.svelte';
   import DeleteModal from '../UI/modals/DeleteModal.svelte';
-  import TestPlans from '../../apis/testPlan';
+  import TestPlans from '../../apis/test_plan';
 
   import Modal from '../UI/modals/Modal.svelte';
   import UpdateTestPlanSection from '../UI/modals/InputsModal.svelte';

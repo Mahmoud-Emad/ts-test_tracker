@@ -143,7 +143,7 @@
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Test Suites</th>
-            <td class="text-primary">{project.total_suites.length}</td>
+            <td class="text-primary">{project.test_suites.length}</td>
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Test Runs</th>

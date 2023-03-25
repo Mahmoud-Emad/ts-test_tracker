@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { useParams } from 'svelte-navigator';
-  import testPlans from '../../apis/testPlan';
+  import testPlans from '../../apis/test_plan';
   import {
     testPlanSectionsStore,
     testPlansStore,

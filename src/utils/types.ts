@@ -75,6 +75,7 @@ export enum ObjectTypeEnum {
   member = 'Member',
   testPlanSection = 'Test Plan Section',
   testPlan = 'Test Plan',
+  testSuite = 'Test Suite',
   requirementDoc = 'Requirement Document',
   requirement = 'Requirement',
 }
@@ -257,7 +258,7 @@ export type ProjectsType = {
   user?: string;
   github_repo?: boolean;
   repo_link?: string;
-  total_suites?: TestSuiteChart[];
+  test_suites?: TestSuiteChart[];
   test_plans?: TestPlanChart[];
   total_test_runs?: TestRunChart[];
   requirements_docs?: RequirementsDocChart[];

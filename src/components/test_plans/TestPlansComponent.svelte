@@ -11,14 +11,25 @@
     filterStore,
   } from '../../utils/helpers';
   import Search from '../UI/Search.svelte';
-  import PlanCard from './TestPlanCard.svelte';
   import Alert from '../UI/Alert.svelte';
   import CreatePlanModal from './CreatePlanModal.svelte';
   import { useParams } from 'svelte-navigator';
   import projects from '../../apis/projects';
-  import type { ProjectsType } from '../../utils/types';
+  import {
+    ObjectTypeEnum,
+    type FieldsModalObject,
+    type ProjectsType,
+    type TestPlanChart,
+  } from '../../utils/types';
+  import ListCard from '../UI/cards/ListCard.svelte';
+  import { validateProjectName } from '../../utils/validators';
+  import Input from '../UI/forms/Input.svelte';
+  import testPlans from '../../apis/test_plan';
 
   export let isLoading: boolean;
+  let openEditModal: boolean;
+  let openDeleteModal: boolean;
+
   let openModal: boolean;
   let value: string;
   const params = useParams();
@@ -34,6 +45,60 @@
     } );
     isLoading = false;
   } );
+
+  const getFields = ( plan: TestPlanChart ): Array<FieldsModalObject> => {
+    return [
+      {
+        component: Input,
+        fieldLabel: 'Test Plan Tilte',
+        fieldName: 'title',
+        fieldValue: plan.title,
+        validation: validateProjectName,
+      },
+    ];
+  };
+
+  const onUpdate = async (
+    actualTextPlan: TestPlanChart,
+    updatedTestPlan: TestPlanChart,
+  ) => {
+    await testPlans
+      .update( project.id, actualTextPlan.id, updatedTestPlan )
+      .then( () => {
+        const plans: TestPlanChart[] = project.test_plans;
+        const indx = project.test_plans.findIndex(
+          ( _plan ) => actualTextPlan.id === _plan.id,
+        );
+        plans[indx] = updatedTestPlan;
+        project.test_plans = plans;
+        testPlansStore.set( project.test_plans );
+        setTimeout( () => {
+          openEditModal = false;
+        }, 3000 );
+      } );
+  };
+
+  const onDelete = async ( testPlan: TestPlanChart ) => {
+    await testPlans.delete( project.id, testPlan.id ).then( () => {
+      const plans: TestPlanChart[] = project.test_plans;
+      const indx = project.test_plans.findIndex(
+        ( _plan ) => testPlan.id === _plan.id,
+      );
+      plans.splice( indx, 1 );
+      project.test_plans = plans;
+      testPlansStore.set( project.test_plans );
+      alertStore.set( {
+        className: 'danger',
+        close: true,
+        message: 'Test Plan Deleted Successfully!',
+        isOpen: openDeleteModal,
+        title: 'Test Plan Deleted Successfully!',
+      } );
+      setTimeout( () => {
+        openDeleteModal = false;
+      }, 3000 );
+    } );
+  };
 </script>
 
 {#if isLoading}
@@ -75,7 +140,21 @@
     />
     <div class="container mt-3">
       {#each filterStore( $testPlansStore, 'title', value ) as plan}
-        <PlanCard {plan} {project} />
+        <ListCard
+          {project}
+          item={plan}
+          type={ObjectTypeEnum.testSuite}
+          to="/projects/{project.id}/test-plans/{plan.id}"
+          {openEditModal}
+          {openDeleteModal}
+          updateFields={getFields( plan )}
+          on:delete={() => {
+            return onDelete( plan );
+          }}
+          on:update={( e ) => {
+            return onUpdate( plan, e.detail.updatedItem );
+          }}
+        />
       {:else}
         <Alert
           className={'light not-available'}

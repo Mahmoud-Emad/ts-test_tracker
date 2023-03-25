@@ -51,7 +51,7 @@
       close={false}
     />
 
-    <div class="p-2 text-center m-0-auto">
+    <div class="p-2 text-center m-0-auto text-color">
       This action <strong>cannot</strong> be undone. This will permanently
       delete the <strong>{$userStore.full_name}/{bindTitle}</strong>
       {type} and remove all its associations.
