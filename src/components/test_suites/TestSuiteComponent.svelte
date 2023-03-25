@@ -11,6 +11,7 @@
   import { testSuiteStore } from '../../stores/test_suites';
   import {
     ObjectTypeEnum,
+    RequestActionEnum,
     type FieldsModalObject,
     type ProjectsType,
     type TestSuiteChart,
@@ -23,6 +24,8 @@
   import ListCard from '../UI/cards/ListCard.svelte';
   import { validateProjectName } from '../../utils/validators';
   import Input from '../UI/forms/Input.svelte';
+  import InputsModal from '../UI/modals/InputsModal.svelte';
+  import SelectAria from '../UI/forms/SelectAria.svelte';
 
   export let isLoading: boolean;
   let openEditModal: boolean;
@@ -30,6 +33,7 @@
   let openModal: boolean;
   let project: ProjectsType;
   let value = '';
+  const testSuiteBuffer: TestSuiteChart = {};
   const params = useParams();
 
   onMount( async () => {
@@ -43,23 +47,39 @@
     isLoading = false;
   } );
 
-  const getFields = ( suite: TestSuiteChart ): Array<FieldsModalObject> => {
+  const getFields = ( suite?: TestSuiteChart ): Array<FieldsModalObject> => {
     return [
       {
         component: Input,
-        fieldLabel: 'Test Plan Tilte',
+        fieldLabel: 'Test Suite Tilte',
         fieldName: 'title',
-        fieldValue: suite.title,
+        fieldValue: suite ? suite.title : '',
+        validation: validateProjectName,
+      },
+      {
+        component: SelectAria,
+        fieldLabel: 'Test Plan',
+        fieldName: 'test_plan',
+        fieldValue: '',
         validation: validateProjectName,
       },
     ];
   };
 
-  const onDelete = async ( suite: TestSuiteChart ) => console.log( suite );
-  const onUpdate = async (
+  const onDeleteTestSuite = async ( suite: TestSuiteChart ) => {
+    await testSuiteStore.remove( project.id, suite.id );
+  };
+
+  const onUpdateTestSuite = async (
     suite: TestSuiteChart,
     updatedSuite: TestSuiteChart,
-  ) => console.log( suite, updatedSuite );
+  ) => {
+    await testSuiteStore.edit( project.id, suite.id, updatedSuite );
+  };
+
+  const onCreateTestSuite = async ( testSuite: TestSuiteChart ) => {
+    await testSuiteStore.create( project.id, testSuite );
+  };
 </script>
 
 {#if isLoading}
@@ -110,10 +130,10 @@
           {openDeleteModal}
           updateFields={getFields( suite )}
           on:delete={() => {
-            return onDelete( suite );
+            return onDeleteTestSuite( suite );
           }}
           on:update={( e ) => {
-            return onUpdate( suite, e.detail.updatedItem );
+            return onUpdateTestSuite( suite, e.detail.updatedItem );
           }}
         />
       {:else}
@@ -121,9 +141,19 @@
           className={'light not-available'}
           isOpen={true}
           close={false}
-          message={'There are no plans inside this project, try to create new one from the navbar.'}
+          message={'There are no suites inside this project, try to create new one from the navbar.'}
         />
       {/each}
     </div>
   </div>
+  <InputsModal
+    bind:openModal
+    action={RequestActionEnum.create}
+    fields={getFields()}
+    buffer={testSuiteBuffer}
+    type={ObjectTypeEnum.testSuite}
+    on:create={( e ) => {
+      onCreateTestSuite( e.detail.data );
+    }}
+  />
 {/if}

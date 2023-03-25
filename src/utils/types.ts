@@ -189,12 +189,12 @@ export type ProjectTestSuite = {
 };
 
 export type TestSuiteChart = {
-  created: string;
-  id: number;
-  updated: string;
-  number_of_test_cases: number;
-  test_plan: number;
-  title: string;
+  created?: string;
+  id?: number;
+  updated?: string;
+  number_of_test_cases?: number;
+  test_plan?: number;
+  title?: string;
 };
 
 export type TestPlanSection = {
