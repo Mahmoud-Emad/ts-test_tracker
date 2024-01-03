@@ -12,7 +12,7 @@ class User {
       const response: onSuccessResponseType<UserType> = await axios.get(
         '/dashboard/user/',
       );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       onErrorResponse( error );
     }
@@ -23,7 +23,7 @@ class User {
       const response: onSuccessResponseType<MemberType[]> = await axios.get(
         '/members/all/',
       );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       onErrorResponse( error );
     }
@@ -36,7 +36,7 @@ class User {
         memberData,
       );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       onErrorResponse( error );
     }
@@ -46,7 +46,7 @@ class User {
       const response: onSuccessResponseType<MemberType> = await axios.get(
         `members/${id}/`,
       );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       onErrorResponse( error );
     }

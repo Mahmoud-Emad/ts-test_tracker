@@ -64,7 +64,7 @@
     />
     {#if loadMembers}
       <LoadingComponent className="component" />
-    {:else}
+    {:else if $membersStore.length}
       <div class="pt-5">
         <div class="row">
           {#each filterStore( $membersStore, 'first_name', value ) as member}

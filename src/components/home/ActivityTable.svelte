@@ -38,45 +38,47 @@
     </div>
   {:else}
     <div class="table">
-      {#each $projectsActivitiesStore as action}
-        {#if action.date && action.action}
-          <table class="table align-middle mb-3">
-            <thead class="table-bg">
-              <tr>
-                <th>
-                  <span class="badge badge-success rounded-pill d-inline">
-                    {getDate( action )}</span
-                  >
-                  <span class="badge rounded-pill d-inline text-color"
-                    >Action Date</span
-                  >
-                </th>
-              </tr>
-            </thead>
-            <thead class="table-bg">
-              <tr>
-                <td>
-                  <div class="d-inline b-0">
-                    <div class="ms-3">
-                      <p class="text-color mb-0">
-                        {action.action}
-                      </p>
+      {#if $projectsActivitiesStore.length}
+        {#each $projectsActivitiesStore as action}
+          {#if action.date && action.action}
+            <table class="table align-middle mb-3">
+              <thead class="table-bg">
+                <tr>
+                  <th>
+                    <span class="badge badge-success rounded-pill d-inline">
+                      {getDate( action )}</span
+                    >
+                    <span class="badge rounded-pill d-inline text-color"
+                      >Action Date</span
+                    >
+                  </th>
+                </tr>
+              </thead>
+              <thead class="table-bg">
+                <tr>
+                  <td>
+                    <div class="d-inline b-0">
+                      <div class="ms-3">
+                        <p class="text-color mb-0">
+                          {action.action}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            </thead>
-          </table>
-        {/if}
-      {:else}
-        <h6 class="text-color mb-3">Activities section.</h6>
-        <Alert
-          close={false}
-          message={'Seems to be no activities available'}
-          className={'light not-available'}
-          isOpen={true}
-        />
-      {/each}
+                  </td>
+                </tr>
+              </thead>
+            </table>
+          {/if}
+        {:else}
+          <h6 class="text-color mb-3">Activities section.</h6>
+          <Alert
+            close={false}
+            message={'Seems to be no activities available'}
+            className={'light not-available'}
+            isOpen={true}
+          />
+        {/each}
+      {/if}
     </div>
   {/if}
 </section>

@@ -25,6 +25,7 @@
       try {
         if ( !blockedRoutes.includes( window.location.pathname ) ) {
           await User.profile().then( ( data ) => {
+            console.log( 'data', data );
             $userStore = data;
           } );
         }

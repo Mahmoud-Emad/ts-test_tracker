@@ -50,7 +50,7 @@ function createActivitiesStore() {
   const { subscribe, update, set } = store;
 
   async function reload() {
-    const res = await Dashboard.loadLast5ProjectsActivity();
+    const res = await Dashboard.recentProjectsActivity( 5 );
     if ( res ) {
       return update( ( s ) => {
         s = res;

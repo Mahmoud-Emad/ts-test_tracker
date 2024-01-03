@@ -41,6 +41,7 @@
     projects.get( +$params.projectID ).then( ( rsp ) => {
       if ( rsp ) {
         project = rsp;
+        console.log("project", project);
         projectsStore.set( [ project ] );
         projectsActivitiesStore.set( project.activity.slice( 0, 10 ) );
         for ( const member of project.teams ) {
@@ -135,19 +136,19 @@
         <tbody>
           <tr>
             <th scope="row" class="text-color">Total test plans</th>
-            <td class="text-primary">{project.test_plans.length}</td>
+            <td class="text-primary">{project.total_test_plan.length || 0}</td>
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Requirements Docs</th>
-            <td class="text-primary">{project.requirements_docs.length}</td>
+            <td class="text-primary">{project.total_requirements_docs.length || 0}</td>
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Test Suites</th>
-            <td class="text-primary">{project.test_suites.length}</td>
+            <td class="text-primary">{project.total_suites.length || 0}</td>
           </tr>
           <tr>
             <th scope="row" class="text-color">Total Test Runs</th>
-            <td class="text-primary">{project.total_test_runs.length}</td>
+            <td class="text-primary">{project.total_test_runs.length || 0}</td>
           </tr>
         </tbody>
       </table>
@@ -163,7 +164,7 @@
         {#each project.teams as member}
           <div class="col team-col">
             <span
-              style="background-color: {member.background_color};"
+              style="background-color: {member.background_color || "var(--text-primary)"};"
               class="team-image-span"
               data-tooltip={member.full_name}
             >

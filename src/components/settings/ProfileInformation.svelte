@@ -35,7 +35,7 @@
   />
   <Input
     label={'Phone Number.'}
-    type={'text'}
+    type={'number'}
     bind:value={$userStore.phone}
     validation={validatePhone}
   />

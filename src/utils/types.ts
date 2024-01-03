@@ -115,7 +115,7 @@ export type AlertType = {
 export type onSuccessResponseType<T> = {
   status: number;
   statusText: string;
-  data: T;
+  data: {results: T};
   headers: object;
   request: object;
   message: string;
@@ -191,9 +191,10 @@ export type ProjectTestSuite = {
 export type TestSuiteChart = {
   created?: string;
   id?: number;
+  modified?: string;
   updated?: string;
   number_of_test_cases?: number;
-  test_plan?: number;
+  test_plan?: number | TestPlanChart;
   title?: string;
 };
 
@@ -206,6 +207,7 @@ export type TestPlanChart = {
   created?: string;
   id?: number;
   title?: string;
+  modified?: string;
   updated?: string;
   type?: string;
   temps?: Array<TestPlanSection>;
@@ -215,6 +217,7 @@ export type RequirementsDocChart = {
   title?: string;
   created?: string;
   id?: number;
+  modified?: string;
   updated?: string;
   requirements?: RequirementsType[];
 };
@@ -225,6 +228,7 @@ export type RequirementsType = {
   requirement_doc?: number;
   created?: string;
   id?: number;
+  modified?: string;
   updated?: string;
   requirement_title?: string;
   associated_test_cases?: number;
@@ -234,7 +238,8 @@ export type TestRunChart = {
   assigned_user: UserType;
   completed: string;
   created: string;
-  updated: string;
+  modified: string;
+  updated?: string;
   status: string;
   title: string;
   failed: number;
@@ -258,10 +263,10 @@ export type ProjectsType = {
   user?: string;
   github_repo?: boolean;
   repo_link?: string;
-  test_suites?: TestSuiteChart[];
-  test_plans?: TestPlanChart[];
+  total_suites?: TestSuiteChart[];
+  total_test_plan?: TestPlanChart[];
   total_test_runs?: TestRunChart[];
-  requirements_docs?: RequirementsDocChart[];
+  total_requirements_docs?: RequirementsDocChart[];
   people_with_the_most_incomplete_test_runs?: TestRunChart[];
   incomplete_test_runs_assigned_to_you?: TestRunChart;
 };

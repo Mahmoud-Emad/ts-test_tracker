@@ -40,7 +40,7 @@
     await projects.get( +$params.projectID ).then( ( resp ) => {
       if ( resp ) {
         project = resp;
-        requirementsDocStore.set( project.requirements_docs );
+        requirementsDocStore.set( project.total_requirements_docs );
       }
     } );
     isLoading = false;
@@ -62,13 +62,13 @@
 
   const onDelete = async ( document: RequirementsDocChart ) => {
     await requirements.deleteDocument( project.id, document.id ).then( () => {
-      const docs: RequirementsDocChart[] = project.requirements_docs;
-      const indx = project.requirements_docs.findIndex(
+      const docs: RequirementsDocChart[] = project.total_requirements_docs;
+      const indx = project.total_requirements_docs.findIndex(
         ( doc ) => document.id === doc.id,
       );
       docs.splice( indx, 1 );
-      project.requirements_docs = docs;
-      requirementsDocStore.set( project.requirements_docs );
+      project.total_requirements_docs = docs;
+      requirementsDocStore.set( project.total_requirements_docs );
       alertStore.set( {
         className: 'danger',
         close: true,
@@ -89,13 +89,13 @@
     await requirements
       .updateDocument( project.id, actualDocument.id, updatedDocument )
       .then( () => {
-        const docs: RequirementsDocChart[] = project.requirements_docs;
-        const indx = project.requirements_docs.findIndex(
+        const docs: RequirementsDocChart[] = project.total_requirements_docs;
+        const indx = project.total_requirements_docs.findIndex(
           ( doc ) => actualDocument.id === doc.id,
         );
         docs[indx] = updatedDocument;
-        project.requirements_docs = docs;
-        requirementsDocStore.set( project.requirements_docs );
+        project.total_requirements_docs = docs;
+        requirementsDocStore.set( project.total_requirements_docs );
         setTimeout( () => {
           openEditModal = false;
         }, 3000 );

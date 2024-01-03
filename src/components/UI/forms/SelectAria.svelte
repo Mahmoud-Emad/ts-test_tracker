@@ -1,33 +1,41 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import type {
     RequirementsDocChart,
     TestPlanChart,
     TestSuiteChart,
   } from '../../../utils/types';
 
-  export let items: TestPlanChart[] | RequirementsDocChart[] | TestSuiteChart[];
-  const dispatch = createEventDispatcher();
+  export let value: TestPlanChart[] | RequirementsDocChart[] | TestSuiteChart[];
+  export let label: string;
+  export let onClick: CallableFunction;
 
-  let selected: TestPlanChart | RequirementsDocChart | TestSuiteChart;
+  let selected: number = value[0].id;
+  const elmID = label.replace( ' ', '-' ).toLocaleLowerCase() + '-id';
+
+  onMount( () => {
+    onClick( selected );
+  } );
 </script>
 
-<h2>Insecurity questions</h2>
-
-<form
-  on:submit|preventDefault={() => {
-    dispatch( 'select', {
-      selected: selected,
-    } );
-  }}
->
-  {#if items}
-    <select bind:value={selected}>
-      {#each items as item}
-        <option value={item.id}>
-          {item.title}
-        </option>
-      {/each}
-    </select>
+<div class="form-group p-2 mb-2">
+  {#if label}
+    <strong>
+      <label for={elmID}>{label}</label>
+    </strong>
   {/if}
-</form>
+  <select
+    id={elmID}
+    class="form-control mt-2 input is-valid text-success"
+    bind:value={selected}
+    on:change={() => {
+      onClick( selected );
+    }}
+  >
+    {#each value as item}
+      <option value={item.id}>
+        {item.title}
+      </option>
+    {/each}
+  </select>
+</div>

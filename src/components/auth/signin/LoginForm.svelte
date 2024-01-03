@@ -39,7 +39,7 @@
       if ( data && data.access_token ) {
         authStore.updateTokens( data.access_token, data.refresh_token );
         updateThem();
-        window.location.href = '/';
+        // window.location.href = '/';
       }
     } );
   };
@@ -47,15 +47,15 @@
   async function loginViaGitHub( code: string ) {
     disabledForm = true;
     if ( code ) {
-      await GitHubAPI.gitHubToken( code ).then( async ( access_token: string ) => {
+      await GitHubAPI.gitHubToken( code ).then( async ( access_token: string ) => {        
         await GitHubAPI.getUser( access_token ).then( ( data: TokensType ) => {
-          if ( access_token ) {
+          if ( access_token ) {            
             authStore.updateTokens( data.access_token, data.refresh_token );
             disabledForm = false;
             updateThem();
             window.location.href = '/';
           }
-        } );
+        } );        
       } );
     } else {
       createNewNotifacation(

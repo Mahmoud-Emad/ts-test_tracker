@@ -35,7 +35,7 @@
         loadProjects = false;
       } );
 
-    await Dashboard.loadLast5ProjectsActivity()
+    await Dashboard.recentProjectsActivity(5)
       .then( ( data ) => {
         if ( data ) {
           projectsActivitiesStore.set( data );

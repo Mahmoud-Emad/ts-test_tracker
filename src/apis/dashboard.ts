@@ -9,19 +9,19 @@ class Dashboard {
     try {
       const response: onSuccessResponseType<ProjectsType[]> =
         await httpAxios.get( `project/recent/?count=${count}` );
-      const projects: ProjectsType[] = response.data;
+      const projects: ProjectsType[] = response.data.results;
       return projects;
     } catch ( error ) {
       return onErrorResponse( error );
     }
   }
 
-  public async loadLast5ProjectsActivity() {
+  public async recentProjectsActivity( count: number ) {
     // Load last projects updated based on its count.
     try {
       const response: onSuccessResponseType<ProjectActivity[]> =
-        await httpAxios.get( '/project/last-5-projects/activity/' );
-      const activities: ProjectActivity[] = response.data;
+        await httpAxios.get( `/project/recent/activity/?count=${count}` );
+      const activities: ProjectActivity[] = response.data.results;
       return activities;
     } catch ( error ) {
       return onErrorResponse( error );

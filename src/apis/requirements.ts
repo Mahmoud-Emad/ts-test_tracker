@@ -12,7 +12,7 @@ class Requirements {
     try {
       const response: onSuccessResponseType<RequirementsDocChart> =
         await httpAxios.post( `/requirements/${projectID}/`, data );
-      const docCreated: RequirementsDocChart = response.data;
+      const docCreated: RequirementsDocChart = response.data.results;
       onSuccessResponse( response );
       return docCreated;
     } catch ( error ) {
@@ -25,7 +25,7 @@ class Requirements {
     try {
       const response: onSuccessResponseType<RequirementsDocChart[]> =
         await httpAxios.get( `/requirements/projects/${projectID}/get-all/` );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -38,7 +38,7 @@ class Requirements {
         await httpAxios.get(
           `requirements/projects/${projectID}/details/${documentID}/`,
         );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -56,7 +56,7 @@ class Requirements {
           data,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -69,7 +69,7 @@ class Requirements {
         await httpAxios.delete(
           `/requirements/projects/${projectID}/details/${docID}/`,
         );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -88,7 +88,7 @@ class Requirements {
           document,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -106,7 +106,7 @@ class Requirements {
           `/requirements/projects/${projectID}/${documentID}/${reqID}/`,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -126,7 +126,7 @@ class Requirements {
           data,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }

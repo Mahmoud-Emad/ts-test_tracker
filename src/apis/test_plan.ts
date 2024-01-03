@@ -9,7 +9,7 @@ class TestPlans {
     try {
       const response: onSuccessResponseType<TestPlanChart> =
         await httpAxios.post( `/test_plan/${projectID}/`, data );
-      const testPlanCreated: TestPlanChart = response.data;
+      const testPlanCreated: TestPlanChart = response.data.results;
       onSuccessResponse( response );
       return testPlanCreated;
     } catch ( error ) {
@@ -22,7 +22,7 @@ class TestPlans {
     try {
       const response: onSuccessResponseType<TestPlanChart[]> =
         await httpAxios.get( `/test_plan/${projectID}/` );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -39,7 +39,7 @@ class TestPlans {
         await httpAxios.delete(
           `/test_plan/${projectID}/${planID}/temps/${sectionTitle}/`,
         );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -59,7 +59,7 @@ class TestPlans {
           section,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -70,7 +70,7 @@ class TestPlans {
     try {
       const response: onSuccessResponseType<TestPlanChart> =
         await httpAxios.get( `/test_plan/${projectID}/actions/${testPlanID}/` );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -83,7 +83,7 @@ class TestPlans {
         await httpAxios.delete(
           `/test_plan/${projectID}/actions/${testPlanID}/`,
         );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -102,7 +102,7 @@ class TestPlans {
           testPlan,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }

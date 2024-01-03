@@ -8,7 +8,7 @@ class TestSuite {
     try {
       const response: onSuccessResponseType<TestSuiteChart[]> =
         await httpAxios.get( `/test_suite/${projectID}/` );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -20,7 +20,7 @@ class TestSuite {
       const response: onSuccessResponseType<TestSuiteChart> =
         await httpAxios.post( `/test_suites/${projectID}/`, testSuite );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -38,7 +38,7 @@ class TestSuite {
           testSuite,
         );
       onSuccessResponse( response );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -48,7 +48,7 @@ class TestSuite {
     try {
       const response: onSuccessResponseType<TestSuiteChart> =
         await httpAxios.delete( `/test_suites/${projectID}/actions/${suiteID}/` );
-      return response.data;
+      return response.data.results;
     } catch ( error ) {
       return onErrorResponse( error );
     }

@@ -33,6 +33,7 @@
   let openModal: boolean;
   let project: ProjectsType;
   let value = '';
+  let selectedTestPlanID: number;
   const testSuiteBuffer: TestSuiteChart = {};
   const params = useParams();
 
@@ -41,7 +42,7 @@
     await projects.get( +$params.projectID ).then( ( resp ) => {
       if ( resp ) {
         project = resp;
-        testSuiteStore.set( project.test_suites );
+        testSuiteStore.set( project.total_suites );
       }
     } );
     isLoading = false;
@@ -60,25 +61,12 @@
         component: SelectAria,
         fieldLabel: 'Test Plan',
         fieldName: 'test_plan',
-        fieldValue: '',
-        validation: validateProjectName,
+        fieldValue: project.total_test_plan,
+        onClick: ( id: number ) => {
+          selectedTestPlanID = id;
+        },
       },
     ];
-  };
-
-  const onDeleteTestSuite = async ( suite: TestSuiteChart ) => {
-    await testSuiteStore.remove( project.id, suite.id );
-  };
-
-  const onUpdateTestSuite = async (
-    suite: TestSuiteChart,
-    updatedSuite: TestSuiteChart,
-  ) => {
-    await testSuiteStore.edit( project.id, suite.id, updatedSuite );
-  };
-
-  const onCreateTestSuite = async ( testSuite: TestSuiteChart ) => {
-    await testSuiteStore.create( project.id, testSuite );
   };
 </script>
 
@@ -129,11 +117,15 @@
           {openEditModal}
           {openDeleteModal}
           updateFields={getFields( suite )}
-          on:delete={() => {
-            return onDeleteTestSuite( suite );
+          on:delete={async () => {
+            return await testSuiteStore.remove( project.id, suite.id );
           }}
-          on:update={( e ) => {
-            return onUpdateTestSuite( suite, e.detail.updatedItem );
+          on:update={async ( e ) => {
+            return await testSuiteStore.edit(
+              project.id,
+              suite.id,
+              e.detail.updatedItem,
+            );
           }}
         />
       {:else}
@@ -152,8 +144,14 @@
     fields={getFields()}
     buffer={testSuiteBuffer}
     type={ObjectTypeEnum.testSuite}
-    on:create={( e ) => {
-      onCreateTestSuite( e.detail.data );
+    on:create={async () => {
+      console.log( 'testSuiteBuffer', testSuiteBuffer );
+      testSuiteBuffer.test_plan = testSuiteBuffer.test_plan.filter(
+        ( plan ) => plan.id === selectedTestPlanID,
+      )[0].id;
+      console.log( 'Changed, ', testSuiteBuffer );
+
+      return await testSuiteStore.create(project.id, testSuiteBuffer);
     }}
   />
 {/if}

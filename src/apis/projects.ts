@@ -18,7 +18,7 @@ class Projects {
     try {
       const response: onSuccessResponseType<ProjectsType> =
         await httpAxios.post( '/dashboard/projects/', data );
-      const project: ProjectsType = response.data;
+      const project: ProjectsType = response.data.results;
       onSuccessResponse( response );
       return project;
     } catch ( error ) {
@@ -30,8 +30,8 @@ class Projects {
     // Request to all projects from the server.
     try {
       const response: onSuccessResponseType<ProjectsType[]> =
-        await httpAxios.get( '/dashboard/projects/' );
-      const projects: ProjectsType[] = response.data;
+        await httpAxios.get( '/dashboard/projects/' );        
+      const projects: ProjectsType[] = response.data.results;
       return projects;
     } catch ( error ) {
       return onErrorResponse( error );
@@ -44,7 +44,7 @@ class Projects {
       const response: onSuccessResponseType<ProjectsType> = await httpAxios.get(
         `project/${projectID}/`,
       );
-      const project: ProjectsType = response.data;
+      const project: ProjectsType = response.data.results;
       return project;
     } catch ( error ) {
       return onErrorResponse( error );
@@ -76,7 +76,7 @@ class Projects {
       const response: onSuccessResponseType<ProjectsType> = await httpAxios.put(
         `project/${projectID}/members/${memberID}/`,
       );
-      const project: ProjectsType = response.data;
+      const project: ProjectsType = response.data.results;
       onSuccessResponse( response );
       return project;
     } catch ( error ) {
@@ -90,7 +90,7 @@ class Projects {
         `project/${data.id}/`,
         data,
       );
-      const project: ProjectsType = response.data;
+      const project: ProjectsType = response.data.results;
       if ( project ) {
         projectsStore.set( [ project ] );
       }

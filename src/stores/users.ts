@@ -38,7 +38,7 @@ function createAuthStore() {
 
     if ( accessToken ) {
       if ( get( userStore ) === undefined ) {
-        User.profile().then( ( data ) => {
+        User.profile().then( ( data ) => {    
           userStore.set( {
             id: data.id,
             first_name: data.first_name,

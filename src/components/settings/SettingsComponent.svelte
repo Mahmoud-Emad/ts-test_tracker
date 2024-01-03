@@ -57,9 +57,9 @@
         <div class="header">
           <strong class="h4"
             >Settings |
-            <strong class="text-primary"
-              >{$userStore.first_name} {$userStore.last_name}</strong
-            >
+            <strong class="text-primary">
+              {$userStore.first_name !== undefined ? $userStore.first_name + " " + $userStore.last_name : "Page"}
+            </strong>
           </strong>
         </div>
         <div class="mt-3">

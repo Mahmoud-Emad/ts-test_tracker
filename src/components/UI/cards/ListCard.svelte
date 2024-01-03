@@ -44,7 +44,7 @@
           </div>
           <div class="col-6 col-md-6 col-sm-6 col-xs-12">
             <p class="text-color">
-              Updated: <strong>{item.updated}</strong>
+              Updated: <strong>{item.modified || item.updated}</strong>
             </p>
           </div>
           <div class="col d-flex justify-content-between">

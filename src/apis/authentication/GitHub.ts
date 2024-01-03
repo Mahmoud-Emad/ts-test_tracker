@@ -24,8 +24,8 @@ class GitHub {
         '/auth/github/access_token/',
         data,
       );
-      onSuccessResponse( response );
-      return response.data.access_token;
+      onSuccessResponse( response );      
+      return response.data.results.access_token;
     } catch ( error ) {
       return onErrorResponse( error );
     }
@@ -38,9 +38,11 @@ class GitHub {
           access_token: accessToken,
         } );
       onSuccessResponse( response );
+      console.log( 'response', response );
+      
       const tokensType: TokensType = {
-        access_token: response.data.access_token,
-        refresh_token: response.data.refresh_token,
+        access_token: response.data.results.access_token,
+        refresh_token: response.data.results.refresh_token,
       };
       return tokensType;
     } catch ( error ) {
